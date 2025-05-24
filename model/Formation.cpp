@@ -2,69 +2,64 @@
 #include "IDGenerator.hpp"
 #include <sstream>
 
-Formation::Formation() {
-    id = IDGenerator::generate<Formation>();
-    filiere = "";
-    niveau = Niveau::L1;  
-    dureeAnnuelle = 0;
-    coutAnnuel = 0.0;
+Formation::Formation()
+{
+    this->id = IDGenerator::generate("FR");
 }
 
-Formation::Formation(const std::string& filiere,
-                     Niveau niveau,
-                     int dureeAnnuelle,
-                     double coutAnnuel)
-    : filiere(filiere),
-      niveau(niveau),
-      dureeAnnuelle(dureeAnnuelle),
-      coutAnnuel(coutAnnuel) {
-    id = IDGenerator::generate<Formation>();
+const std::string &Formation::getId() const
+{
+    return this->id;
 }
 
-const std::string& Formation::getId() const {
-    return id;
+const std::string &Formation::getFiliere() const
+{
+    return this->filiere;
 }
 
-const std::string& Formation::getFiliere() const {
-    return filiere;
+Niveau::Type Formation::getNiveau() const
+{
+    return this->niveau;
 }
 
-Niveau Formation::getNiveau() const {
-    return niveau;
+int Formation::getDureeAnnuelle() const
+{
+    return this->dureeAnnuelle;
 }
 
-int Formation::getDureeAnnuelle() const {
-    return dureeAnnuelle;
+double Formation::getCoutAnnuel() const
+{
+    return this->coutAnnuel;
 }
 
-double Formation::getCoutAnnuel() const {
-    return coutAnnuel;
+void Formation::setFiliere(const std::string &filiere)
+{
+    this->filiere = filiere;
 }
 
-void Formation::setFiliere(const std::string& f) {
-    filiere = f;
+void Formation::setNiveau(Niveau::Type niveau)
+{
+    this->niveau = niveau;
 }
 
-void Formation::setNiveau(Niveau n) {
-    niveau = n;
+void Formation::setDureeAnnuelle(int dureeAnnuelle)
+{
+    this->dureeAnnuelle = dureeAnnuelle;
 }
 
-void Formation::setDureeAnnuelle(int duree) {
-    dureeAnnuelle = duree;
+void Formation::setCoutAnnuel(double coutAnnuel)
+{
+    this->coutAnnuel = coutAnnuel;
 }
 
-void Formation::setCoutAnnuel(double cout) {
-    coutAnnuel = cout;
-}
-
-std::string Formation::toString() const {
-    std::ostringstream oss;
-    oss << "Formation[ID=" << id
-        << ", Filière=" << filiere
-        << ", Niveau=" << niveauToString(niveau)
-        << ", Durée=" << dureeAnnuelle << " mois"
-        << ", Coût=" << coutAnnuel << " FCFA]";
-    return oss.str();
+std::string Formation::toString() const
+{
+    return "Formation[ID: " + id +
+           ", filiere: " + filiere +
+           ", Annee Academique: " + anneeAcademique +
+           ", Niveau: " + Niveau::toString(niveau) +
+           ", Duree Annuelle: " + std::to_string(dureeAnnuelle) +
+           ", Cout Annuel: " + std::to_string(coutAnnuel) + "]";
 }
 
 Formation::~Formation() {}

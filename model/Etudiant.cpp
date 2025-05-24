@@ -1,110 +1,84 @@
 #include "Etudiant.hpp"
-//Aminata
-#include "IDGenerator.hpp"
+#include "IDGenerator.hpp"  // Assurez-vous que cette classe existe
 #include <sstream>
 
+// Constructeur : génère un code automatiquement
 Etudiant::Etudiant() {
-    code = IDGenerator::generate<Etudiant>();
-    nom = "";
-    prenom = "";
-    telephone = 0;
-    email = "";
-    estBoursier = false;
-    estHandicape = false;
-    familleNombreuse = false;
-    estOrphelin = false;
+    code = IDGenerator::generate("ETU");
 }
 
-Etudiant::Etudiant(const std::string& nom,
-                   const std::string& prenom,
-                   int telephone,
-                   const std::string& email,
-                   bool estBoursier,
-                   bool estHandicape,
-                   bool familleNombreuse,
-                   bool estOrphelin)
-    : nom(nom), prenom(prenom), telephone(telephone), email(email),
-      estBoursier(estBoursier), estHandicape(estHandicape),
-      familleNombreuse(familleNombreuse), estOrphelin(estOrphelin) {
-    code = IDGenerator::generate<Etudiant>();
+// Getters
+const std::string& Etudiant::getCode() const { return code; }
+const std::string& Etudiant::getNom() const { return nom; }
+const std::string& Etudiant::getPrenom() const { return prenom; }
+const std::string& Etudiant::getTelephone() const { return telephone; }
+const std::string& Etudiant::getEmail() const { return email; }
+const std::string& Etudiant::getClasseCode() const { return classeCode; }
+const std::vector<std::string>& Etudiant::getReglementsCode() const { return reglementsCode; }
+const std::string& Etudiant::getCadPaieId() const { return cadPaieId; }
+
+bool Etudiant::getEstBoursier() const { return estBoursier; }
+bool Etudiant::getEstHandicape() const { return estHandicape; }
+bool Etudiant::getFamilleNombreuse() const { return familleNombreuse; }
+bool Etudiant::getEstOrphelin() const { return estOrphelin; }
+
+// Setters
+void Etudiant::setNom(const std::string& nom) {
+    this->nom = nom;
 }
 
-const std::string& Etudiant::getCode() const {
-    return code;
+void Etudiant::setPrenom(const std::string& prenom) {
+    this->prenom = prenom;
 }
 
-const std::string& Etudiant::getNom() const {
-    return nom;
+void Etudiant::setTelephone(const std::string& telephone) {
+    this->telephone = telephone;
 }
 
-const std::string& Etudiant::getPrenom() const {
-    return prenom;
+void Etudiant::setEmail(const std::string& email) {
+    this->email = email;
 }
 
-int Etudiant::getTelephone() const {
-    return telephone;
+void Etudiant::setEstBoursier(bool estBoursier) {
+    this->estBoursier = estBoursier;
 }
 
-const std::string& Etudiant::getEmail() const {
-    return email;
+void Etudiant::setEstHandicape(bool estHandicape) {
+    this->estHandicape = estHandicape;
 }
 
-const std::vector<std::string>& Etudiant::getClassesCode() const {
-    return classesCode;
+void Etudiant::setFamilleNombreuse(bool familleNombreuse) {
+    this->familleNombreuse = familleNombreuse;
 }
 
-const std::vector<std::string>& Etudiant::getReglementsCode() const {
-    return reglementsCode;
+void Etudiant::setEstOrphelin(bool estOrphelin) {
+    this->estOrphelin = estOrphelin;
 }
 
-const std::vector<std::string>& Etudiant::getCalendriersCode() const {
-    return calendriersCode;
+void Etudiant::setclasseCode(const std::string& classeCode) {
+    this->classeCode = classeCode;
 }
 
-void Etudiant::setNom(const std::string& n) {
-    nom = n;
+void Etudiant::addReglement(const std::string& reglementCode) {
+    reglementsCode.push_back(reglementCode);
 }
 
-void Etudiant::setPrenom(const std::string& p) {
-    prenom = p;
+void Etudiant::setCadPaieId(const std::string& cadPaieId) {
+    this->cadPaieId = cadPaieId;
 }
 
-void Etudiant::setTelephone(int tel) {
-    telephone = tel;
-}
-
-void Etudiant::setEmail(const std::string& mail) {
-    email = mail;
-}
-
-void Etudiant::addClasse(const std::string& codeClasse) {
-    classesCode.push_back(codeClasse);
-}
-
-void Etudiant::addReglement(const std::string& codeReglement) {
-    reglementsCode.push_back(codeReglement);
-}
-
-void Etudiant::addCalendrier(const std::string& codeCalendrier) {
-    calendriersCode.push_back(codeCalendrier);
-}
-
+// toString — format compact sur une ligne
 std::string Etudiant::toString() const {
-    std::ostringstream oss;
-    oss << "Etudiant[Code=" << code
-        << ", Nom=" << nom
-        << ", Prénom=" << prenom
-        << ", Téléphone=" << telephone
-        << ", Email=" << email
-        << ", Boursier=" << (estBoursier ? "Oui" : "Non")
-        << ", Handicapé=" << (estHandicape ? "Oui" : "Non")
-        << ", FamilleNombreuse=" << (familleNombreuse ? "Oui" : "Non")
-        << ", Orphelin=" << (estOrphelin ? "Oui" : "Non")
-        << ", NbClasses=" << classesCode.size()
-        << ", NbRèglements=" << reglementsCode.size()
-        << ", NbCalendriers=" << calendriersCode.size()
-        << "]";
-    return oss.str();
+    return "Etudiant[Code: " + code +
+           ", Nom: " + nom +
+           ", Prénom: " + prenom +
+           ", Téléphone: " + telephone +
+           ", Email: " + email +
+           ", Classe: " + classeCode +
+           ", CadPaieId: " + cadPaieId +
+           ", Boursier: " + (estBoursier ? "Oui" : "Non") +
+           ", Handicape: " + (estHandicape ? "Oui" : "Non") +
+           ", FamilleNombreuse: " + (familleNombreuse ? "Oui" : "Non") +
+           ", Orphelin: " + (estOrphelin ? "Oui" : "Non") +
+           "]";
 }
-
-Etudiant::~Etudiant() {}

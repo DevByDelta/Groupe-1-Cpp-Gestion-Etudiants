@@ -1,6 +1,7 @@
 #pragma once
 #include<string>
 #include<vector>
+
 #include "Date.hpp"
 // Reglement.hpp  --  généré automatiquement
 // salim
@@ -19,8 +20,8 @@ public:
     const std::string& getEtudiantCode() const;
     const std::string& getclasseId() const;
     const Date& getDate() const;
-    void setEtudiantCode(const std::string& code);
-    void setClasseId(const std::string& id);
+    void setEtudiantCode(const std::string& etudiantCode);
+    void setClasseId(const std::string& classeId);
     double getMontant()const ;
     void setMontant(double montant);
     std::string Reglement::toString() const;

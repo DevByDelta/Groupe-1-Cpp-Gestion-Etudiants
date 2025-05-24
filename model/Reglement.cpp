@@ -1,10 +1,15 @@
 #include "Reglement.hpp"
-
+#include "IDGenerator.hpp"
 // salim
 
-Reglement::Reglement() {}
+Reglement::Reglement() {
+    this -> id = IDGenerator::generate("RE");
+}
 
 Reglement::~Reglement() {}
+const std::string& Reglement::getId()const{
+    return this -> id;
+}
 const std::string& Reglement::getclasseId()const {
     return this -> classeId;
 }
@@ -20,16 +25,14 @@ double Reglement::getMontant() const{
 void Reglement::setMontant(double montant){
     this -> montant = montant;
 }
-void Reglement::setEtudiantCode(const std::string& code) {
-    this->etudiantCode = code;
+void Reglement::setEtudiantCode(const std::string& etudiantCode) {
+    this -> etudiantCode = etudiantCode;
 }
-
-void Reglement::setClasseId(const std::string& id) {
-    this->classeId = id;
+void Reglement::setClasseId(const std::string& classeId) {
+    this -> classeId = classeId;
 }
 std::string Reglement::toString() const {
-    
-    return  "Reglement[ ID:" + id 
+    return  "Reglement[ID:" + id 
      + ", Etudiant Code:" + etudiantCode +
      ", Classe ID:" + classeId + 
      ", Date:" + date.toString() +

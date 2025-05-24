@@ -7,15 +7,16 @@ class Classe {
 private:
     std::string id;
     std::string nom;
-    int idFormation;
-    std::vector <std::string>etudiantCodes;
+    std::string formationId;
+    std::vector<std::string>etudiantCodes;
 public:
     Classe();
-    ~Classe();
     const std::string& getId() const ;
     const std::string& getNom() const ;
+    const std::string& getFormationId() const;
     void setNom(const std::string& nom);
-   int getIdFormation() const;
-    const std::vector<std::string> getEtudiantCodes()const ;
+   void setFormationId(const std::string& formationId);
+    const std::vector<std::string> getEtudiantCodes()const;
     std::string toString() const;
+    void addEtudiant(const std::string& codeEtudiant);
 };

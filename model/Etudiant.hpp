@@ -8,12 +8,11 @@ private:
     std::string code;
     std::string nom;
     std::string prenom;
-    int telephone;
+    std::string telephone;
     std::string email;
-
-    std::vector<std::string> classesCode;
+    std::string classeCode;
     std::vector<std::string> reglementsCode;
-    std::vector<std::string> calendriersCode;
+    std::string cadPaieId;
 
     bool estBoursier;
     bool estHandicape;
@@ -22,35 +21,36 @@ private:
 
 public:
     Etudiant();
-    Etudiant(const std::string& nom,
-             const std::string& prenom,
-             int telephone,
-             const std::string& email,
-             bool estBoursier = false,
-             bool estHandicape = false,
-             bool familleNombreuse = false,
-             bool estOrphelin = false);
 
     const std::string& getCode() const;
     const std::string& getNom() const;
     const std::string& getPrenom() const;
-    int getTelephone() const;
+    const std::string& getTelephone() const;
     const std::string& getEmail() const;
 
-    const std::vector<std::string>& getClassesCode() const;
+    const std::string& getClasseCode() const;
     const std::vector<std::string>& getReglementsCode() const;
-    const std::vector<std::string>& getCalendriersCode() const;
+    const std::string& getCadPaieId() const;
+
+    bool getEstBoursier() const;
+    bool getEstHandicape() const;
+    bool getFamilleNombreuse() const;
+    bool getEstOrphelin() const;
 
     void setNom(const std::string& nom);
     void setPrenom(const std::string& prenom);
-    void setTelephone(int tel);
-    void setEmail(const std::string& mail);
+    void setTelephone(const std::string& telephone);
+    void setEmail(const std::string& email);
+    
+    void setEstBoursier(bool estBoursier);
+    void setEstHandicape(bool estHandicape);
+    void setFamilleNombreuse(bool familleNombreuse);
+    void setEstOrphelin(bool estOrphelin);
 
-    void addClasse(const std::string& codeClasse);
-    void addReglement(const std::string& codeReglement);
-    void addCalendrier(const std::string& codeCalendrier);
+    void setclasseCode(const std::string& classeCode);
+    void addReglement(const std::string& reglementCode);
+    void setCadPaieId(const std::string& cadPaieId);
 
     std::string toString() const;
 
-    ~Etudiant();
 };

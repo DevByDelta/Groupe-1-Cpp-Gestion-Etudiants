@@ -4,7 +4,8 @@
 
 // salim
 
-class Date {
+class Date
+{
 private:
     int jour;
     int mois;
@@ -24,10 +25,14 @@ public:
     std::string toString() const;
 
     // Opérateurs de comparaison
-    bool operator==(const Date& other) const;
-    bool operator!=(const Date& other) const;
-    bool operator<(const Date& other) const;
-    bool operator<=(const Date& other) const;
-    bool operator>(const Date& other) const;
-    bool operator>=(const Date& other) const;
+    bool operator==(const Date &other) const;
+    bool operator!=(const Date &other) const;
+    bool operator<(const Date &other) const;
+    bool operator<=(const Date &other) const;
+    bool operator>(const Date &other) const;
+    bool operator>=(const Date &other) const;
+
+    // Méthodes utiles
+    Date ajouterJours(int nbJours) const;
+    Date ajouterMois(int nbMois) const;
 };
