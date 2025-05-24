@@ -7,6 +7,5 @@ enum class Niveau {
     M1, M2,
     D1, D2
 };
-std::string  niveauToString(Niveau niveau);
-Niveau stringToNiveau(const std::string& str);
+
 

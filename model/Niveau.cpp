@@ -1,6 +1,6 @@
 #include "Niveau.hpp"
-#include<stdexcept>
-inline std::string niveauToString(Niveau niveau) {
+
+std::string niveauToString(Niveau niveau) {
     switch (niveau) {
         case Niveau::L1: return "L1";
         case Niveau::L2: return "L2";
@@ -13,7 +13,7 @@ inline std::string niveauToString(Niveau niveau) {
     }
 }
 
-inline Niveau stringToNiveau(const std::string& str) {
+Niveau stringToNiveau(const std::string& str) {
     if (str == "L1") return Niveau::L1;
     if (str == "L2") return Niveau::L2;
     if (str == "L3") return Niveau::L3;

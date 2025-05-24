@@ -15,6 +15,9 @@ const std::string& Promotion::getAnnePromotion() const {
 const std::string& Promotion::getFormationId() const {
     return this -> formationId;
 }
+void Promotion::setFormationId(const std::string& id) {
+    this -> formationId = id;
+}
 
 const std::vector<std::string>& Promotion::getClassesId() const {
     return this -> classesId;
@@ -23,15 +26,7 @@ void Promotion::setAnnePromotion(const std::string& annePromotion) {
     this -> annePromotion = annePromotion;
 }
 std::string Promotion::toString() const {
-    std::string result = "Promotion :\n";
-    result += "ID : " + id + "\n";
-    result += "Année : " + annePromotion + "\n";
-    result += "Formation ID : " + formationId + "\n";
-    result += "Classes ID : ";
-
-    for (const std::string& cid : classesId) {
-        result += cid + " ";
-    }
-
-    return result;
+    return "Promotion[ ID:" + id +
+     ", Année de promotion:" + annePromotion + 
+     ", Formation ID:" + formationId + "]";
 }

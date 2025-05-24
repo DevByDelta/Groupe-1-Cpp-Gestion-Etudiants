@@ -1,16 +1,15 @@
 #pragma once
 // IDGenerator.hpp  --  généré automatiquement
 // Aminata
+#pragma once
 #include <string>
-#include<atomic>
-#include<typeinfo>
-
+#include <unordered_map>
 class IDGenerator {
 public:
     template<typename T>
-    static std::string generate(){
-        static std::atomic<long> counter{0};
-        long c =++counter;
-        return std::string(typeid(T).name()) + "_" + std::to_string(c);
-    }
+    static std::string generate();
+
+private:
+    static std::unordered_map<std::string, int> counters;
 };
+

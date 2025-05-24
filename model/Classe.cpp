@@ -19,16 +19,8 @@ const std::vector<std::string> Classe:: getEtudiantCodes()const{
     return this -> etudiantCodes;
 }
 std::string Classe::toString() const {
-    std::string result = "Classe :\n";
-    result += "ID : " + id + "\n";
-    result += "Nom : " + nom + "\n";
-    result += "ID Formation : " + std::to_string(idFormation) + "\n";
-    result += "Étudiants : ";
-
-    for (const std::string& code : etudiantCodes) {
-        result += code + " ";
-    }
-
-    return result;
+    return "Classe[ ID:" + id + 
+    ", Nom:" + nom + 
+    ", ID Formation:" + std::to_string(idFormation) +"]";
 }
 Classe::~Classe() {}
