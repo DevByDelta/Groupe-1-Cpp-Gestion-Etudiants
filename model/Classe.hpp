@@ -1,8 +1,7 @@
 #pragma once
-// Classe.hpp  --  généré automatiquement
-// Kiné
 #include<string>
 #include<vector>
+#include <map>
 class Classe {
 private:
     std::string id;
@@ -15,8 +14,11 @@ public:
     const std::string& getNom() const ;
     const std::string& getFormationId() const;
     void setNom(const std::string& nom);
-   void setFormationId(const std::string& formationId);
+    void setFormationId(const std::string& formationId);
     const std::vector<std::string> getEtudiantCodes()const;
     std::string toString() const;
     void addEtudiant(const std::string& codeEtudiant);
+
+    
+    static Classe To(const std::map<std::string, std::string>& data); // a faire
 };

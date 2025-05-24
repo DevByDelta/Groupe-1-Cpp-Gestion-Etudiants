@@ -5,6 +5,7 @@
 #include "Date.hpp"
 #include "Echeancier.hpp"
 #include "IDGenerator.hpp"
+#include <map>
 
 class CalendrierPaiement {
 private:
@@ -14,6 +15,7 @@ private:
     Date dateInscription;
     Echeancier::Type echance;
     std::vector<Date> echeances;
+    double reduction;
     double montantParEcheance;
 
     void genererEcheances();
@@ -29,13 +31,17 @@ public:
     Echeancier::Type getEchance() const;
     const std::vector<Date>& getEcheances() const;
     double getMontantParEcheance() const;
+    double getReduction() const;
 
     // Mutateurs
     void setEtudiantCode(const std::string& code);
     void setClasseId(const std::string& code);
-    void setMontantParEcheance(double montant);
     void setEchance(Echeancier::Type type);
+    void setMontantParEcheance(double montant);
+    void setReduction(double reduction);
 
     // Méthode d'affichage
     std::string toString() const;
+
+    static CalendrierPaiement To(const std::map<std::string, std::string>& data); // a faire
 };

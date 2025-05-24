@@ -1,8 +1,8 @@
 #pragma once
-// Etudiant.hpp  --  généré automatiquement
-// Aminata
 #include <string>
 #include <vector>
+#include <map>
+
 class Etudiant {
 private:
     std::string code;
@@ -10,8 +10,8 @@ private:
     std::string prenom;
     std::string telephone;
     std::string email;
-    std::string classeCode;
-    std::vector<std::string> reglementsCode;
+    std::string classeId;
+    std::vector<std::string> reglementsId;
     std::string cadPaieId;
 
     bool estBoursier;
@@ -28,8 +28,8 @@ public:
     const std::string& getTelephone() const;
     const std::string& getEmail() const;
 
-    const std::string& getClasseCode() const;
-    const std::vector<std::string>& getReglementsCode() const;
+    const std::string& getClasseId() const;
+    const std::vector<std::string>& getReglementsId() const;
     const std::string& getCadPaieId() const;
 
     bool getEstBoursier() const;
@@ -47,10 +47,11 @@ public:
     void setFamilleNombreuse(bool familleNombreuse);
     void setEstOrphelin(bool estOrphelin);
 
-    void setclasseCode(const std::string& classeCode);
-    void addReglement(const std::string& reglementCode);
+    void setClasseId(const std::string& classeId);
+    void addReglementId(const std::string& reglementCode);
     void setCadPaieId(const std::string& cadPaieId);
 
     std::string toString() const;
 
+    static Etudiant To(const std::map<std::string, std::string>& data); // a faire
 };

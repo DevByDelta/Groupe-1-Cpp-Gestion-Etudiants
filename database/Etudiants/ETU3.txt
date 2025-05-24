@@ -1,0 +1,12 @@
+code=ETU3
+nom=BA
+prenom=ibrahima
+telephone=770112233
+email=ibrahima.ba@gmail.com
+classeId=CL1
+reglementsId=RE5
+cadPaieId=CP3
+estBoursier=0
+estHandicape=0
+familleNombreuse=1
+estOrphelin=1

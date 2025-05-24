@@ -1,0 +1,12 @@
+code=ETU1
+nom=ODG
+prenom=salim
+telephone=788234720
+email=salimoeudz@gmail.com
+classeId=CL1
+reglementsId=RE1,RE2
+cadPaieId=CP1
+estBoursier=0
+estHandicape=0
+familleNombreuse=0
+estOrphelin=0

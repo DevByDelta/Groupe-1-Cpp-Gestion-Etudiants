@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 #include "Niveau.hpp"
 
 class Formation {
@@ -28,5 +29,5 @@ public:
 
     std::string toString() const;
 
-    ~Formation();
+    static Formation To(const std::map<std::string, std::string>& data); // a faire
 };

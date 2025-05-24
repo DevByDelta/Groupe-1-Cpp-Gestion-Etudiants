@@ -1,0 +1,4 @@
+id=CL1
+nom=GLRSA
+formationId=FR1
+etudiantsId=ETU1,ETU2,ETU3

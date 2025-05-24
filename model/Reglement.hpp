@@ -1,10 +1,8 @@
 #pragma once
 #include<string>
 #include<vector>
-
+#include <map>
 #include "Date.hpp"
-// Reglement.hpp  --  généré automatiquement
-// salim
 
 class Reglement {
 private:
@@ -26,4 +24,5 @@ public:
     void setMontant(double montant);
     std::string Reglement::toString() const;
     
+    static Reglement To(const std::map<std::string, std::string>& data); // a faire
 };

@@ -10,6 +10,7 @@ const std::string &CalendrierPaiement::getClasseId() const { return classeId; }
 Echeancier::Type CalendrierPaiement::getEchance() const { return echance; }
 const std::vector<Date> &CalendrierPaiement::getEcheances() const { return echeances; }
 double CalendrierPaiement::getMontantParEcheance() const { return montantParEcheance; }
+double CalendrierPaiement::getReduction() const { return reduction; }
 
 void CalendrierPaiement::setEtudiantCode(const std::string &code) { etudiantCode = code; }
 void CalendrierPaiement::setClasseId(const std::string &code) { classeId = code; }
@@ -18,6 +19,7 @@ void CalendrierPaiement::setEchance(Echeancier::Type type) {
     genererEcheances();
 }
 void CalendrierPaiement::setMontantParEcheance(double montant) { montantParEcheance = montant; }
+void CalendrierPaiement::setReduction(double reduction) { this->reduction = reduction; }
 
 std::string CalendrierPaiement::toString() const
 {
@@ -64,7 +66,7 @@ void CalendrierPaiement::genererEcheances() {
             intervalleMois = 6;
             break;
         default:
-            return; // Rien à faire si type inconnu ou invalide
+            return;
     }
 
     Date dateActuelle = dateInscription;
