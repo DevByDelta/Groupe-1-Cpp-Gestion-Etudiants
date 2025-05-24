@@ -1,6 +1,5 @@
 #include "Formation.hpp"
 // Aminata
+#include<sstream>
 
-Formation::Formation() {}
 
-Formation::~Formation() {}
