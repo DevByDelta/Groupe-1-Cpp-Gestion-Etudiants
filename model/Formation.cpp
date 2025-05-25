@@ -7,59 +7,46 @@ Formation::Formation()
     this->id = IDGenerator::generate("FR");
 }
 
-const std::string &Formation::getId() const
-{
-    return this->id;
-}
+const std::string &Formation::getId() const { return this->id; }
+void Formation::setId(const std::string &id) { this->id = id; }
 
-const std::string &Formation::getFiliere() const
-{
-    return this->filiere;
-}
+const std::string &Formation::getFiliere() const { return this->filiere; }
+void Formation::setFiliere(const std::string &filiere) { this->filiere = filiere; }
 
-Niveau::Type Formation::getNiveau() const
-{
-    return this->niveau;
-}
+Niveau::Type Formation::getNiveau() const { return this->niveau; }
+void Formation::setNiveau(Niveau::Type niveau) { this->niveau = niveau; }
 
-int Formation::getDureeAnnuelle() const
-{
-    return this->dureeAnnuelle;
-}
+int Formation::getDureeAnnuelle() const { return this->dureeAnnuelle; }
+void Formation::setDureeAnnuelle(int dureeAnnuelle) { this->dureeAnnuelle = dureeAnnuelle; }
 
-double Formation::getCoutAnnuel() const
-{
-    return this->coutAnnuel;
-}
+double Formation::getCoutAnnuel() const { return this->coutAnnuel; }
+void Formation::setCoutAnnuel(double coutAnnuel) { this->coutAnnuel = coutAnnuel; }
 
-void Formation::setFiliere(const std::string &filiere)
-{
-    this->filiere = filiere;
-}
-
-void Formation::setNiveau(Niveau::Type niveau)
-{
-    this->niveau = niveau;
-}
-
-void Formation::setDureeAnnuelle(int dureeAnnuelle)
-{
-    this->dureeAnnuelle = dureeAnnuelle;
-}
-
-void Formation::setCoutAnnuel(double coutAnnuel)
-{
-    this->coutAnnuel = coutAnnuel;
-}
+const std::string &Formation::getAnneeAcademique() const { return this->anneeAcademique; }
+void Formation::setAnneeAcademique(const std::string &anneeAcademique) { this->anneeAcademique = anneeAcademique; }
 
 std::string Formation::toString() const
 {
-    return "Formation[ID: " + id +
-           ", filiere: " + filiere +
-           ", Annee Academique: " + anneeAcademique +
-           ", Niveau: " + Niveau::toString(niveau) +
-           ", Duree Annuelle: " + std::to_string(dureeAnnuelle) +
-           ", Cout Annuel: " + std::to_string(coutAnnuel) + "]";
+    std::ostringstream oss;
+    oss << "Formation[ID: " << id
+        << ", Filiere: " << filiere
+        << ", Annee Academique: " << anneeAcademique
+        << ", Niveau: " << Niveau::toString(niveau)
+        << ", Duree Annuelle: " << dureeAnnuelle
+        << ", Cout Annuel: " << coutAnnuel << "]";
+    return oss.str();
 }
 
-Formation::~Formation() {}
+// Méthode toTxt pour sérialisation (PascalCase)
+std::string Formation::toTxt() const
+{
+    std::ostringstream oss;
+    oss << "Id=" << id << "\n";
+    oss << "Filiere=" << filiere << "\n";
+    oss << "AnneeAcademique=" << anneeAcademique << "\n";
+    oss << "Niveau=" << Niveau::toString(niveau) << "\n";
+    oss << "DureeAnnuelle=" << dureeAnnuelle << "\n";
+    oss << "CoutAnnuel=" << coutAnnuel << "\n";
+    return oss.str();
+}
+

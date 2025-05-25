@@ -2,10 +2,11 @@
 
 #include <string>
 #include <vector>
+#include <map>
+
 #include "Date.hpp"
 #include "Echeancier.hpp"
 #include "IDGenerator.hpp"
-#include <map>
 
 class CalendrierPaiement {
 private:
@@ -13,12 +14,16 @@ private:
     std::string etudiantCode;
     std::string classeId;
     Date dateInscription;
-    Echeancier::Type echance;
+    Echeancier::Type echeancier;
     std::vector<Date> echeances;
     double reduction;
     double montantParEcheance;
 
     void genererEcheances();
+
+    void setId(const std::string& id);
+    void setDateInscription(const Date& dateInscription);
+    void setEcheances(const std::vector<Date>& echeances);
 
 public:
     CalendrierPaiement();
@@ -27,8 +32,8 @@ public:
     const std::string& getId() const;
     const std::string& getEtudiantCode() const;
     const std::string& getClasseId() const;
-    Date getDateInscription() const;
-    Echeancier::Type getEchance() const;
+    const Date& getDateInscription() const;
+    Echeancier::Type getEcheancier() const;
     const std::vector<Date>& getEcheances() const;
     double getMontantParEcheance() const;
     double getReduction() const;
@@ -36,12 +41,15 @@ public:
     // Mutateurs
     void setEtudiantCode(const std::string& code);
     void setClasseId(const std::string& code);
-    void setEchance(Echeancier::Type type);
+    void setEcheancier(Echeancier::Type type);
     void setMontantParEcheance(double montant);
     void setReduction(double reduction);
+    void addEcheance(const Date& d);
 
     // Méthode d'affichage
     std::string toString() const;
 
-    static CalendrierPaiement To(const std::map<std::string, std::string>& data); // a faire
+    // Sérialisation
+    std::string toTxt() const;
+    static CalendrierPaiement To(const std::map<std::string, std::string>& data);
 };

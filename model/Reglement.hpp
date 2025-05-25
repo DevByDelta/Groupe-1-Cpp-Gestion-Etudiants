@@ -1,6 +1,7 @@
 #pragma once
-#include<string>
-#include<vector>
+
+#include <string>
+#include <vector>
 #include <map>
 #include "Date.hpp"
 
@@ -11,18 +12,29 @@ private:
     std::string classeId;
     Date date;
     double montant;
+
+    void setId(const std::string& id);
+    void setDate(const Date& date);
+
 public:
     Reglement();
-    ~Reglement();
+
+    // Getters
     const std::string& getId() const;
     const std::string& getEtudiantCode() const;
-    const std::string& getclasseId() const;
+    const std::string& getClasseId() const;
     const Date& getDate() const;
+    double getMontant() const;
+
+    // Setters métier
     void setEtudiantCode(const std::string& etudiantCode);
     void setClasseId(const std::string& classeId);
-    double getMontant()const ;
     void setMontant(double montant);
-    std::string Reglement::toString() const;
-    
-    static Reglement To(const std::map<std::string, std::string>& data); // a faire
+
+    // Affichage & sérialisation
+    std::string toString() const;
+    std::string toTxt() const;
+
+    // Import (reconstruction)
+    static Reglement To(const std::map<std::string, std::string>& data);
 };

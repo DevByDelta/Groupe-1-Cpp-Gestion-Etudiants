@@ -1,4 +1,5 @@
 #include "Classe.hpp"
+#include "ReflectionMacros.hpp"
 #include "IDGenerator.hpp"
 // Kiné
 
@@ -19,7 +20,7 @@ const std::string& Classe::getFormationId() const
 {
     return this->formationId;
 }
-const std::vector<std::string> Classe::getEtudiantCodes() const
+const std::vector<std::string>& Classe::getEtudiantCodes() const
 {
     return this->etudiantCodes;
 }
@@ -32,15 +33,41 @@ void Classe::setFormationId(const std::string& formationId)
 {
     this->formationId = formationId;
 }
+void Classe::setId(const std::string& id)
+{
+    this->id = id;
+}
+void Classe::setEtudiantCodes(const std::vector<std::string>& codes)
+{
+    this->etudiantCodes = codes;
+}
 
 std::string Classe::toString() const
 {
-    return "Classe[ID: " + id +
-           ", Nom: " + nom +
-           ", ID Formation: " + formationId + "]";
+    std::ostringstream oss;
+    oss << "Classe[ID: " << id
+        << ", nom: " << nom
+        << ", ID Formation: " << formationId
+        << "]";
+    return oss.str();
 }
+
 void Classe::addEtudiant(const std::string& codeEtudiant)
 {
     this->etudiantCodes.push_back(codeEtudiant);
 }
 
+std::string Classe::toTxt() const
+{
+    std::ostringstream oss;
+    oss << "Id=" << id << "\n";
+    oss << "Nom=" << nom << "\n";
+    oss << "FormationId=" << formationId << "\n";
+    oss << "EtudiantCodes=";
+    for (size_t i = 0; i < etudiantCodes.size(); ++i) {
+        oss << etudiantCodes[i];
+        if (i != etudiantCodes.size() - 1) oss << ",";
+    }
+    oss << "\n";
+    return oss.str();
+}

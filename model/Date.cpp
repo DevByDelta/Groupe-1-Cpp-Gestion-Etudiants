@@ -109,3 +109,17 @@ Date Date::ajouterMois(int nbMois) const {
     return Date(nouveauJour, nouveauMois, nouvelleAnnee);
 }
 
+// Conversion
+Date Date::fromString(const std::string& str) {
+    int j = 1, m = 1, a = 1900;
+    char delim1, delim2;
+    std::istringstream iss(str);
+    // On s'attend à "jj-mm-aaaa"
+    if (iss >> j >> delim1 >> m >> delim2 >> a) {
+        if (delim1 == '-' && delim2 == '-') {
+            return Date(j, m, a);
+        }
+    }
+    // Si erreur, retourne une date par défaut (ou tu peux lever une exception si tu veux)
+    return Date();
+}

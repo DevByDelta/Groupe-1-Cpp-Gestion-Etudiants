@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <vector>
 #include <map>
@@ -19,15 +20,18 @@ private:
     bool familleNombreuse;
     bool estOrphelin;
 
+    void setCode(const std::string& code);
+    void setReglementsId(const std::vector<std::string>& reglementsId);
+
 public:
     Etudiant();
 
+    // Getters
     const std::string& getCode() const;
     const std::string& getNom() const;
     const std::string& getPrenom() const;
     const std::string& getTelephone() const;
     const std::string& getEmail() const;
-
     const std::string& getClasseId() const;
     const std::vector<std::string>& getReglementsId() const;
     const std::string& getCadPaieId() const;
@@ -37,21 +41,25 @@ public:
     bool getFamilleNombreuse() const;
     bool getEstOrphelin() const;
 
+    // Setters métier
     void setNom(const std::string& nom);
     void setPrenom(const std::string& prenom);
     void setTelephone(const std::string& telephone);
     void setEmail(const std::string& email);
-    
+
     void setEstBoursier(bool estBoursier);
     void setEstHandicape(bool estHandicape);
     void setFamilleNombreuse(bool familleNombreuse);
     void setEstOrphelin(bool estOrphelin);
 
     void setClasseId(const std::string& classeId);
-    void addReglementId(const std::string& reglementCode);
+    void addReglementId(const std::string& reglementId);
     void setCadPaieId(const std::string& cadPaieId);
 
+    // Affichage & sérialisation
     std::string toString() const;
 
-    static Etudiant To(const std::map<std::string, std::string>& data); // a faire
+    // === Sauvegarde & Chargement ===
+    std::string toTxt() const;
+    static Etudiant To(const std::map<std::string, std::string>& data);
 };
