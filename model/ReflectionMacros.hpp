@@ -44,9 +44,18 @@ inline std::vector<std::string> splitList(const std::string& csv, char delim = '
     if ((map).find(#attr) != (map).end()) \
         (obj).set##attr(Date::fromString((map).at(#attr)));
 
+#define SET_LIST_DATE(map, obj, attr, addMethod)              \
+  if ((map).find(#attr) != (map).end()) {                     \
+    auto _lst = splitList((map).at(#attr));                  \
+    for (const auto& _s : _lst)                              \
+      (obj).addMethod( Date::fromString(_s) );               \
+  }
+
+
 // Pour tous les enums avec Namespace::fromString
 #define SET_ENUM(map, obj, attr, Namespace) \
     if ((map).find(#attr) != (map).end()) { \
         (obj).set##attr(Namespace::fromString((map).at(#attr))); \
     }
+
 

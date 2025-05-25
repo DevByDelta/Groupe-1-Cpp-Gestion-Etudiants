@@ -152,3 +152,21 @@ std::string CalendrierPaiement::toTxt() const {
 
     return oss.str();
 }
+
+CalendrierPaiement CalendrierPaiement::To(const std::map<std::string, std::string>& data) {
+    CalendrierPaiement obj;
+
+    SET_STRING(data, obj, Id);
+
+
+    SET_STRING(data, obj, EtudiantCode);
+    SET_STRING(data, obj, ClasseId);
+
+    SET_DATE(data, obj, DateInscription);
+
+    SET_ENUM(data, obj, Echeancier, Echeancier);
+    SET_DOUBLE(data, obj, MontantParEcheance);
+    SET_DOUBLE(data, obj, Reduction);
+    SET_LIST_DATE(data, obj, Echeances, addEcheance);
+    return obj;
+}

@@ -68,3 +68,12 @@ std::string Reglement::toTxt() const {
     oss << "Montant=" << montant << "\n";
     return oss.str();
 }
+Reglement Reglement::To(const std::map<std::string, std::string>& data) {
+    Reglement obj;
+    SET_STRING(data, obj, Id);
+    SET_STRING(data, obj, EtudiantCode);
+    SET_STRING(data, obj, ClasseId);
+    SET_DATE  (data, obj, Date);
+    SET_DOUBLE(data, obj, Montant);
+    return obj;
+}

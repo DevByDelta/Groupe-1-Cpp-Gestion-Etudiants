@@ -111,3 +111,22 @@ std::string Etudiant::toTxt() const {
     oss << "\n";
     return oss.str();
 }
+
+Etudiant Etudiant::To(const std::map<std::string, std::string>& data) {
+    Etudiant obj;
+
+    SET_STRING(data, obj, Code);
+    SET_STRING(data, obj, Nom);
+    SET_STRING(data, obj, Prenom);
+    SET_STRING(data, obj, Telephone);
+    SET_STRING(data, obj, Email);
+    SET_STRING(data, obj, ClasseId);
+    SET_STRING(data, obj, CadPaieId);
+    SET_BOOL(data, obj, EstBoursier);
+    SET_BOOL(data, obj, EstHandicape);
+    SET_BOOL(data, obj, FamilleNombreuse);
+    SET_BOOL(data, obj, EstOrphelin);
+    SET_LIST(data, obj, ReglementsId, addReglementId);
+
+    return obj;
+}

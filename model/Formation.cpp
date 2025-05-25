@@ -1,6 +1,7 @@
 #include "Formation.hpp"
 #include "IDGenerator.hpp"
 #include <sstream>
+#include"ReflectionMacros.hpp"
 
 Formation::Formation()
 {
@@ -48,5 +49,15 @@ std::string Formation::toTxt() const
     oss << "DureeAnnuelle=" << dureeAnnuelle << "\n";
     oss << "CoutAnnuel=" << coutAnnuel << "\n";
     return oss.str();
+}
+Formation Formation::To(const std::map<std::string, std::string>& data) {
+    Formation obj;
+    SET_STRING(data, obj, Id);
+    SET_STRING(data, obj, Filiere);
+    SET_STRING(data, obj, AnneeAcademique);
+    SET_ENUM  (data, obj, Niveau, Niveau);
+    SET_INT   (data, obj, DureeAnnuelle);
+    SET_DOUBLE(data, obj, CoutAnnuel);
+    return obj;
 }
 
