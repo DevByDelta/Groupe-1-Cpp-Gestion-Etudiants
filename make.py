@@ -41,6 +41,7 @@ class PackageManager:
         controller = "controller"
         view       = "view"
         utils      = "utils"
+        repository = "repository"
         COURANT    = "."          # dossier courant
         Q          = "Quitter"
 
@@ -51,6 +52,7 @@ class PackageManager:
         Choix.controller: "Package  controller",
         Choix.view:       "Package  view",
         Choix.utils:      "Package  utils",
+        Choix.repository: "Package repository",
         Choix.COURANT:    "Dossier courant",
         Choix.Q:          "Retour menu précédent",
     }

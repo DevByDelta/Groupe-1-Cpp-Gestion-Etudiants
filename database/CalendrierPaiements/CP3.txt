@@ -1,8 +1,8 @@
-id=CP3
-etudiantCode=ETU3
-classeId=CL1
-dateInscription=01-09-2024
-echeancier=Mensuel
-montantParEcheance=26250.0
-reduction=0.1
-echeances=01-09-2024,01-10-2024,01-11-2024,01-12-2024,01-01-2025,01-02-2025,01-03-2025,01-04-2025,01-05-2025,01-06-2025,01-07-2025,01-08-2025
+Id=CP3
+EtudiantCode=ETU3
+ClasseId=CL1
+DateInscription=01-09-2024
+Echeancier=Mensuel
+MontantParEcheance=26250.0
+Reduction=0.1
+Echeances=01-09-2024,01-10-2024,01-11-2024,01-12-2024,01-01-2025,01-02-2025,01-03-2025,01-04-2025,01-05-2025,01-06-2025,01-07-2025,01-08-2025

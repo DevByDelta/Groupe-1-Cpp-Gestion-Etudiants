@@ -1,8 +1,8 @@
-id=CP1
-etudiantCode=ETU1
-classeId=CL1
-dateInscription=01-09-2024
-echeancier=Trimestriel
-montantParEcheance=87500.0
-reduction=0.0
-echeances=01-09-2024,01-12-2024,01-03-2025,01-06-2025
+Id=CP1
+EtudiantCode=ETU1
+ClasseId=CL1
+DateInscription=01-09-2024
+Echeancier=Trimestriel
+MontantParEcheance=87500.0
+Reduction=0.0
+Echeances=01-09-2024,01-12-2024,01-03-2025,01-06-2025

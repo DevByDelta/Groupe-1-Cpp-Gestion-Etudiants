@@ -71,3 +71,12 @@ std::string Classe::toTxt() const
     oss << "\n";
     return oss.str();
 }
+
+Classe Classe::To(const std::map<std::string, std::string>& data) {
+    Classe obj;
+    SET_STRING(data, obj, Id);            // "Id" => setId
+    SET_STRING(data, obj, Nom);           // "Nom" => setNom
+    SET_STRING(data, obj, FormationId);   // "FormationId" => setFormationId
+    SET_LIST(data, obj, EtudiantCodes, addEtudiant); // "EtudiantCodes" => addEtudiant (pour chaque code)
+    return obj;
+}

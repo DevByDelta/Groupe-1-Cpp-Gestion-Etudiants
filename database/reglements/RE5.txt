@@ -1,0 +1,5 @@
+Id=RE5
+EtudiantCode=ETU3
+ClasseId=CL1
+Date=14-10-2024
+Montant=14000

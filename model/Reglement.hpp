@@ -31,10 +31,10 @@ public:
     void setClasseId(const std::string& classeId);
     void setMontant(double montant);
 
-    // Affichage & sérialisation
+    // Affichage
     std::string toString() const;
-    std::string toTxt() const;
 
-    // Import (reconstruction)
+    // === Sauvegarde & Chargement ===
+    std::string toTxt() const;
     static Reglement To(const std::map<std::string, std::string>& data);
 };

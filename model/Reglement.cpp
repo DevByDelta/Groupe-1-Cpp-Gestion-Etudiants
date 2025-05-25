@@ -7,7 +7,6 @@ Reglement::Reglement() {
     this->id = IDGenerator::generate("RE");
 }
 
-Reglement::~Reglement() {}
 
 const std::string& Reglement::getId() const {
     return this->id;
