@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Etudiant.hpp"
-
 #include <string>
 #include <vector>
 #include <functional>
+
+#include "Etudiant.hpp"
 
 class EtudiantRepository {
 private:

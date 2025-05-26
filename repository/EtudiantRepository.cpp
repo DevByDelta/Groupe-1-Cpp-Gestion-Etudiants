@@ -1,6 +1,3 @@
-#include "EtudiantRepository.hpp"
-#include "macrosId.hpp"
-
 #include <fstream>
 #include <sstream>
 #include <map>
@@ -8,19 +5,31 @@
 #include <cstdio>
 #include <cstring>
 
+#include "EtudiantRepository.hpp"
+#include "pathsConst.hpp"
+
+bool  EtudiantRepository::exists(const std::string& id) {
+    std::ifstream ifs(getFilePath(id).c_str());
+    return ifs.good();
+}
+
+std::string EtudiantRepository::getFilePath(const std::string& id){
+    return ETUDIANTS_PATH + std::string(id) + EXTENSION_DB;
+}
+
 bool EtudiantRepository::save(const Etudiant& obj) {
-    std::ofstream ofs(ETUDIANT_FILE(obj.getCode()));
+    std::ofstream ofs(getFilePath(obj.getCode()));
     if (!ofs.is_open()) return false;
     ofs << obj.toTxt();
     return true;
 }
 
 bool EtudiantRepository::remove(const std::string& code) {
-    return std::remove(ETUDIANT_FILE(code).c_str()) == 0;
+    return std::remove(getFilePath(code).c_str()) == 0;
 }
 
 Etudiant EtudiantRepository::findById(const std::string& code) {
-    std::ifstream ifs(ETUDIANT_FILE(code));
+    std::ifstream ifs(getFilePath(code));
     if (!ifs.is_open()) return {};
     std::map<std::string, std::string> data;
     std::string line;
@@ -57,12 +66,4 @@ std::vector<Etudiant> EtudiantRepository::findBy(std::function<bool(const Etudia
         if (predicate(e)) matches.push_back(e);
     }
     return matches;
-}
-std::string EtudiantRepository::getFilePath(const std::string& id){
-    return ETUDIANT_FILE(id);
-}
-
-bool  EtudiantRepository::exists(const std::string& id) {
-    std::ifstream ifs(getFilePath(id).c_str());
-    return ifs.good();
 }

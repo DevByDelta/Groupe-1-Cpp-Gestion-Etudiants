@@ -1,6 +1,3 @@
-#include "ClasseRepository.hpp"
-#include "macrosId.hpp"
-
 #include <fstream>
 #include <sstream>
 #include <map>
@@ -9,9 +6,12 @@
 #include <cstring>
 #include <sys/stat.h>
 
+#include "ClasseRepository.hpp"
+#include "pathsConst.hpp"
+
 // Utilisation de la macro pour obtenir le chemin du fichier
 std::string ClasseRepository::getFilePath(const std::string& id) {
-    return CLASS_FILE(id); // Utilise la macro centralisée
+    return (CLASSES_PATH + std::string(id) + EXTENSION_DB);
 }
 
 // Vérifier la présence de l'objet

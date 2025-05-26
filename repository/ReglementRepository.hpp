@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Reglement.hpp"
-
 #include <string>
 #include <vector>
 #include <functional>
+
+#include "Reglement.hpp"
 
 class ReglementRepository {
 private:

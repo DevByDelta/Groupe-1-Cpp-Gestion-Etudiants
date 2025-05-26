@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Formation.hpp"
-
 #include <string>
 #include <vector>
 #include <functional>
+
+#include "Formation.hpp"
 
 class FormationRepository {
 private:

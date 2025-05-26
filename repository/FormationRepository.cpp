@@ -1,6 +1,3 @@
-#include "FormationRepository.hpp"
-#include "macrosId.hpp"
-
 #include <fstream>
 #include <sstream>
 #include <map>
@@ -8,19 +5,31 @@
 #include <cstdio>
 #include <cstring>
 
+#include "FormationRepository.hpp"
+#include "pathsConst.hpp"
+
+std::string FormationRepository::getFilePath(const std::string& id){
+    return FORMATIONS_PATH + std::string(id) + EXTENSION_DB;
+}
+
+bool  FormationRepository::exists(const std::string& id) {
+    std::ifstream ifs(getFilePath(id).c_str());
+    return ifs.good();
+}
+
 bool FormationRepository::save(const Formation& obj) {
-    std::ofstream ofs(FORMATION_FILE(obj.getId()));
+    std::ofstream ofs(getFilePath(obj.getId()));
     if (!ofs.is_open()) return false;
     ofs << obj.toTxt();
     return true;
 }
 
 bool FormationRepository::remove(const std::string& id) {
-    return std::remove(FORMATION_FILE(id).c_str()) == 0;
+    return std::remove(getFilePath(id).c_str()) == 0;
 }
 
 Formation FormationRepository::findById(const std::string& id) {
-    std::ifstream ifs(FORMATION_FILE(id));
+    std::ifstream ifs(getFilePath(id));
     if (!ifs.is_open()) return {};
     std::map<std::string, std::string> data;
     std::string line;
@@ -33,7 +42,7 @@ Formation FormationRepository::findById(const std::string& id) {
 }
 
 std::vector<Formation> FormationRepository::findAll() {
-    std::vector<Formation> result;^
+    std::vector<Formation> result;
     DIR* dir = opendir(FORMATIONS_PATH);
     if (!dir) return result;
     struct dirent* entry;
@@ -58,12 +67,4 @@ std::vector<Formation> FormationRepository::findBy(std::function<bool(const Form
         if (predicate(f)) matches.push_back(f);
     }
     return matches;
-}
-std::string FormationRepository::getFilePath(const std::string& id){
-    return FORMATION_FILE(id);
-}
-
-bool  FormationRepository::exists(const std::string& id) {
-    std::ifstream ifs(getFilePath(id).c_str());
-    return ifs.good();
 }

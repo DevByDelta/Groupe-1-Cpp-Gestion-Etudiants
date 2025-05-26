@@ -1,10 +1,10 @@
 #pragma once
 
-#include "CalendrierPaiement.hpp"
-
 #include <string>
 #include <vector>
 #include <functional>
+
+#include "CalendrierPaiement.hpp"
 
 class CalendrierPaiementRepository {
 private:

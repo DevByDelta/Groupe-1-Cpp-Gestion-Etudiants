@@ -1,6 +1,3 @@
-#include "ReglementRepository.hpp"
-#include "macrosId.hpp"
-
 #include <fstream>
 #include <sstream>
 #include <map>
@@ -8,19 +5,32 @@
 #include <cstdio>
 #include <cstring>
 
+#include "ReglementRepository.hpp"
+#include "pathsConst.hpp"
+
+std::string ReglementRepository::getFilePath(const std::string& id){
+    return REGLEMENTS_PATH + std::string(id) + EXTENSION_DB;
+}
+
+
+bool  ReglementRepository::exists(const std::string& id) {
+    std::ifstream ifs(getFilePath(id).c_str());
+    return ifs.good();
+}
+
 bool ReglementRepository::save(const Reglement& obj) {
-    std::ofstream ofs(REGLEMENT_FILE(obj.getId()));
+    std::ofstream ofs(getFilePath(obj.getId()));
     if (!ofs.is_open()) return false;
     ofs << obj.toTxt();
     return true;
 }
 
 bool ReglementRepository::remove(const std::string& id) {
-    return std::remove(REGLEMENT_FILE(id).c_str()) == 0;
+    return std::remove(getFilePath(id).c_str()) == 0;
 }
 
 Reglement ReglementRepository::findById(const std::string& id) {
-    std::ifstream ifs(REGLEMENT_FILE(id));
+    std::ifstream ifs(getFilePath(id));
     if (!ifs.is_open()) return {};
     std::map<std::string, std::string> data;
     std::string line;
@@ -59,11 +69,4 @@ std::vector<Reglement> ReglementRepository::findBy(std::function<bool(const Regl
     return matches;
 }
 
-std::string ReglementRepository::getFilePath(const std::string& id){
-    return REGLEMENT_FILE(id);
-}
 
-bool  ReglementRepository::exists(const std::string& id) {
-    std::ifstream ifs(getFilePath(id).c_str());
-    return ifs.good();
-}

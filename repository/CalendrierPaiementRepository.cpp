@@ -1,6 +1,3 @@
-#include "CalendrierPaiementRepository.hpp"
-#include "macrosId.hpp"
-
 #include <fstream>
 #include <sstream>
 #include <map>
@@ -8,19 +5,31 @@
 #include <cstdio>
 #include <cstring>
 
+#include "CalendrierPaiementRepository.hpp"
+#include "pathsConst.hpp"
+
+std::string CalendrierPaiementRepository::getFilePath(const std::string& id){
+    return CALENDRIERS_PATH + std::string(id) + EXTENSION_DB;
+}
+
+bool CalendrierPaiementRepository::exists(const std::string& id) {
+    std::ifstream ifs(getFilePath(id).c_str());
+    return ifs.good();
+}
+
 bool CalendrierPaiementRepository::save(const CalendrierPaiement& obj) {
-    std::ofstream ofs(CALENDRIER_FILE(obj.getId()));
+    std::ofstream ofs(getFilePath(obj.getId()));
     if (!ofs.is_open()) return false;
     ofs << obj.toTxt();
     return true;
 }
 
 bool CalendrierPaiementRepository::remove(const std::string& id) {
-    return std::remove(CALENDRIER_FILE(id).c_str()) == 0;
+    return std::remove(getFilePath(id).c_str()) == 0;
 }
 
 CalendrierPaiement CalendrierPaiementRepository::findById(const std::string& id) {
-    std::ifstream ifs(CALENDRIER_FILE(id));
+    std::ifstream ifs(getFilePath(id));
     if (!ifs.is_open()) return {};
     std::map<std::string, std::string> data;
     std::string line;
@@ -58,11 +67,4 @@ std::vector<CalendrierPaiement> CalendrierPaiementRepository::findBy(std::functi
     }
     return matches;
 }
-std::string CalendrierPaiementRepository ::getFilePath(const std::string& id){
-    return CALENDRIER_FILE(id);
-}
 
-bool CalendrierPaiementRepository::exists(const std::string& id) {
-    std::ifstream ifs(getFilePath(id).c_str());
-    return ifs.good();
-}
