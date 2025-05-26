@@ -1,10 +1,10 @@
 #pragma once
 
+#include "Reglement.hpp"
+
 #include <string>
 #include <vector>
 #include <functional>
-#include "Reglement.hpp"
-#include "PathsAndMacros.hpp"  // REGLEMENT_FILE(id), REGLEMENTS_PATH, EXTENSION_DB
 
 class ReglementRepository {
 private:

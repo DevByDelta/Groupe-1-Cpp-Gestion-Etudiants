@@ -1,4 +1,4 @@
-
+#include "Etudiant.hpp"
 #include "IDGenerator.hpp"
 #include "ReflectionMacros.hpp"
 #include <sstream>

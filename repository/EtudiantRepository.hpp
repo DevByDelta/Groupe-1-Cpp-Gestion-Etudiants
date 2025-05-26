@@ -1,10 +1,10 @@
 #pragma once
 
+#include "Etudiant.hpp"
+
 #include <string>
 #include <vector>
 #include <functional>
-#include "Etudiant.hpp"
-#include "PathsAndMacros.hpp"  // ETUDIANT_FILE(id), ETUDIANTS_PATH, EXTENSION_DB
 
 class EtudiantRepository {
 private:

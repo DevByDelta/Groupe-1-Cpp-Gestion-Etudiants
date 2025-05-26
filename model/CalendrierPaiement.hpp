@@ -8,6 +8,9 @@
 #include "Echeancier.hpp"
 #include "IDGenerator.hpp"
 
+#include "Etudiant.hpp"
+#include "EtudiantRepository.hpp"
+
 class CalendrierPaiement {
 private:
     std::string id;
@@ -24,6 +27,10 @@ private:
     void setId(const std::string& id);
     void setDateInscription(const Date& dateInscription);
     void setEcheances(const std::vector<Date>& echeances);
+
+    // méthodes de calculs
+    double calculReduction(const Etudiant& e);
+    double calculMontantParEcheance(const Etudiant& e);
 
 public:
     CalendrierPaiement();

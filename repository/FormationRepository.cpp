@@ -1,4 +1,6 @@
 #include "FormationRepository.hpp"
+#include "macrosId.hpp"
+
 #include <fstream>
 #include <sstream>
 #include <map>

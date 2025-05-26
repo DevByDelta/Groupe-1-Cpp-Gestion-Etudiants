@@ -1,10 +1,10 @@
 #pragma once
 
+#include "CalendrierPaiement.hpp"
+
 #include <string>
 #include <vector>
 #include <functional>
-#include "CalendrierPaiement.hpp"
-#include "PathsAndMacros.hpp"  // CALENDRIER_FILE(id), CALENDRIERS_PATH, EXTENSION_DB
 
 class CalendrierPaiementRepository {
 private:

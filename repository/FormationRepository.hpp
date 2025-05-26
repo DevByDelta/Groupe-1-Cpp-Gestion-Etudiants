@@ -1,10 +1,10 @@
 #pragma once
 
+#include "Formation.hpp"
+
 #include <string>
 #include <vector>
 #include <functional>
-#include "Formation.hpp"
-#include "PathsAndMacros.hpp"  // FORMATION_FILE(id), FORMATIONS_PATH, EXTENSION_DB
 
 class FormationRepository {
 private:

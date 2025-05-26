@@ -1,10 +1,13 @@
+#include "pathsConst.hpp"
 #include "CalendrierPaiement.hpp"
 #include "ReflectionMacros.hpp"
 #include <sstream>
 
 // Constructeur
-CalendrierPaiement::CalendrierPaiement()
-    : id(IDGenerator::generate("CP")) {}
+CalendrierPaiement::CalendrierPaiement(){
+    id = IDGenerator::generate("CP");
+    dateInscription = Date();
+}
 
 // Getters
 const std::string& CalendrierPaiement::getId() const {
@@ -46,6 +49,8 @@ void CalendrierPaiement::setId(const std::string& id) {
 
 void CalendrierPaiement::setEtudiantCode(const std::string& code) {
     etudiantCode = code;
+    Etudiant e = EtudiantRepository::findById(etudiantCode);
+
 }
 
 void CalendrierPaiement::setClasseId(const std::string& code) {

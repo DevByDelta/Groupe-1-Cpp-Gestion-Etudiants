@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Classe.hpp"
+
 #include <string>
 #include <vector>
 #include <functional>
-#include "Classe.hpp"
 
 class ClasseRepository {
 private:
