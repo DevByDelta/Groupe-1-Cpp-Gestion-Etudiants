@@ -12,7 +12,6 @@ private:
     std::vector<std::string> etudiantCodes;
 
     void setId(const std::string& id);
-    void setEtudiantCodes(const std::vector<std::string>& codes);
 
 public:
     Classe();
@@ -26,7 +25,7 @@ public:
     // Setters métier (publics)
     void setNom(const std::string& nom);
     void setFormationId(const std::string& formationId);
-    void addEtudiant(const std::string& codeEtudiant);
+    void addEtudiantCode(const std::string& codeEtudiant);
 
     // Affichage
     std::string toString() const;

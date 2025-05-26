@@ -1,11 +1,15 @@
+#include <sstream>
+
 #include "Formation.hpp"
 #include "IDGenerator.hpp"
-#include <sstream>
-#include"ReflectionMacros.hpp"
+#include "Date.hpp"
+
+#include "ReflectionMacros.hpp"
 
 Formation::Formation()
 {
     this->id = IDGenerator::generate("FR");
+    this->anneeAcademique = Date::giveAnneeAcademique();
 }
 
 const std::string &Formation::getId() const { return this->id; }
@@ -26,8 +30,7 @@ void Formation::setCoutAnnuel(double coutAnnuel) { this->coutAnnuel = coutAnnuel
 const std::string &Formation::getAnneeAcademique() const { return this->anneeAcademique; }
 void Formation::setAnneeAcademique(const std::string &anneeAcademique) { this->anneeAcademique = anneeAcademique; }
 
-std::string Formation::toString() const
-{
+std::string Formation::toString() const{
     std::ostringstream oss;
     oss << "Formation[ID: " << id
         << ", Filiere: " << filiere

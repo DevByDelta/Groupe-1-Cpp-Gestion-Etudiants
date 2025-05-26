@@ -123,3 +123,14 @@ Date Date::fromString(const std::string& str) {
     // Si erreur, retourne une date par défaut (ou tu peux lever une exception si tu veux)
     return Date();
 }
+
+std::string Date::giveAnneeAcademique() {
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+    int anneeCourante = now->tm_year + 1900;
+    int anneeSuivante = anneeCourante + 1;
+
+    std::ostringstream oss;
+    oss << anneeCourante << "/" << anneeSuivante;
+    return oss.str();
+}

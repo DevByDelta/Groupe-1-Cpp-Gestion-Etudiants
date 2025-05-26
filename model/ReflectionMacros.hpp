@@ -15,7 +15,7 @@ inline std::vector<std::string> splitList(const std::string& csv, char delim = '
     return out;
 }
 
-// Macros
+// Macros pour les set rapide dans les méthodes To
 #define SET_STRING(map, obj, attr) \
     if ((map).find(#attr) != (map).end()) \
         (obj).set##attr((map).at(#attr));
@@ -59,3 +59,7 @@ inline std::vector<std::string> splitList(const std::string& csv, char delim = '
     }
 
 
+// // méthode rapide pour des messages personnalisés d'exception
+// inline std::string makeInvalidMsg(const std::string& type, int id) {
+//     return type + " id/code invalide : " + std::to_string(id);
+// }

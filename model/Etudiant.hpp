@@ -21,7 +21,6 @@ private:
     bool estOrphelin;
 
     void setCode(const std::string& code);
-    void setReglementsId(const std::vector<std::string>& reglementsId);
 
 public:
     Etudiant();

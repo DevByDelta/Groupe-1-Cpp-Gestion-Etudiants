@@ -1,7 +1,16 @@
+#include <sstream>
+#include <stdexcept>
+#include <cctype>
+#include <algorithm>
+#include <regex>
+#include <stdexcept>
+
 #include "Etudiant.hpp"
 #include "IDGenerator.hpp"
 #include "ReflectionMacros.hpp"
-#include <sstream>
+
+#include "ReglementRepository.hpp"
+#include "CalendrierPaiementRepository.hpp"
 
 Etudiant::Etudiant() {
     code = IDGenerator::generate("ETU");
@@ -24,11 +33,19 @@ void Etudiant::setPrenom(const std::string& prenom) {
 
 const std::string& Etudiant::getTelephone() const { return telephone; }
 void Etudiant::setTelephone(const std::string& telephone) {
+    if (telephone.size() != 9 || 
+        !std::all_of(telephone.begin(), telephone.end(), ::isdigit)) {
+        throw std::invalid_argument("Le numéro de téléphone doit contenir exactement 9 chiffres.");
+    }
     this->telephone = telephone;
 }
 
 const std::string& Etudiant::getEmail() const { return email; }
 void Etudiant::setEmail(const std::string& email) {
+    static const std::regex pattern(R"(^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$)");
+    if (!std::regex_match(email, pattern)) {
+        throw std::invalid_argument("Email invalide !");
+    }
     this->email = email;
 }
 
@@ -38,12 +55,12 @@ void Etudiant::setClasseId(const std::string& classeId) {
 }
 
 const std::vector<std::string>& Etudiant::getReglementsId() const { return reglementsId; }
-void Etudiant::setReglementsId(const std::vector<std::string>& reglementsId) {
-    this->reglementsId = reglementsId;
-}
 
 const std::string& Etudiant::getCadPaieId() const { return cadPaieId; }
 void Etudiant::setCadPaieId(const std::string& cadPaieId) {
+    if (!CalendrierPaiementRepository::exists(cadPaieId)) {
+        throw std::runtime_error("Calendrier Paiement ID invalide : " + cadPaieId);
+    }
     this->cadPaieId = cadPaieId;
 }
 
@@ -68,6 +85,9 @@ void Etudiant::setEstOrphelin(bool estOrphelin) {
 }
 
 void Etudiant::addReglementId(const std::string& reglementId) {
+    if (!ReglementRepository::exists(reglementId)) {
+        throw std::runtime_error("Reglement ID invalide : " + reglementId);
+    }
     reglementsId.push_back(reglementId);
 }
 

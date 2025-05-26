@@ -1,12 +1,16 @@
+#include <sstream>
+
 #include "Reglement.hpp"
 #include "IDGenerator.hpp"
+
 #include "ReflectionMacros.hpp"
-#include <sstream>
+
+#include "EtudiantRepository.hpp"
 
 Reglement::Reglement() {
     this->id = IDGenerator::generate("RE");
+    this->date = Date();
 }
-
 
 const std::string& Reglement::getId() const {
     return this->id;
@@ -37,6 +41,9 @@ void Reglement::setMontant(double montant) {
 }
 
 void Reglement::setEtudiantCode(const std::string& etudiantCode) {
+    if (!EtudiantRepository::exists(etudiantCode)) {
+        throw std::runtime_error("Etudiant CODE invalide : " + etudiantCode);
+    }
     this->etudiantCode = etudiantCode;
 }
 
@@ -68,6 +75,7 @@ std::string Reglement::toTxt() const {
     oss << "Montant=" << montant << "\n";
     return oss.str();
 }
+
 Reglement Reglement::To(const std::map<std::string, std::string>& data) {
     Reglement obj;
     SET_STRING(data, obj, Id);

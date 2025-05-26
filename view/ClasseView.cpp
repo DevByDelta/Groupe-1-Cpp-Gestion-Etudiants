@@ -33,7 +33,7 @@ void ClasseView::ajouterEtudiantCode(Classe cl){
             View::showMessage("Code invalide! Etudiant n'existe pas.");
         }
         else{
-            cl.addEtudiant(code);
+            cl.addEtudiantCode(code);
         }
     }
 }
