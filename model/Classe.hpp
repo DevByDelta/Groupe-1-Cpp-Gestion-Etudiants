@@ -25,7 +25,7 @@ public:
     // Setters métier (publics)
     void setNom(const std::string& nom);
     void setFormationId(const std::string& formationId);
-    void addEtudiantCode(const std::string& codeEtudiant);
+    void addEtudiant(const std::string& codeEtudiant);
 
     // Affichage
     std::string toString() const;

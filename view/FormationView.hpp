@@ -5,8 +5,6 @@
 
 class FormationView
 {
-private:
-    FormationView();
 public:
     static Formation saisir();
 };

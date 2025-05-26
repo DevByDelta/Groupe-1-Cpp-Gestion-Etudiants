@@ -3,6 +3,5 @@
 
 class EcheancierView {
 public:
-    // Affiche le menu et retourne le type choisi
     static Echeancier::Type choisir();
 };

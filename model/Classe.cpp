@@ -37,7 +37,7 @@ std::string Classe::toString() const{
 }
 
 // méthode d'ajout
-void Classe::addEtudiantCode(const std::string& codeEtudiant){
+void Classe::addEtudiant(const std::string& codeEtudiant){
     if (!EtudiantRepository::exists(codeEtudiant)) {
         throw std::runtime_error("Etudiant CODE invalide : " + codeEtudiant);
     }
@@ -63,6 +63,6 @@ Classe Classe::To(const std::map<std::string, std::string>& data) {
     SET_STRING(data, obj, Id);
     SET_STRING(data, obj, Nom);
     SET_STRING(data, obj, FormationId);
-    SET_LIST(data, obj, EtudiantCodes, addEtudiantCode);
+    SET_LIST(data, obj, EtudiantCodes, addEtudiant);
     return obj;
 }

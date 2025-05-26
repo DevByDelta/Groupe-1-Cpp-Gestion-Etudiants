@@ -4,9 +4,6 @@
 
 class EtudiantView
 {
-private:
-    EtudiantView();
-
 public:
     static void ajouterReglementId(Etudiant etudiant);
     static Etudiant saisir();
