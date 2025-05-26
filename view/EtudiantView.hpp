@@ -2,11 +2,12 @@
 #include "Etudiant.hpp"
 // EtudiantView.hpp  --  généré automatiquement
 
-class EtudiantView {
-   
-public:
-static void ajouterEtudiantCode(Classe cl);
-static Etudiant saisir();
+class EtudiantView
+{
+private:
     EtudiantView();
-    ~EtudiantView();
+
+public:
+    static void ajouterReglementId(Etudiant etudiant);
+    static Etudiant saisir();
 };

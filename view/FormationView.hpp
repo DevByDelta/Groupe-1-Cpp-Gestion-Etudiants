@@ -3,9 +3,10 @@
 #include "View.hpp"
 #include "Formation.hpp"
 
-class FormationView {
+class FormationView
+{
+private:
+    FormationView();
 public:
     static Formation saisir();
-    FormationView();
-    ~FormationView();
 };

@@ -1,5 +1,4 @@
 #include "EtudiantView.hpp"
-#include <vector>
 #include "View.hpp"
 #include "ReglementRepository.hpp"
 #include "CalendrierPaiementRepository.hpp"
@@ -11,13 +10,13 @@ EtudiantView::~EtudiantView() {}
 Etudiant EtudiantView::saisir(){
     Etudiant etu = Etudiant();
 
-    std::string nom = View::promptString("Donner le nom de l'étudiant'");
+    std::string nom = View::promptString("Donner le nom de l'étudiant");
     etu.setNom(nom);
-    std::string prenom = View::promptString("Donner le prenom de l'étudiant'");
+    std::string prenom = View::promptString("Donner le prenom de l'étudiant");
     etu.setPrenom(prenom);
-    std::string telephone = View::promptString("Donner le télephone de l'étudiant'");
+    std::string telephone = View::promptString("Donner le télephone de l'étudiant");
     etu.setTelephone(telephone);
-    std::string mail = View::promptString("Donner le mail de l'étudiant'");
+    std::string mail = View::promptString("Donner le mail de l'étudiant");
     etu.setEmail(mail);
 
     std::string classeId;
@@ -37,16 +36,20 @@ Etudiant EtudiantView::saisir(){
     }
     etu.setCadPaieId(cadPaieId);
 
-    while (View::promptYesNo("Voulez vous ajouter un reglement?"))
-    {
-        std::string reglementId = View::promptString("Saisir l'id du reglement'");
-        if(!ReglementRepository::exists(reglementId)){
-            View::showMessage("Code invalide! le reglement n'existe pas.");
-        }
-        else{
-            etu.addReglementId(reglementId);
-        }
-    }
+    EtudiantView::ajouterReglementId(etu);
     
     return etu;
+}
+
+void EtudiantView::ajouterReglementId(Etudiant etudiant){
+ while (View::promptYesNo("Voulez vous ajouter un réglementt?"))
+    {
+        std::string reglementId = View::promptString("Saisir l'id du réglement");
+        if(!ReglementRepository::exists(reglementId)){
+            View::showMessage("Code invalide! ce reglement  n'existe pas.");
+        }
+        else{
+            etudiant.addReglementId(reglementId);
+        }
+    }
 }

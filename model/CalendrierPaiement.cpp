@@ -157,13 +157,9 @@ CalendrierPaiement CalendrierPaiement::To(const std::map<std::string, std::strin
     CalendrierPaiement obj;
 
     SET_STRING(data, obj, Id);
-
-
     SET_STRING(data, obj, EtudiantCode);
     SET_STRING(data, obj, ClasseId);
-
     SET_DATE(data, obj, DateInscription);
-
     SET_ENUM(data, obj, Echeancier, Echeancier);
     SET_DOUBLE(data, obj, MontantParEcheance);
     SET_DOUBLE(data, obj, Reduction);
