@@ -12,4 +12,7 @@ public:
     static int promptInt(const std::string& message);
     static double promptDouble(const std::string& message);
     static bool promptYesNo(const std::string& message);
+    static void warning(const std::string& msg);
+    static void success(const std::string& msg);
+    static void error(const std::string& msg);
 };

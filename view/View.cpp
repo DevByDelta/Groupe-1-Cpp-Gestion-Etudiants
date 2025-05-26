@@ -3,58 +3,74 @@
 #include <limits>
 #include <stdexcept>
 
-void View::showMessage(const std::string& message) {
+void View::showMessage(const std::string &message)
+{
     std::cout << message << std::endl;
 }
 
-std::string View::promptString(const std::string& message) {
+std::string View::promptString(const std::string &message)
+{
     std::string input;
-    showMessage(message);
+    std::cout << message;
     std::getline(std::cin, input);
     return input;
 }
 
-int View::promptInt(const std::string& message) {
+int View::promptInt(const std::string &message)
+{
     int value;
     std::string input;
-    while (true) {
+    while (true)
+    {
         input = promptString(message);
-        try {
+        try
+        {
             size_t pos;
             value = std::stoi(input, &pos);
-            if (pos != input.length()) {
+            if (pos != input.length())
+            {
                 throw std::invalid_argument("Extra characters after number");
             }
             break;
-        } catch (const std::exception&) {
+        }
+        catch (const std::exception &)
+        {
             showMessage("Entrée invalide. Veuillez saisir un entier valide.");
         }
     }
     return value;
 }
 
-double View::promptDouble(const std::string& message) {
+double View::promptDouble(const std::string &message)
+{
     double value;
     std::string input;
-    while (true) {
+    while (true)
+    {
         input = promptString(message);
-        try {
+        try
+        {
             size_t pos;
             value = std::stod(input, &pos);
-            if (pos != input.length()) {
+            if (pos != input.length())
+            {
                 throw std::invalid_argument("Extra characters after number");
             }
             break;
-        } catch (const std::exception&) {
+        }
+        catch (const std::exception &)
+        {
             showMessage("Entrée invalide. Veuillez saisir un nombre réel valide.");
         }
     }
     return value;
 }
 
-bool View::promptYesNo(const std::string& message) {
+bool View::promptYesNo(const std::string &message)
+{
     std::string input;
-    while (true) {
+    while (true)
+    {
         showMessage(message + " (o/n) : ");
         std::getline(std::cin, input);
         if (input == "o" || input == "O" || input == "oui" || input == "Oui")
@@ -63,4 +79,17 @@ bool View::promptYesNo(const std::string& message) {
             return false;
         showMessage("Réponse invalide. Veuillez répondre par 'o' (oui) ou 'n' (non).");
     }
+}
+
+void View::warning(const std::string &msg)
+{
+    std::cout << "\033[33m" << msg << "\033[0m" << std::endl; // Jaune
+}
+void View::success(const std::string &msg)
+{
+    std::cout << "\033[32m" << msg << "\033[0m" << std::endl; // Vert
+}
+void View::error(const std::string &msg)
+{
+    std::cout << "\033[31m" << msg << "\033[0m" << std::endl;
 }
