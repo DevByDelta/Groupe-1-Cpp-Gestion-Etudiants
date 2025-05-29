@@ -8,7 +8,7 @@
 
 class FormationView {
 public:
-    static Formation saisir();
+    static Formation input();
     static std::string saisirFiliere();
     static Niveau::Type saisirNiveau();
     static int saisirDureeAnnuelle();

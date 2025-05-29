@@ -5,7 +5,7 @@
 #include "ClasseRepository.hpp"
 #include "View.hpp"
 
-Reglement ReglementView::saisir(){
+Reglement ReglementView::input(){
     Reglement r = Reglement();
     r.setEtudiantCode(saisirEtudiantCode()) ;
     r.setClasseId(saisirClasseId())  ;

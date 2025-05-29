@@ -3,5 +3,5 @@
 
 class EcheancierView {
 public:
-    static Echeancier::Type choisir();
+    Echeancier::Type choisir();
 };

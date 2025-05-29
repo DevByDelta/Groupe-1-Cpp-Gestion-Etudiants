@@ -7,7 +7,7 @@
 
 class ReglementView {
 public:
-    static Reglement saisir();
+    static Reglement input();
     static  std::string saisirEtudiantCode();
     static  std::string saisirClasseId();
     static double saisirMontant();

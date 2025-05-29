@@ -1,7 +1,10 @@
-#include "View.hpp"
 #include <iostream>
 #include <limits>
 #include <stdexcept>
+
+#include "View.hpp"
+
+View::~View(){}
 
 void View::showMessage(const std::string &message)
 {

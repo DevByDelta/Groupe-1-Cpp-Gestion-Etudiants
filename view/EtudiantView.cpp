@@ -11,7 +11,7 @@ EtudiantView::EtudiantView() {}
 
 EtudiantView::~EtudiantView() {}
 
-Etudiant EtudiantView::saisir()
+Etudiant EtudiantView::input()
 {
     Etudiant etu = Etudiant();
     etu.setNom(View::promptString("entrer le nom de l'etudiant"));

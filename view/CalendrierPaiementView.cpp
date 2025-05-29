@@ -1,12 +1,10 @@
 #include "CalendrierPaiementView.hpp"
-#include "ClasseRepository.hpp"
-#include "EtudiantRepository.hpp"
 #include "View.hpp"
 #include "EcheancierView.hpp"
 
 CalendrierPaiementView::CalendrierPaiementView() {}
 
-CalendrierPaiement CalendrierPaiementView::saisir()
+CalendrierPaiement CalendrierPaiementView::input()
 {
     CalendrierPaiement cp = CalendrierPaiement();
     cp.setEtudiantCode(saisirEtudiantCode());

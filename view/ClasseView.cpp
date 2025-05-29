@@ -1,15 +1,16 @@
+#include <exception>
+
 #include "ClasseView.hpp"
 #include "Classe.hpp"
-#include "FormationRepository.hpp"
-#include "EtudiantRepository.hpp"
+#include "ClasseService.hpp"
 
 ClasseView::ClasseView() {}
 
-Classe ClasseView::saisir()
+Classe ClasseView::input()
 {
     Classe cl = Classe();
 
-    cl.setNom(View::promptString("Donner le nom de la classe"));
+    cl.setNom(promptString("Donner le nom de la classe"));
     cl.setFormationId(saisirFormationId());
     ajouterEtudiantCode(cl);
     return cl;
@@ -19,28 +20,32 @@ std::string ClasseView::saisirFormationId()
 {
     while (true)
     {
-        std::string formationId = View::promptString("Donner l'id de la formation: ");
-        if (FormationRepository::exists(formationId))
-            return formationId;
-        View::error("Formation ID invalide : ");
-        View::warning("Erreur lors de l'ajout de la classe!");
+        std::string formationId = promptString("Donner l'id de la formation: ");
+        // if (FormationRepository::exists(formationId))
+        //     return formationId;
+        try {
+            
+        } catch (const std::exception& e) {
+            error("Formation ID invalide : ");
+        }
+        warning("Erreur lors de l'ajout de la classe!");
     }
 }
 
 void ClasseView::ajouterEtudiantCode(Classe &cl)
 {
-    while (View::promptYesNo("Voulez vous ajouter un étudiant?"))
+    while (promptYesNo("Voulez vous ajouter un étudiant?"))
     {
-        std::string etudiantCode = View::promptString("Saisir le code de l'étudiant: ");
-        if (EtudiantRepository::exists(etudiantCode))
-        {
-            cl.addEtudiantCode(etudiantCode);
-            View::success("Etudiant bien ajouté");
-        }
-        else
-        {
-            View::error("Etudiant CODE: " + etudiantCode);
-            View::warning("Erreur lors de l'ajout de l'étudiant!");
-        }
+        std::string etudiantCode = promptString("Saisir le code de l'étudiant: ");
+        // if (EtudiantRepository::exists(etudiantCode))
+        // {
+        //     cl.addEtudiantCode(etudiantCode);
+        //     success("Etudiant bien ajouté");
+        // }
+        // else
+        // {
+        //     error("Etudiant CODE: " + etudiantCode);
+        //     warning("Erreur lors de l'ajout de l'étudiant!");
+        // }
     }
 }

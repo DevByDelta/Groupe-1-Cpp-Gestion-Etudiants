@@ -2,7 +2,7 @@
 #include "View.hpp"
 #include "NiveauView.hpp"
 
-Formation FormationView::saisir()
+Formation FormationView::input()
 {
     Formation f =Formation();
     f.setFiliere(       saisirFiliere()      );

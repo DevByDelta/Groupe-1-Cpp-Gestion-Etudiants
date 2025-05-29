@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1514140574 source:c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\main.cpp
+	<iostream>
+
+1748124429 source:c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\enum\echeancier.cpp
+	"Echeancier.hpp"
+
+1748214143 c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\enum\echeancier.hpp
+	<string>
+	<array>
+
+1748164763 source:c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\enum\niveau.cpp
+	"Niveau.hpp"
+
+1748215742 c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\enum\niveau.hpp
+	<string>
+	<array>
+
+1748232940 source:c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\utils\date.cpp
+	"Date.hpp"
+	<ctime>
+	<sstream>
+	<iomanip>
+
+1748471954 c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\utils\date.hpp
+	<string>
+
+1748096807 source:c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\utils\idgenerator.cpp
+	"IDGenerator.hpp"
+	<fstream>
+	<map>
+	<string>
+	<sstream>
+
+1748095219 c:\users\hp pavilion 15\desktop\ism_cours\cours de classe & td\c++\groupe-1-cpp-gestion-etudiants\model\utils\idgenerator.hpp
+	<string>
+

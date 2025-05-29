@@ -7,9 +7,10 @@
 #include "Echeancier.hpp"
 
 class CalendrierPaiementView {
+
 public:
-    static CalendrierPaiement saisir();
-    static std::string saisirEtudiantCode();
-    static std::string saisirClasseId();
-    static Echeancier::Type saisirEcheancier();
+    CalendrierPaiement input();
+    std::string saisirEtudiantCode();
+    std::string saisirClasseId();
+    Echeancier::Type saisirEcheancier();
 };
