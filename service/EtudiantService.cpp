@@ -1,7 +1,9 @@
 #include "EtudiantService.hpp"
-#include "ClasseRepository.hpp"
-#include "EtudiantRepository.hpp"
+#include "../repository/ClasseRepository.hpp"
+#include "../repository/EtudiantRepository.hpp"
+#include "../repository/CalendrierPaiementRepository.hpp"
 #include <exception>
+#include <stdexcept>
 
 EtudiantService::EtudiantService() {}
 
@@ -29,6 +31,14 @@ void EtudiantService::validerMetierClasseId(Etudiant &etudiant, const std::strin
     }
     etudiant.setClasseId(classeId);
 }
+void validerMetierCadPaieId(Etudiant& etudiant,const std::string& cadPaieId){
+    if (!CalendrierPaiementRepository::exists(cadPaieId))
+    {
+        throw std::runtime_error("Calendrier Paiement ID invalide " + cadPaieId);
+    }
+    etudiant.setCadPaieId(cadPaieId);
+}
+
 
 void EtudiantService::validerMetierEstBoursier(Etudiant &etudiant, bool etat)
 {
@@ -38,7 +48,7 @@ void EtudiantService::validerMetierEstHandicape(Etudiant &etudiant, bool etat)
 {
     etudiant.setEstHandicape(etat);
 }
-void EtudiantService::validerMetierEstFamilleNombreuse(Etudiant &etudiant, bool etat)
+void EtudiantService::validerMetierFamilleNombreuse(Etudiant &etudiant, bool etat)
 {
     etudiant.setFamilleNombreuse(etat);
 }
@@ -47,14 +57,10 @@ void EtudiantService::validerMetierEstOrphelin(Etudiant &etudiant, bool etat)
     etudiant.setEstOrphelin(etat);
 }
 
-void EtudiantService::validerMetierAddReglementId(Etudiant &etudiant, const std::string &reglementId)
-{
-    etudiant.addReglementId(reglementId);
-}
 
 bool EtudiantService::ajouterEtudiant(const Etudiant& etudiant){
     return (EtudiantRepository::save(etudiant));
-    
+
 }
 bool EtudiantService::supprimerEtudiant(const std::string& code){
         return EtudiantRepository::remove(code);
@@ -66,4 +72,15 @@ Etudiant EtudiantService::rechercherEtudiant(const std::string& code){
 
 std::vector<Etudiant> EtudiantService::avoirTousEtudiants(){
     return EtudiantRepository::findAll();
+}
+
+bool EtudiantService::exist(const std::string& code){
+    return EtudiantRepository::exists(code);
+}
+
+
+EtudiantService &EtudiantService::instance()
+{
+    static EtudiantService inst;
+    return inst;
 }

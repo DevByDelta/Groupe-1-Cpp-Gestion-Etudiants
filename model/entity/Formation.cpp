@@ -1,10 +1,10 @@
 #include <sstream>
 
 #include "Formation.hpp"
-#include "IDGenerator.hpp"
-#include "Date.hpp"
+#include "../utils/IDGenerator.hpp"
+#include "../utils/Date.hpp"
 
-#include "ReflectionMacros.hpp"
+#include "../ReflectionMacros.hpp"
 
 Formation::Formation()
 {

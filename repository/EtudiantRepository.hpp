@@ -4,7 +4,7 @@
 #include <vector>
 #include <functional>
 
-#include "Etudiant.hpp"
+#include "../model/entity/Etudiant.hpp"
 
 class EtudiantRepository {
 private:

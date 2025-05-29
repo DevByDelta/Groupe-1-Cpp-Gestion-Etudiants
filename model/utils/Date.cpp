@@ -125,12 +125,16 @@ Date Date::fromString(const std::string& str) {
 }
 
 std::string Date::giveAnneeAcademique() {
-    std::time_t t = std::time(nullptr);
-    std::tm* now = std::localtime(&t);
-    int anneeCourante = now->tm_year + 1900;
+    int anneeCourante = giveAnnee();
     int anneeSuivante = anneeCourante + 1;
 
     std::ostringstream oss;
     oss << anneeCourante << "/" << anneeSuivante;
     return oss.str();
+}
+
+int Date::giveAnnee(){
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+    return now->tm_year + 1900;
 }

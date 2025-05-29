@@ -1,47 +1,73 @@
 #include "CalendrierPaiementView.hpp"
 #include "View.hpp"
 #include "EcheancierView.hpp"
+#include "CalendrierPaiementService.hpp"
 
 CalendrierPaiementView::CalendrierPaiementView() {}
 
-CalendrierPaiement CalendrierPaiementView::input()
+CalendrierPaiement CalendrierPaiementView::input(const Etudiant& e, const Formation& f)
 {
     CalendrierPaiement cp = CalendrierPaiement();
-    cp.setEtudiantCode(saisirEtudiantCode());
-    cp.setClasseId(saisirClasseId());
-    cp.setEcheancier(saisirEcheancier());
+    modifierClasseId(cp);
+    modifierEtudiantCode(cp);
+    modifierEcheancier(cp);
     cp.genererEcheances();
-    cp.majReduction();
-    cp.majMontantParEcheance();
+    cp.majReduction(e);
+    cp.majMontantParEcheance(f);
     return cp;
 }
 
-std::string CalendrierPaiementView::saisirEtudiantCode()
+void CalendrierPaiementView::modifierEtudiantCode(CalendrierPaiement &cp)
 {
     while (true)
     {
-        std::string etudiantCode = View::promptString("Entrer le code de l'étudiant: ");
-        if (EtudiantRepository::exists(etudiantCode))
-            return etudiantCode;
-        View::error("Etudiant CODE invalide : " + etudiantCode);
-        View::warning("Saisir le code d'un étudiant qui exist!");
+        std::string etudiantCode = promptString("Entrer le code de l'étudiant: ");
+        try
+        {
+            CalendrierPaiementService::instance().validerMetierEtudiantCode(cp, etudiantCode);
+        }
+        catch (const std::exception &e)
+        {
+            error(e.what());
+        }
     }
 }
 
-std::string CalendrierPaiementView::saisirClasseId()
+void CalendrierPaiementView::modifierClasseId(CalendrierPaiement &cp)
 {
-    std::string classeId;
     while (true)
     {
-        std::string classeId = View::promptString("Donner l'id de la classe: ");
-        if (ClasseRepository::exists(classeId))
-            return classeId;
-        View::error(std::string("Classe ID invalide : " + classeId));
-        View::warning("Erreur lors de l'ajout de la classe!");
+        std::string classeId = promptString("Donner l'id de la classe: ");
+        try
+        {
+            CalendrierPaiementService::instance().validerMetierClasseId(cp, classeId);
+        }
+        catch (const std::exception &e)
+        {
+            error(e.what());
+        }
     }
 }
 
-Echeancier::Type CalendrierPaiementView::saisirEcheancier()
+void CalendrierPaiementView::modifierEcheancier(CalendrierPaiement &cp)
 {
-    return EcheancierView::choisir();
+    while (true)
+    {
+        Echeancier::Type echeancier = EcheancierView::instance().choisir();
+        try
+        {
+            CalendrierPaiementService::instance().validerMetierEchancier(cp, echeancier);
+        }
+        catch(const std::exception& e)
+        {
+            error(e.what());
+        }
+        
+    }
+}
+
+CalendrierPaiementView &CalendrierPaiementView::instance()
+{
+    static CalendrierPaiementView inst;
+    return inst;
 }

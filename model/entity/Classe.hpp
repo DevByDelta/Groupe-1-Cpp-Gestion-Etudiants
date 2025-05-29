@@ -14,7 +14,10 @@ private:
     void setId(const std::string& id);
 
 public:
-    Classe();
+    Classe(
+        const std::string& formationId = "",
+        const std::string& firstEtudiantCode = ""
+    );
 
     // Getters
     const std::string& getId() const;

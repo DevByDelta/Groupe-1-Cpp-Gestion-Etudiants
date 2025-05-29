@@ -1,9 +1,9 @@
 #include <sstream>
 
 #include "Reglement.hpp"
-#include "IDGenerator.hpp"
+#include "../utils/IDGenerator.hpp"
 
-#include "ReflectionMacros.hpp"
+#include "../ReflectionMacros.hpp"
 
 
 

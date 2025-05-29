@@ -6,7 +6,7 @@
 #include <cstring>
 
 #include "FormationRepository.hpp"
-#include "pathsConst.hpp"
+#include "../const/pathsConst.hpp"
 
 std::string FormationRepository::getFilePath(const std::string& id){
     return FORMATIONS_PATH + std::string(id) + EXTENSION_DB;

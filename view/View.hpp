@@ -13,5 +13,11 @@ public:
     void warning(const std::string& msg);
     void success(const std::string& msg);
     void error(const std::string& msg);
-    
+    std::string afficherMenu(
+        const std::map<std::string, std::string>& menu,
+        const std::string& titre = "FONCTIONNALITÉS DISPONIBLES",
+        const std::string& separateur = "=",
+        int largeur = 40,
+        const std::string& prefix = "→ "
+    );
 };

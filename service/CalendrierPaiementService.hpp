@@ -1,11 +1,18 @@
 #pragma once
-#include "CalendrierPaiement.hpp"
-#include "Echeancier.hpp"
+#include "../model/entity/CalendrierPaiement.hpp"
+#include "../model/enum/Echeancier.hpp"
 
-class CalendrierPaiementService {
+class CalendrierPaiementService
+{
+private:
+    CalendrierPaiementService() {}
+    CalendrierPaiementService(const CalendrierPaiementService &) = delete;
+    CalendrierPaiementService &operator=(const CalendrierPaiementService &) = delete;
+
 public:
-    CalendrierPaiementService();
-    void validerMetierEtudiantCode(CalendrierPaiement& cp, const std::string& etudiantCode);
-    void validerMetierClasseId(CalendrierPaiement& cp, const std::string& classeId);
-    void validerMetierEchancier(CalendrierPaiement& cp, const Echeancier::Type& echeancier);
+    static CalendrierPaiementService &instance();
+    bool exist(const std::string &id);
+    void validerMetierEtudiantCode(CalendrierPaiement &cp, const std::string &etudiantCode);
+    void validerMetierClasseId(CalendrierPaiement &cp, const std::string &classeId);
+    void validerMetierEchancier(CalendrierPaiement &cp, const Echeancier::Type &echeancier);
 };

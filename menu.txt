@@ -6,14 +6,18 @@ Gestion des Étudiants
     Rechercher un étudiant //Etudiant
     Afficher la liste des étudiants  //void
 
+    Définir le calendrier de paiement personnalisé d'un étudiant
+
+
 Gestion des Classes
     Ajouter une classe
     Modifier une classe
     Supprimer une classe
+    Rechercher une classe par ID
+    Afficher les classes
+
     Afficher l'effectif d’une classe
     Afficher le coût de formation d’une classe donnée
-    Afficher les classes
-    Rechercher une classe par ID
 
 Gestion des Formations
     Ajouter une formation //bool
@@ -21,21 +25,22 @@ Gestion des Formations
     Supprimer une formation //bool
     Rechercher une formation par ID //formation
     Afficher la liste des formations proposées //void
-    Identifier la filière la plus rentable //formation
 
-Gestion des Tarifs
-    Définir les tarifs différenciés par niveau, filière ou catégorie sociale
-    Paramétrer les réductions et remises (familles nombreuses, bourses d’excellence)
+    Identifier la filière la plus rentable //pair<filiere, montant>
+    Afficher les formations les plus populaires //
+
+Paramétrer les réductions et remises (familles nombreuses, bourses d’excellence)
 
 Gestion des Paiements
-    Ajouter un règlement
-    Modifier un règlement
-    Supprimer un règlement
-    Afficher les règlements pour un étudiant donné par année
-    Afficher le reliquat à payer pour un étudiant
-    Définir le calendrier de paiement personnalisé d'un étudiant
-    Tableau de Bord Financier
-    Afficher le chiffre d’affaires total de l'établissement
-    Afficher des statistiques globales (rentabilité par filière, formations les plus populaires)
+    Ajouter un règlement //fait
+    Modifier un règlement //Fait
+    Supprimer un règlement //fait
+    rechercher un règlement par ID //kine
+    Afficher la liste des règlements //kine
+    
+    Afficher les règlements pour un étudiant donné par année //Fait
+    Afficher le reliquat à payer pour un étudiant //Fait
+    Afficher le chiffre d’affaires total de l'établissement //fait
+    Afficher la rentabilité par filière //amina
 
 Quitter l'application

@@ -36,6 +36,7 @@ public:
     Date ajouterJours(int nbJours) const;
     Date ajouterMois(int nbMois) const;
     static std::string giveAnneeAcademique();
+    static int giveAnnee();
 
     // Méthode de convertion
     static Date fromString(const std::string& str);

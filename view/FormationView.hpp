@@ -1,17 +1,34 @@
 #pragma once
-
+#include "View.hpp"
 #include <vector>
 #include <string>
 
+#include "../model/entity/Formation.hpp"
 
-#include "Formation.hpp"
+class FormationView : public View
 
-class FormationView {
+{
+private:
+    FormationView() {};
+    FormationView(const FormationView &) = delete;
+    FormationView &operator=(const FormationView &) = delete;
+
 public:
-    static Formation input();
-    static std::string saisirFiliere();
-    static Niveau::Type saisirNiveau();
-    static int saisirDureeAnnuelle();
-    static double saisirCoutAnnuel();
+    Formation input();
+    static FormationView &instance();
+
+    // méthodes de modifications
+    void modifierFiliere(Formation &fomation);
+    void modifierNiveau(Formation &formation);
+    void modifierDureeAnnuelle(Formation &formation);
+    void modifierCoutAnnuel(Formation &Formation);
+    // methode pure service
+    void saisirEtEnregistrerFormation();
+    void supprimerFormation();
+    void rechercherFormation();
+    void modifierFormation();
     void displayAll(std::vector<Formation> formations);
+    // methode service utils
+    void afficherRentabiliteParFiliere();
+    void afficherFormationsPopulaires();
 };

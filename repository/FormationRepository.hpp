@@ -4,7 +4,7 @@
 #include <vector>
 #include <functional>
 
-#include "Formation.hpp"
+#include "../model/entity/Formation.hpp"
 
 class FormationRepository {
 private:

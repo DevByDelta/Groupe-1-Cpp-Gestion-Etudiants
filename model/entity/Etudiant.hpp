@@ -12,7 +12,6 @@ private:
     std::string telephone;
     std::string email;
     std::string classeId;
-    std::vector<std::string> reglementsId;
     std::string cadPaieId;
 
     bool estBoursier=false;
@@ -23,7 +22,10 @@ private:
     void setCode(const std::string& code);
 
 public:
-    Etudiant();
+    Etudiant(
+        const std::string& classeId = "",
+        const std::string& cadPaieId = ""
+    );
 
     // Getters
     const std::string& getCode() const;
@@ -32,7 +34,6 @@ public:
     const std::string& getTelephone() const;
     const std::string& getEmail() const;
     const std::string& getClasseId() const;
-    const std::vector<std::string>& getReglementsId() const;
     const std::string& getCadPaieId() const;
 
     bool getEstBoursier() const;
@@ -52,7 +53,6 @@ public:
     void setEstOrphelin(bool estOrphelin);
 
     void setClasseId(const std::string& classeId);
-    void addReglementId(const std::string& reglementId);
     void setCadPaieId(const std::string& cadPaieId);
 
     // Affichage & sérialisation

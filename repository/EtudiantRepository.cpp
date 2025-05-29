@@ -6,7 +6,7 @@
 #include <cstring>
 
 #include "EtudiantRepository.hpp"
-#include "pathsConst.hpp"
+#include "../const/pathsConst.hpp"
 
 bool  EtudiantRepository::exists(const std::string& id) {
     std::ifstream ifs(getFilePath(id).c_str());

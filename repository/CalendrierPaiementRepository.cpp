@@ -6,7 +6,7 @@
 #include <cstring>
 
 #include "CalendrierPaiementRepository.hpp"
-#include "pathsConst.hpp"
+#include "../const/pathsConst.hpp"
 
 std::string CalendrierPaiementRepository::getFilePath(const std::string& id){
     return CALENDRIERS_PATH + std::string(id) + EXTENSION_DB;

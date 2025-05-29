@@ -6,7 +6,7 @@
 #include <cstring>
 
 #include "ReglementRepository.hpp"
-#include "pathsConst.hpp"
+#include "../const/pathsConst.hpp"
 
 std::string ReglementRepository::getFilePath(const std::string& id){
     return REGLEMENTS_PATH + std::string(id) + EXTENSION_DB;

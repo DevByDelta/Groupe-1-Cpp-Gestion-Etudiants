@@ -4,7 +4,7 @@
 #include <vector>
 #include <functional>
 
-#include "Reglement.hpp"
+#include "../model/entity/Reglement.hpp"
 
 class ReglementRepository {
 private:

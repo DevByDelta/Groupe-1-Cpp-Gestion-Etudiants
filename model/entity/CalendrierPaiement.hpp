@@ -4,9 +4,11 @@
 #include <vector>
 #include <map>
 
-#include "Date.hpp"
-#include "Echeancier.hpp"
-#include "IDGenerator.hpp"
+#include "../utils/Date.hpp"
+#include "../enum/Echeancier.hpp"
+#include "../utils/IDGenerator.hpp"
+#include "Formation.hpp"
+#include "Etudiant.hpp"
 
 class CalendrierPaiement
 {
@@ -29,7 +31,10 @@ private:
     void addEcheance(const Date &d);
 
 public:
-    CalendrierPaiement();
+    CalendrierPaiement(
+        const std::string& etudiantCode = "",
+        const std::string& classeId = ""
+    );
 
     // Accesseurs
     const std::string &getId() const;
@@ -49,7 +54,7 @@ public:
     // méthodes de mise à jours d'attributs dépendant
     void genererEcheances();
     void majReduction(const Etudiant &e);
-    void majMontantParEcheance(double coutAnnuel);
+    void majMontantParEcheance(const Formation& f);
 
 
     // Méthode d'affichage

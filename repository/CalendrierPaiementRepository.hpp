@@ -4,7 +4,7 @@
 #include <vector>
 #include <functional>
 
-#include "CalendrierPaiement.hpp"
+#include "../model/entity/CalendrierPaiement.hpp"
 
 class CalendrierPaiementRepository {
 private:

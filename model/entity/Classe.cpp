@@ -1,31 +1,37 @@
 #include "Classe.hpp"
-#include "ReflectionMacros.hpp"
+#include "../ReflectionMacros.hpp"
 #include "../utils/IDGenerator.hpp"
 
-
-
-Classe::Classe()
-{
+Classe::Classe(
+    const std::string &formationId = "",
+    const std::string &firstEtudiantCode = ""
+){
     this->id = IDGenerator::generate("CL");
-    nom="";
-    formationId="";
+    this->nom = "";
+    this->formationId = formationId;
+    if (firstEtudiantCode != "")
+    {
+        this->etudiantCodes.push_back(firstEtudiantCode);
+    }
 }
 
 // getters
-const std::string& Classe::getId() const{ return this->id; }
-const std::string& Classe::getNom() const{ return this->nom; }
-const std::string& Classe::getFormationId() const{ return this->formationId; }
-const std::vector<std::string>& Classe::getEtudiantCodes() const{ return this->etudiantCodes; }
+const std::string &Classe::getId() const { return this->id; }
+const std::string &Classe::getNom() const { return this->nom; }
+const std::string &Classe::getFormationId() const { return this->formationId; }
+const std::vector<std::string> &Classe::getEtudiantCodes() const { return this->etudiantCodes; }
 
 // setters
-void Classe::setNom(const std::string& nom){ this->nom = nom; }
-void Classe::setFormationId(const std::string& formationId){
+void Classe::setNom(const std::string &nom) { this->nom = nom; }
+void Classe::setFormationId(const std::string &formationId)
+{
     this->formationId = formationId;
 }
-void Classe::setId(const std::string& id){ this->id = id; }
+void Classe::setId(const std::string &id) { this->id = id; }
 
 // métiers
-std::string Classe::toString() const{
+std::string Classe::toString() const
+{
     std::ostringstream oss;
     oss << "Classe[ID: " << id
         << ", nom: " << nom
@@ -35,25 +41,30 @@ std::string Classe::toString() const{
 }
 
 // méthode d'ajout
-void Classe::addEtudiantCode(const std::string& codeEtudiant){
+void Classe::addEtudiantCode(const std::string &codeEtudiant)
+{
     this->etudiantCodes.push_back(codeEtudiant);
 }
 
-std::string Classe::toTxt() const{
+std::string Classe::toTxt() const
+{
     std::ostringstream oss;
     oss << "Id=" << id << "\n";
     oss << "Nom=" << nom << "\n";
     oss << "FormationId=" << formationId << "\n";
     oss << "EtudiantCodes=";
-    for (size_t i = 0; i < etudiantCodes.size(); ++i) {
+    for (size_t i = 0; i < etudiantCodes.size(); ++i)
+    {
         oss << etudiantCodes[i];
-        if (i != etudiantCodes.size() - 1) oss << ",";
+        if (i != etudiantCodes.size() - 1)
+            oss << ",";
     }
     oss << "\n";
     return oss.str();
 }
 
-Classe Classe::To(const std::map<std::string, std::string>& data) {
+Classe Classe::To(const std::map<std::string, std::string> &data)
+{
     Classe obj;
     SET_STRING(data, obj, Id);
     SET_STRING(data, obj, Nom);

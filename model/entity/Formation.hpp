@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Niveau.hpp"
+#include "../enum/Niveau.hpp"
 
 #include <string>
 #include <map>
@@ -14,6 +14,7 @@ private:
     Niveau::Type niveau;
     int dureeAnnuelle;
     double coutAnnuel;
+
 
     void setId(const std::string &id);
     void setAnneeAcademique(const std::string &anneeAcademique);

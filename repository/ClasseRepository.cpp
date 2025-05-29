@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 
 #include "ClasseRepository.hpp"
-#include "pathsConst.hpp"
+#include "../const/pathsConst.hpp"
 
 // Utilisation de la macro pour obtenir le chemin du fichier
 std::string ClasseRepository::getFilePath(const std::string& id) {

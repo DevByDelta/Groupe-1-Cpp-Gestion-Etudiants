@@ -6,92 +6,104 @@
 #include <stdexcept>
 
 #include "Etudiant.hpp"
-#include "IDGenerator.hpp"
-#include "ReflectionMacros.hpp"
+#include "../utils/IDGenerator.hpp"
+#include "../ReflectionMacros.hpp"
 
-
-
-Etudiant::Etudiant() {
-    code = IDGenerator::generate("ETU");
-    nom="";
-    prenom ="";
-    telephone="";
-    email="";
-    classeId="";
-    cadPaieId="";
+Etudiant::Etudiant(
+    const std::string &classeId = "",
+    const std::string &cadPaieId = ""
+)
+{
+    this->code = IDGenerator::generate("ETU");
+    this->nom = "";
+    this->prenom = "";
+    this->telephone = "";
+    this->email = "";
+    this->classeId = "";
+    this->cadPaieId = "";
 }
 
-const std::string& Etudiant::getCode() const { return code; }
-void Etudiant::setCode(const std::string& code){
+const std::string &Etudiant::getCode() const { return code; }
+void Etudiant::setCode(const std::string &code)
+{
     this->code = code;
 }
 
-const std::string& Etudiant::getNom() const { return nom; }
-void Etudiant::setNom(const std::string& nom) {
+const std::string &Etudiant::getNom() const { return nom; }
+void Etudiant::setNom(const std::string &nom)
+{
     this->nom = nom;
 }
 
-const std::string& Etudiant::getPrenom() const { return prenom; }
-void Etudiant::setPrenom(const std::string& prenom) {
+const std::string &Etudiant::getPrenom() const { return prenom; }
+void Etudiant::setPrenom(const std::string &prenom)
+{
     this->prenom = prenom;
 }
 
-const std::string& Etudiant::getTelephone() const { return telephone; }
-void Etudiant::setTelephone(const std::string& telephone) {
-    if (telephone.size() != 9 || 
-        !std::all_of(telephone.begin(), telephone.end(), ::isdigit)) {
+const std::string &Etudiant::getTelephone() const { return telephone; }
+void Etudiant::setTelephone(const std::string &telephone)
+{
+    if (telephone.size() != 9 ||
+        !std::all_of(telephone.begin(), telephone.end(), ::isdigit))
+    {
         throw std::invalid_argument("Le numéro de téléphone doit contenir exactement 9 chiffres.");
     }
     this->telephone = telephone;
 }
 
-const std::string& Etudiant::getEmail() const { return email; }
-void Etudiant::setEmail(const std::string& email) {
+const std::string &Etudiant::getEmail() const { return email; }
+void Etudiant::setEmail(const std::string &email)
+{
     static const std::regex pattern(R"(^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$)");
-    if (!std::regex_match(email, pattern)) {
+    if (!std::regex_match(email, pattern))
+    {
         throw std::invalid_argument("Email invalide !");
     }
     this->email = email;
 }
 
-const std::string& Etudiant::getClasseId() const { return classeId; }
-void Etudiant::setClasseId(const std::string& classeId) {
+const std::string &Etudiant::getClasseId() const { return classeId; }
+void Etudiant::setClasseId(const std::string &classeId)
+{
     this->classeId = classeId;
 }
 
-const std::vector<std::string>& Etudiant::getReglementsId() const { return reglementsId; }
 
-const std::string& Etudiant::getCadPaieId() const { return cadPaieId; }
-void Etudiant::setCadPaieId(const std::string& cadPaieId) {
+const std::string &Etudiant::getCadPaieId() const { return cadPaieId; }
+void Etudiant::setCadPaieId(const std::string &cadPaieId)
+{
     this->cadPaieId = cadPaieId;
 }
 
 bool Etudiant::getEstBoursier() const { return estBoursier; }
-void Etudiant::setEstBoursier(bool estBoursier) {
+void Etudiant::setEstBoursier(bool estBoursier)
+{
     this->estBoursier = estBoursier;
 }
 
 bool Etudiant::getEstHandicape() const { return estHandicape; }
-void Etudiant::setEstHandicape(bool estHandicape) {
+void Etudiant::setEstHandicape(bool estHandicape)
+{
     this->estHandicape = estHandicape;
 }
 
 bool Etudiant::getFamilleNombreuse() const { return familleNombreuse; }
-void Etudiant::setFamilleNombreuse(bool familleNombreuse) {
+void Etudiant::setFamilleNombreuse(bool familleNombreuse)
+{
     this->familleNombreuse = familleNombreuse;
 }
 
 bool Etudiant::getEstOrphelin() const { return estOrphelin; }
-void Etudiant::setEstOrphelin(bool estOrphelin) {
+void Etudiant::setEstOrphelin(bool estOrphelin)
+{
     this->estOrphelin = estOrphelin;
 }
 
-void Etudiant::addReglementId(const std::string& reglementId) {
-    reglementsId.push_back(reglementId);
-}
 
 // toString
-std::string Etudiant::toString() const {
+std::string Etudiant::toString() const
+{
     std::ostringstream oss;
     oss << "Etudiant[Code: " << code
         << ", Nom: " << nom
@@ -109,7 +121,8 @@ std::string Etudiant::toString() const {
 }
 
 // toTxt : sérialisation pour sauvegarde fichier
-std::string Etudiant::toTxt() const {
+std::string Etudiant::toTxt() const
+{
     std::ostringstream oss;
     oss << "Code=" << code << "\n";
     oss << "Nom=" << nom << "\n";
@@ -122,16 +135,11 @@ std::string Etudiant::toTxt() const {
     oss << "EstHandicape=" << (estHandicape ? "1" : "0") << "\n";
     oss << "FamilleNombreuse=" << (familleNombreuse ? "1" : "0") << "\n";
     oss << "EstOrphelin=" << (estOrphelin ? "1" : "0") << "\n";
-    oss << "ReglementsId=";
-    for (size_t i = 0; i < reglementsId.size(); ++i) {
-        oss << reglementsId[i];
-        if (i != reglementsId.size() - 1) oss << ",";
-    }
-    oss << "\n";
     return oss.str();
 }
 
-Etudiant Etudiant::To(const std::map<std::string, std::string>& data) {
+Etudiant Etudiant::To(const std::map<std::string, std::string> &data)
+{
     Etudiant obj;
 
     SET_STRING(data, obj, Code);
@@ -145,7 +153,6 @@ Etudiant Etudiant::To(const std::map<std::string, std::string>& data) {
     SET_BOOL(data, obj, EstHandicape);
     SET_BOOL(data, obj, FamilleNombreuse);
     SET_BOOL(data, obj, EstOrphelin);
-    SET_LIST(data, obj, ReglementsId, addReglementId);
 
     return obj;
 }

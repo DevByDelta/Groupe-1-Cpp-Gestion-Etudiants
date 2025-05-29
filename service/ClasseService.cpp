@@ -1,8 +1,11 @@
 #include <exception>
 
 #include "ClasseService.hpp"
-#include "FormationRepository.hpp"
-#include "ClasseRepository.hpp"
+#include "../repository/FormationRepository.hpp"
+#include "../repository/ClasseRepository.hpp"
+#include <exception>
+#include <stdexcept>
+
 
 ClasseService::ClasseService() {}
 
@@ -21,7 +24,7 @@ void ClasseService::validerMetierAddEtudiantCode(Classe& classe , const std::str
     classe.addEtudiantCode(code);
 }
 
-bool ClasseService::ajouterClasse(Classe& classe){
+bool ClasseService::enregistrerClasse(Classe& classe){
     return ClasseRepository::save(classe);
 }
 bool ClasseService::supprimerClasse(const std::string& id){
@@ -38,4 +41,13 @@ double ClasseService::avoirCoutFormation(const std::string& id){
     std::string formationId = cl.getFormationId();
     Formation f = FormationRepository::findById(formationId);
     return f.getCoutAnnuel();
+}
+ClasseService &ClasseService::instance()
+{
+    static ClasseService inst;
+    return inst;
+}
+
+bool ClasseService::exist(const std::string& id){
+    return ClasseService::exist(id);
 }
