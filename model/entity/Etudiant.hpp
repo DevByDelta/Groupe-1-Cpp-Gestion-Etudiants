@@ -8,17 +8,17 @@ class Etudiant {
 private:
     std::string code;
     std::string nom;
-    std::string prenom;
+    std::string prenom ;
     std::string telephone;
     std::string email;
     std::string classeId;
     std::vector<std::string> reglementsId;
     std::string cadPaieId;
 
-    bool estBoursier;
-    bool estHandicape;
-    bool familleNombreuse;
-    bool estOrphelin;
+    bool estBoursier=false;
+    bool estHandicape=false;
+    bool familleNombreuse=false;
+    bool estOrphelin=false;
 
     void setCode(const std::string& code);
 

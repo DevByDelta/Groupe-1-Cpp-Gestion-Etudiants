@@ -10,6 +10,9 @@ Formation::Formation()
 {
     this->id = IDGenerator::generate("FR");
     this->anneeAcademique = Date::giveAnneeAcademique();
+    filiere="";
+    dureeAnnuelle=0;
+    coutAnnuel=0;
 }
 
 const std::string &Formation::getId() const { return this->id; }

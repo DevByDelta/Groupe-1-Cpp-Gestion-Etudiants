@@ -1,5 +1,4 @@
 #include "NiveauView.hpp"
-#include "Niveau.hpp"
 #include "View.hpp"
 #include <sstream>
 

@@ -11,7 +11,7 @@
 
 // Utilisation de la macro pour obtenir le chemin du fichier
 std::string ClasseRepository::getFilePath(const std::string& id) {
-    return (CLASSES_PATH + std::string(id) + EXTENSION_DB);
+    return CLASSES_PATH + std::string(id) + EXTENSION_DB;
 }
 
 // Vérifier la présence de l'objet

@@ -5,11 +5,15 @@
 
 #include "ReflectionMacros.hpp"
 
-#include "EtudiantRepository.hpp"
+
 
 Reglement::Reglement() {
     this->id = IDGenerator::generate("RE");
     this->date = Date();
+    id="";
+    etudiantCode="";
+    classeId="";
+    montant=0;
 }
 
 const std::string& Reglement::getId() const {
@@ -37,13 +41,13 @@ void Reglement::setId(const std::string& id) {
 }
 
 void Reglement::setMontant(double montant) {
+    if (montant<0.0){
+        throw std::runtime_error("Montant invalide : " + std::to_string(montant));
+    }
     this->montant = montant;
 }
 
 void Reglement::setEtudiantCode(const std::string& etudiantCode) {
-    if (!EtudiantRepository::exists(etudiantCode)) {
-        throw std::runtime_error("Etudiant CODE invalide : " + etudiantCode);
-    }
     this->etudiantCode = etudiantCode;
 }
 

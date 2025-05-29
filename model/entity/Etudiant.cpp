@@ -9,11 +9,16 @@
 #include "IDGenerator.hpp"
 #include "ReflectionMacros.hpp"
 
-#include "ReglementRepository.hpp"
-#include "CalendrierPaiementRepository.hpp"
+
 
 Etudiant::Etudiant() {
     code = IDGenerator::generate("ETU");
+    nom="";
+    prenom ="";
+    telephone="";
+    email="";
+    classeId="";
+    cadPaieId="";
 }
 
 const std::string& Etudiant::getCode() const { return code; }
@@ -58,9 +63,6 @@ const std::vector<std::string>& Etudiant::getReglementsId() const { return regle
 
 const std::string& Etudiant::getCadPaieId() const { return cadPaieId; }
 void Etudiant::setCadPaieId(const std::string& cadPaieId) {
-    if (!CalendrierPaiementRepository::exists(cadPaieId)) {
-        throw std::runtime_error("Calendrier Paiement ID invalide : " + cadPaieId);
-    }
     this->cadPaieId = cadPaieId;
 }
 
@@ -85,9 +87,6 @@ void Etudiant::setEstOrphelin(bool estOrphelin) {
 }
 
 void Etudiant::addReglementId(const std::string& reglementId) {
-    if (!ReglementRepository::exists(reglementId)) {
-        throw std::runtime_error("Reglement ID invalide : " + reglementId);
-    }
     reglementsId.push_back(reglementId);
 }
 

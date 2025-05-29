@@ -1,169 +1,135 @@
 #include <sstream>
+#include <exception>
 
 #include "CalendrierPaiement.hpp"
 #include "pathsConst.hpp"
 #include "Etudiant.hpp"
-#include "Classe.hpp"
-
-#include "EtudiantRepository.hpp"
-#include "ClasseRepository.hpp"
-#include "FormationRepository.hpp"
 
 #include "ReflectionMacros.hpp"
 #include "reductionsConst.hpp"
 
 // Constructeur
-CalendrierPaiement::CalendrierPaiement()
-{
-    id = IDGenerator::generate("CP");
-    dateInscription = Date();
-    echeancier = Echeancier::Type::Invalide;
-    reduction = -1;
-
+CalendrierPaiement::CalendrierPaiement(){
+    this->id = IDGenerator::generate("CP");
+    this->dateInscription = Date();
+    this->echeancier = Echeancier::Type::Invalide;
+    this->reduction = -1;
+    this->etudiantCode="";
+    this->classeId="";
+    this->montantParEcheance=0;
 }
 
 // Getters
 const std::string &CalendrierPaiement::getId() const
 {
-    return id;
+    return this->id;
 }
-
 const std::string &CalendrierPaiement::getEtudiantCode() const
 {
-    return etudiantCode;
+    return this->etudiantCode;
 }
-
 const std::string &CalendrierPaiement::getClasseId() const
 {
-    return classeId;
+    return this->classeId;
 }
-
 const Date &CalendrierPaiement::getDateInscription() const
 {
-    return dateInscription;
+    return this->dateInscription;
 }
-
 Echeancier::Type CalendrierPaiement::getEcheancier() const
 {
-    return echeancier;
+    return this->echeancier;
 }
-
 const std::vector<Date> &CalendrierPaiement::getEcheances() const
 {
-    return echeances;
+    return this->echeances;
 }
-
 double CalendrierPaiement::getMontantParEcheance() const
 {
-    return montantParEcheance;
+    return this->montantParEcheance;
 }
-void CalendrierPaiement::setMontantParEcheance(double montantParEcheance)
-{
-    this->montantParEcheance = montantParEcheance;
-}
-void CalendrierPaiement::majMontantParEcheance(){
-    if (reduction == -1){
-        throw std::runtime_error("Reduction non initialisée");
-    }
-    if (!ClasseRepository::exists(classeId)){
-        throw std::runtime_error("Classe ID invalide : " + classeId);
-    }
-    std::string formationId = ClasseRepository::findById(classeId).getFormationId();
-    if (FormationRepository::exists(formationId)){
-        throw std::runtime_error("Formation ID invalide : " + formationId);
-    }
-    double montantFor = FormationRepository::findById(formationId).getCoutAnnuel();
-    montantParEcheance = montantFor * (1 - reduction);
-}
-
 double CalendrierPaiement::getReduction() const
 {
-    return reduction;
+    return this->reduction;
 }
-void CalendrierPaiement::setReduction(double reduction)
-{
-    this->reduction = reduction;
-}
-void CalendrierPaiement::majReduction(){
-    if (!EtudiantRepository::exists(etudiantCode)){
-        throw std::runtime_error("Etudiant CODE invalide : " + etudiantCode);
-    }
-    Etudiant e = EtudiantRepository::findById(etudiantCode);
-    reduction = (e.getEstBoursier()) ? RD_BOURSIER : 0
-                + (e.getEstHandicape()) ? RD_HANDICAPE : 0
-                + (e.getFamilleNombreuse()) ? RD_FAMILLE_NOMBREUSE : 0
-                + (e.getEstOrphelin()) ? RD_ORPHELIN : 0;
-}
-
 
 // Setters
 void CalendrierPaiement::setId(const std::string &id)
 {
     this->id = id;
 }
-
 void CalendrierPaiement::setEtudiantCode(const std::string &etudiantCode)
 {
-    if (!EtudiantRepository::exists(etudiantCode))
-    {
-        throw std::runtime_error("Etudiant CODE invalide : " + etudiantCode);
-    }
     this->etudiantCode = etudiantCode;
 }
-
 void CalendrierPaiement::setClasseId(const std::string &classeId)
 {
-    if (!ClasseRepository::exists(classeId))
-    {
-        throw std::runtime_error("Classe ID invalide : " + classeId);
-    }
     this->classeId = classeId;
 }
-
 void CalendrierPaiement::setDateInscription(const Date &dateInscription)
 {
     this->dateInscription = dateInscription;
 }
-
 void CalendrierPaiement::setEcheancier(Echeancier::Type echeancier)
 {
     if (echeancier != Echeancier::Type::Invalide)
         throw std::logic_error("Déjà initialisé.");
     this->echeancier = echeancier;
 }
-
-void CalendrierPaiement::addEcheance(const Date &d)
+void CalendrierPaiement::setReduction(double reduction)
 {
-    echeances.push_back(d);
+    if(reduction<0){
+        throw std::runtime_error("La réduction doit être positif");
+    }
+    this->reduction = reduction;
+}
+void CalendrierPaiement::setMontantParEcheance(double montantParEcheance)
+{
+    this->montantParEcheance = montantParEcheance;
 }
 
-// Affichage
-std::string CalendrierPaiement::toString() const
-{
-    std::ostringstream oss;
-    oss << "CalendrierPaiement[ID: " << id
-        << ", Etudiant: " << etudiantCode
-        << ", Classe: " << classeId
-        << ", Echéancier: " << Echeancier::toString(echeancier)
-        << ", Montant: " << montantParEcheance
-        << ", Réduction: " << (reduction * 100) << "%"
-        << ", Echéances: [";
 
-    for (size_t i = 0; i < echeances.size(); ++i)
-    {
-        oss << echeances[i].toString();
-        if (i != echeances.size() - 1)
-            oss << ", ";
+// maj des valeurs
+void CalendrierPaiement::majReduction(const Etudiant& e){
+    reduction = (e.getEstBoursier()) ? RD_BOURSIER : 0
+                + (e.getEstHandicape()) ? RD_HANDICAPE : 0
+                + (e.getFamilleNombreuse()) ? RD_FAMILLE_NOMBREUSE : 0
+                + (e.getEstOrphelin()) ? RD_ORPHELIN : 0;
+}
+void CalendrierPaiement::majMontantParEcheance(double coutAnnuel){
+    if(coutAnnuel<0){
+        throw std::runtime_error("Le cout annuel de la formation doit être positif");
+    }
+    else if(this->reduction == -1){
+        throw std::runtime_error("La reduction doit être initialisée");
+    }
+    else if(this->echeancier == Echeancier::Type::Invalide){
+        throw std::logic_error("Echeancier non initialisé!");
     }
 
-    oss << "]]";
-    return oss.str();
-}
+    int nombreEcheances = 1;
+    switch (echeancier){
+    case Echeancier::Type::EnUneFois:
+        nombreEcheances = 1;
+        break;
+    case Echeancier::Type::Mensuel:
+        nombreEcheances = 12;
+        break;
+    case Echeancier::Type::Trimestriel:
+        nombreEcheances = 4;
+        break;
+    case Echeancier::Type::Semestriel:
+        nombreEcheances = 2;
+        break;
+    default:
+        return;
+    }
 
+    this->montantParEcheance = coutAnnuel / nombreEcheances * (1 - reduction);
+}
 // Génération des échéances en fonction de l’échéancier
 void CalendrierPaiement::genererEcheances()
 {
-
     if (echeancier == Echeancier::Type::Invalide)
         throw std::logic_error("Echeancier non initialisé!");
     if (echeances.empty())
@@ -203,8 +169,37 @@ void CalendrierPaiement::genererEcheances()
     }
 }
 
-std::string CalendrierPaiement::toTxt() const
+// ajout dans une liste
+void CalendrierPaiement::addEcheance(const Date &d)
 {
+    echeances.push_back(d);
+}
+
+// Affichage
+std::string CalendrierPaiement::toString() const
+{
+    std::ostringstream oss;
+    oss << "CalendrierPaiement[ID: " << id
+        << ", Etudiant: " << etudiantCode
+        << ", Classe: " << classeId
+        << ", Echéancier: " << Echeancier::toString(echeancier)
+        << ", Montant: " << montantParEcheance
+        << ", Réduction: " << (reduction * 100) << "%"
+        << ", Echéances: [";
+
+    for (size_t i = 0; i < echeances.size(); ++i)
+    {
+        oss << echeances[i].toString();
+        if (i != echeances.size() - 1)
+            oss << ", ";
+    }
+
+    oss << "]]";
+    return oss.str();
+}
+
+
+std::string CalendrierPaiement::toTxt() const{
     std::ostringstream oss;
     oss << "Id=" << id << "\n";
     oss << "EtudiantCode=" << etudiantCode << "\n";

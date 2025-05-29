@@ -2,12 +2,13 @@
 #include "ReflectionMacros.hpp"
 #include "IDGenerator.hpp"
 
-#include "FormationRepository.hpp"
-#include "EtudiantRepository.hpp"
+
 
 Classe::Classe()
 {
     this->id = IDGenerator::generate("CL");
+    nom="";
+    formationId="";
 }
 
 // getters
@@ -19,9 +20,6 @@ const std::vector<std::string>& Classe::getEtudiantCodes() const{ return this->e
 // setters
 void Classe::setNom(const std::string& nom){ this->nom = nom; }
 void Classe::setFormationId(const std::string& formationId){
-    if (!FormationRepository::exists(formationId)) {
-        throw std::runtime_error("Formation ID invalide : " + formationId);
-    }
     this->formationId = formationId;
 }
 void Classe::setId(const std::string& id){ this->id = id; }
@@ -37,10 +35,7 @@ std::string Classe::toString() const{
 }
 
 // méthode d'ajout
-void Classe::addEtudiant(const std::string& codeEtudiant){
-    if (!EtudiantRepository::exists(codeEtudiant)) {
-        throw std::runtime_error("Etudiant CODE invalide : " + codeEtudiant);
-    }
+void Classe::addEtudiantCode(const std::string& codeEtudiant){
     this->etudiantCodes.push_back(codeEtudiant);
 }
 
@@ -63,6 +58,6 @@ Classe Classe::To(const std::map<std::string, std::string>& data) {
     SET_STRING(data, obj, Id);
     SET_STRING(data, obj, Nom);
     SET_STRING(data, obj, FormationId);
-    SET_LIST(data, obj, EtudiantCodes, addEtudiant);
+    SET_LIST(data, obj, EtudiantCodes, addEtudiantCode);
     return obj;
 }

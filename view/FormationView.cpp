@@ -1,30 +1,39 @@
 #include "FormationView.hpp"
-#include "IDGenerator.hpp"
-#include "Niveau.hpp"
+#include "View.hpp"
+#include "NiveauView.hpp"
 
-FormationView::FormationView() {}
-FormationView::~FormationView() {}
+Formation FormationView::saisir()
+{
+    Formation f =Formation();
+    f.setFiliere(       saisirFiliere()      );
+    f.setNiveau(        saisirNiveau()       );
+    f.setDureeAnnuelle( saisirDureeAnnuelle() );
+    f.setCoutAnnuel(    saisirCoutAnnuel()   );
 
-Formation FormationView::saisir() {
-    Formation obj;
-    // Génération automatique de l'ID
-    obj.setId(IDGenerator::generate("FR"));
+    return f;
 
-    // Saisie des champs
-    std::string filiere = View::promptString("Donner la filiere : ");
-    obj.setFiliere(filiere);
 
-    std::string annee = View::promptString("Donner l'annee academique (ex: 2024/2025) : ");
-    obj.setAnneeAcademique(annee);
-
-    std::string niveauStr = View::promptString("Donner le niveau (L1, L2, L3, M1, M2, D1, D2) : ");
-    obj.setNiveau(Niveau::fromString(niveauStr));
-
-    int duree = View::promptInt("Donner la duree annuelle : ");
-    obj.setDureeAnnuelle(duree);
-
-    double cout = View::promptDouble("Donner le cout annuel : ");
-    obj.setCoutAnnuel(cout);
-
-    return obj;
+}
+std::string FormationView::saisirFiliere(){
+    std::string fil=View::promptString("donner la filere");
+        return fil;
+}
+Niveau::Type FormationView::saisirNiveau() {
+    Niveau::Type niveau = NiveauView::choisir();
+    return niveau;
+}
+int FormationView::saisirDureeAnnuelle() {
+    int duree = View::promptInt("Donner la durée annuelle (en heures)");
+    return duree;
+}
+double FormationView::saisirCoutAnnuel() {
+    double coutAnnuel = View::promptDouble("Donner le coût annuel");
+    return coutAnnuel;
+}
+void FormationView::displayAll(std::vector<Formation> formations)
+{
+    for (auto f : formations)
+    {
+    View::showMessage(f.toString());
+    }
 }

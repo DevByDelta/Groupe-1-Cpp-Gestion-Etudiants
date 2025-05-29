@@ -1,0 +1,41 @@
+Menu principal
+Gestion des Étudiants
+    Ajouter un étudiant //void
+    Modifier un étudiant //void non terminé
+    Supprimer un étudiant //void
+    Rechercher un étudiant //Etudiant
+    Afficher la liste des étudiants  //void
+
+Gestion des Classes
+    Ajouter une classe
+    Modifier une classe
+    Supprimer une classe
+    Afficher l'effectif d’une classe
+    Afficher le coût de formation d’une classe donnée
+    Afficher les classes
+    Rechercher une classe par ID
+
+Gestion des Formations
+    Ajouter une formation //bool
+    Modifier une formation //non terminé
+    Supprimer une formation //bool
+    Rechercher une formation par ID //formation
+    Afficher la liste des formations proposées //void
+    Identifier la filière la plus rentable //formation
+
+Gestion des Tarifs
+    Définir les tarifs différenciés par niveau, filière ou catégorie sociale
+    Paramétrer les réductions et remises (familles nombreuses, bourses d’excellence)
+
+Gestion des Paiements
+    Ajouter un règlement
+    Modifier un règlement
+    Supprimer un règlement
+    Afficher les règlements pour un étudiant donné par année
+    Afficher le reliquat à payer pour un étudiant
+    Définir le calendrier de paiement personnalisé d'un étudiant
+    Tableau de Bord Financier
+    Afficher le chiffre d’affaires total de l'établissement
+    Afficher des statistiques globales (rentabilité par filière, formations les plus populaires)
+
+Quitter l'application

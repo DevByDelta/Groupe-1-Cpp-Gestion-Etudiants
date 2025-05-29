@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Niveau.hpp"
+
 #include <string>
 #include <map>
-#include "Niveau.hpp"
 
 class Formation
 {

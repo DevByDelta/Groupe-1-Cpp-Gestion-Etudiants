@@ -48,8 +48,8 @@ public:
 
     // méthodes de mise à jours d'attributs dépendant
     void genererEcheances();
-    void majReduction();
-    void majMontantParEcheance();
+    void majReduction(const Etudiant &e);
+    void majMontantParEcheance(double coutAnnuel);
 
 
     // Méthode d'affichage

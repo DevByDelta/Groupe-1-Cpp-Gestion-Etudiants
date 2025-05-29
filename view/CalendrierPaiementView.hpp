@@ -1,10 +1,15 @@
 #pragma once
-// CalendrierPaiementView.hpp  --  généré automatiquement
+
+#include <string>
+#include <vector>
+
 #include "CalendrierPaiement.hpp"
+#include "Echeancier.hpp"
+
 class CalendrierPaiementView {
 public:
     static CalendrierPaiement saisir();
-    static void saisirEtudiantCode(CalendrierPaiement& cp);
-    static void saisirClasseId(CalendrierPaiement& cp);
-    static void saisirEcheancier(CalendrierPaiement& cp);
+    static std::string saisirEtudiantCode();
+    static std::string saisirClasseId();
+    static Echeancier::Type saisirEcheancier();
 };
