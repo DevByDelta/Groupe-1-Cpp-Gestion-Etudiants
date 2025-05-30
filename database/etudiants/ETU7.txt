@@ -1,0 +1,11 @@
+Code=ETU7
+Nom=Ngom
+Prenom=Aissatou
+Telephone=111111111
+Email=dzed@gmail.com
+ClasseId=
+CadPaieId=
+EstBoursier=0
+EstHandicape=0
+FamilleNombreuse=0
+EstOrphelin=0

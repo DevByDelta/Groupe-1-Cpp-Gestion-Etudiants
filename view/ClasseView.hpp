@@ -12,8 +12,8 @@ public:
     static Classe input();
 
     // méthodes de modifications
-    static void modifierNom(Classe &cl, bool one=false);
-    static void modifierFormationId(Classe &cl, bool one=false);
+    static bool modifierNom(Classe &cl, bool one=false);
+    static bool modifierFormationId(Classe &cl, bool one=false);
 
     // méthodes pures services
     static Classe trouverClasse();

@@ -13,6 +13,8 @@
 #include <windows.h>
 #include <thread>
 #include <chrono>
+#include <cstdlib>
+
 
 // ── Barre de chargement qui part pleine et se vide ───────────────
 void View::countdownBar(int width, int total_ms)
@@ -104,7 +106,7 @@ void View::showMessage(const std::string &message)
 }
 
 void View::showStringObject(const std::string& obs){
-    std::cout << "\033[35m" << obs << "\033[0m" << std::endl;
+    std::cout << "\033[93m" << obs << "\033[0m" << std::endl;
 }
 
 std::string View::promptString(const std::string &message)

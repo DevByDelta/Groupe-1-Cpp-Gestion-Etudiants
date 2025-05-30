@@ -1,0 +1,11 @@
+Code=ETU6
+Nom=Diallo
+Prenom=Amadou
+Telephone=000000000
+Email=zzdzze@gmail.com
+ClasseId=
+CadPaieId=
+EstBoursier=1
+EstHandicape=0
+FamilleNombreuse=0
+EstOrphelin=0

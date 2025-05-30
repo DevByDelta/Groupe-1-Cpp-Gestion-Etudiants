@@ -1,0 +1,11 @@
+Code=ETU8
+Nom=Fall
+Prenom=Oumar
+Telephone=222222222
+Email=dzdz@gmail.com
+ClasseId=
+CadPaieId=
+EstBoursier=1
+EstHandicape=0
+FamilleNombreuse=0
+EstOrphelin=0

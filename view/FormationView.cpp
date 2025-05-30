@@ -12,7 +12,7 @@ Formation FormationView::input()
     return f;
 }
 
-void FormationView::modifierFiliere(Formation &formation, bool one)
+bool FormationView::modifierFiliere(Formation &formation, bool one)
 {
 
     do
@@ -21,15 +21,16 @@ void FormationView::modifierFiliere(Formation &formation, bool one)
         try
         {
             FormationService::validerMertierFiliere(formation, filiere);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     } while (!one);
+    return false;
 }
-void FormationView::modifierNiveau(Formation &formation, bool one)
+bool FormationView::modifierNiveau(Formation &formation, bool one)
 {
     do
     {
@@ -37,15 +38,16 @@ void FormationView::modifierNiveau(Formation &formation, bool one)
         try
         {
             FormationService::validerMertierNiveau(formation, niveau);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     } while (!one);
+    return false;
 }
-void FormationView::modifierDureeAnnuelle(Formation &formation, bool one)
+bool FormationView::modifierDureeAnnuelle(Formation &formation, bool one)
 {
     do
     {
@@ -53,15 +55,16 @@ void FormationView::modifierDureeAnnuelle(Formation &formation, bool one)
         try
         {
             FormationService::validerMetierDureeAnnuelle(formation, duree);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     } while (!one);
+    return false;
 }
-void FormationView::modifierCoutAnnuel(Formation &formation, bool one)
+bool FormationView::modifierCoutAnnuel(Formation &formation, bool one)
 {
     do
     {
@@ -69,13 +72,14 @@ void FormationView::modifierCoutAnnuel(Formation &formation, bool one)
         try
         {
             FormationService::validerMetierCoutAnnuel(formation, coutAnnuel);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     } while (!one);
+    return false;
 }
 void FormationView::saisirEtEnregistrerFormation()
 {
@@ -140,23 +144,27 @@ void FormationView::modifierFormation()
         std::string key = afficherMenu(menuAt, "Modifier les attributs de la formation");
         if (key == "filiere")
         {
-            modifierFiliere(f);
-            success("La filière a été modifiée");
+            if(modifierFiliere(f)){
+                success("La filière a été modifiée");
+            }
         }
         else if (key == "niveau")
         {
-            modifierNiveau(f);
-            success("Le niveau a été modifié");
+            if(modifierNiveau(f)){
+                success("Le niveau a été modifié");
+            }
         }
         else if (key == "duree")
         {
-            modifierDureeAnnuelle(f);
-            success("La durée annuelle a été modifiée");
+            if(modifierDureeAnnuelle(f)){
+                success("La durée annuelle a été modifiée");
+            }
         }
         else if (key == "cout")
         {
-            modifierCoutAnnuel(f);
-            success("Le coût annuel a été modifié");
+            if(modifierCoutAnnuel(f)){
+                success("Le coût annuel a été modifié");
+            }
         }
 
         if (key != "quit")

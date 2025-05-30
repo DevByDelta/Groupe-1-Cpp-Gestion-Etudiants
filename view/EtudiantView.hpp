@@ -13,15 +13,15 @@ public:
     static void ajouterReglementId(Etudiant etudiant);
 
     // méthodes de modifications
-    static void modifierNom(Etudiant &etu, bool one=true);
-    static void modifierPrenom(Etudiant &etu, bool one=true);
-    static void modifierTelephone(Etudiant &etu, bool one=true);
-    static void modifierEmail(Etudiant &etu, bool one=true);
-    static void modifierClasseId(Etudiant &etu, bool one=true);
-    static void modifierEstBoursier(Etudiant &etu, bool one=true);
-    static void modifierEstHandicape(Etudiant &etu, bool one=true);
-    static void modifierEstOrphelin(Etudiant &etu, bool one=true);
-    static void modifierFamilleNombreuse(Etudiant &etu, bool one=true);
+    static bool modifierNom(Etudiant &etu, bool one=true);
+    static bool modifierPrenom(Etudiant &etu, bool one=true);
+    static bool modifierTelephone(Etudiant &etu, bool one=true);
+    static bool modifierEmail(Etudiant &etu, bool one=true);
+    static bool modifierClasseId(Etudiant &etu, bool one=true);
+    static bool modifierEstBoursier(Etudiant &etu, bool one=true);
+    static bool modifierEstHandicape(Etudiant &etu, bool one=true);
+    static bool modifierEstOrphelin(Etudiant &etu, bool one=true);
+    static bool modifierFamilleNombreuse(Etudiant &etu, bool one=true);
     
     static void definirCadPaieId();
     // méthodes pures services

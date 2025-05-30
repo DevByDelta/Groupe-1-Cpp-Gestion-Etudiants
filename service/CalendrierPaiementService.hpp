@@ -9,4 +9,5 @@ public:
     static void validerMetierEtudiantCode(CalendrierPaiement &cp, const std::string &etudiantCode);
     static void validerMetierClasseId(CalendrierPaiement &cp, const std::string &classeId);
     static void validerMetierEchancier(CalendrierPaiement &cp, const Echeancier::Type &echeancier);
+    static bool enregistrer(CalendrierPaiement& cp);
 };

@@ -3,6 +3,7 @@
 #include "CalendrierPaiementService.hpp"
 #include "../repository/EtudiantRepository.hpp"
 #include "../repository/ClasseRepository.hpp"
+#include "../repository/CalendrierPaiementRepository.hpp"
 #include <exception>
 #include <stdexcept>
 
@@ -26,6 +27,9 @@ void CalendrierPaiementService::validerMetierEchancier(CalendrierPaiement& cp, c
     cp.setEcheancier(echeancier);
 }
 
+bool CalendrierPaiementService::enregistrer(CalendrierPaiement& cp){
+    return CalendrierPaiementRepository::save(cp);
+}
 
 bool CalendrierPaiementService::exist(const std::string& id){
     return CalendrierPaiementService::exist(id);

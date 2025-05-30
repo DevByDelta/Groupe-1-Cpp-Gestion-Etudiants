@@ -12,9 +12,9 @@ public:
     static void displayAll(std::vector<Reglement> reglements);
 
     // méthodes de modifications
-    static void modifierMontant(Reglement &reglement, bool one=true);
-    static void modifierEtudiantCode(Reglement &reglement, bool one=true);
-    static void modifierClasseId(Reglement &Reglement, bool one=true);
+    static bool modifierMontant(Reglement &reglement, bool one=true);
+    static bool modifierEtudiantCode(Reglement &reglement, bool one=true);
+    static bool modifierClasseId(Reglement &Reglement, bool one=true);
     // methode pure service
     static void ajouterReglement();
     static void modifierReglement();

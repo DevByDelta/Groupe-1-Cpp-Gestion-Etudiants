@@ -12,35 +12,37 @@ Classe ClasseView::input()
     modifierNom(cl, false);
     return cl;
 }
-void ClasseView::modifierNom(Classe &cl, bool one)
+bool ClasseView::modifierNom(Classe &cl, bool one)
 {
     do{
         std::string nom = promptString("Donner le nom de la classe: ");
         try
         {
             ClasseService::validerMetierNom(cl, nom);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     }while (!one);
+    return false;
 }
-void ClasseView::modifierFormationId(Classe &cl, bool one)
+bool ClasseView::modifierFormationId(Classe &cl, bool one)
 {
     do{
         std::string formationId = promptString("Donner l'id de la formation: ");
         try
         {
             ClasseService::validerMetierFormationId(cl, formationId);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     }while (!one);
+    return false;
 }
 
 void ClasseView::saisirEtEnregistrerClasse()
@@ -104,13 +106,15 @@ void ClasseView::modifierClasse()
         std::string key = afficherMenu(menuAt, "Modifier les attributs de la classe");
         if (key == "nom")
         {
-            modifierNom(cl);
-            success("Le nom a été bien modifié");
+            if(modifierNom(cl)){
+                success("Le nom a été bien modifié");
+            }
         }
         else if (key == "formationId")
         {
-            modifierFormationId(cl);
-            success("La formation a été bien modifiée");
+            if(modifierFormationId(cl)){
+                success("La formation a été bien modifiée");
+            }
         }
 
         if (key != "quit"){

@@ -1,0 +1,11 @@
+Code=ETU5
+Nom=Martin
+Prenom=Léa
+Telephone=741240141
+Email=acsd@gmail.com
+ClasseId=
+CadPaieId=
+EstBoursier=0
+EstHandicape=0
+FamilleNombreuse=1
+EstOrphelin=1

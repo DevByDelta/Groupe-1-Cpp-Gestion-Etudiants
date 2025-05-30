@@ -1,0 +1,6 @@
+Id=FR6
+Filiere=ETSE
+AnneeAcademique=2025/2026
+Niveau=M1
+DureeAnnuelle=410
+CoutAnnuel=1e+006

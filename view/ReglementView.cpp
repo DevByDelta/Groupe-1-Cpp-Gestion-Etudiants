@@ -12,38 +12,40 @@ Reglement ReglementView::input()
     return r;
 }
 
-void ReglementView::modifierEtudiantCode(Reglement &reglement, bool one)
+bool ReglementView::modifierEtudiantCode(Reglement &reglement, bool one)
 {
     do{
         std::string code = promptString("Donner le code de l'étudiant pour ce règlement: ");
         try
         {
             ReglementService::validerMetierEtudiantCode(reglement, code);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     }while (!one);
+    return false;
 }
 
-void ReglementView::modifierMontant(Reglement &reglement, bool one)
+bool ReglementView::modifierMontant(Reglement &reglement, bool one)
 {
     do{
         double montant = promptDouble("Donner le montant du règlement: ");
         try
         {
             ReglementService::validerMetierMontant(reglement, montant);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     }while (!one);
+    return false;
 }
-void ReglementView::modifierClasseId(Reglement &reglement, bool one)
+bool ReglementView::modifierClasseId(Reglement &reglement, bool one)
 {
     
     do{
@@ -51,13 +53,14 @@ void ReglementView::modifierClasseId(Reglement &reglement, bool one)
         try
         {
             ReglementService::validerMetierClasseId(reglement, nouvelleId);
-            return;
+            return true;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
     }while (!one);
+    return false;
 }
 void ReglementView::ajouterReglement()
 {
@@ -93,18 +96,21 @@ void ReglementView::modifierReglement()
         std::string key = afficherMenu(menuAt, "Modifier les attributs du règlement");
         if (key == "etudiantCode")
         {
-            modifierEtudiantCode(r);
-            success("Le code étudiant a été modifié");
+            if(modifierEtudiantCode(r)){
+                success("Le code étudiant a été modifié");
+            }
         }
         else if (key == "classeId")
         {
-            modifierClasseId(r);
-            success("L'id de la classe a été modifié");
+            if(modifierClasseId(r)){
+                success("L'id de la classe a été modifié");
+            }
         }
         else if (key == "montant")
         {
-            modifierMontant(r);
-            success("Le montant a été modifié");
+            if(modifierMontant(r)){
+                success("Le montant a été modifié");
+            }
         }
 
         if (key != "quit")
