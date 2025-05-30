@@ -3,8 +3,7 @@
 #include "EcheancierView.hpp"
 #include "../service/CalendrierPaiementService.hpp"
 
-
-CalendrierPaiement CalendrierPaiementView::input(const Etudiant& e, const Formation& f)
+CalendrierPaiement CalendrierPaiementView::input(const Etudiant &e, const Formation &f)
 {
     CalendrierPaiement cp = CalendrierPaiement();
     modifierClasseId(cp);
@@ -18,17 +17,14 @@ CalendrierPaiement CalendrierPaiementView::input(const Etudiant& e, const Format
 
 void CalendrierPaiementView::modifierEtudiantCode(CalendrierPaiement &cp)
 {
-    while (true)
+    std::string etudiantCode = promptString("Entrer le code de l'étudiant: ");
+    try
     {
-        std::string etudiantCode = promptString("Entrer le code de l'étudiant: ");
-        try
-        {
-            CalendrierPaiementService::validerMetierEtudiantCode(cp, etudiantCode);
-        }
-        catch (const std::exception &e)
-        {
-            error(e.what());
-        }
+        CalendrierPaiementService::validerMetierEtudiantCode(cp, etudiantCode);
+    }
+    catch (const std::exception &e)
+    {
+        error(e.what());
     }
 }
 
@@ -57,10 +53,9 @@ void CalendrierPaiementView::modifierEcheancier(CalendrierPaiement &cp)
         {
             CalendrierPaiementService::validerMetierEchancier(cp, echeancier);
         }
-        catch(const std::exception& e)
+        catch (const std::exception &e)
         {
             error(e.what());
         }
-
     }
 }

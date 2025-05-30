@@ -32,12 +32,20 @@ void Etudiant::setCode(const std::string &code)
 const std::string &Etudiant::getNom() const { return nom; }
 void Etudiant::setNom(const std::string &nom)
 {
+    if (nom.size() < 3)
+    {
+        throw std::invalid_argument("Le nom doit avoir au minimum 3 caractères !");
+    }
     this->nom = nom;
 }
 
 const std::string &Etudiant::getPrenom() const { return prenom; }
 void Etudiant::setPrenom(const std::string &prenom)
 {
+    if (prenom.size() < 3)
+    {
+        throw std::invalid_argument("Le prénom doit avoir au minimum 3 caractères !");
+    }
     this->prenom = prenom;
 }
 

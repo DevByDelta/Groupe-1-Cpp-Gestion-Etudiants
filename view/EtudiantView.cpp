@@ -5,191 +5,201 @@
 #include "View.hpp"
 #include "../model/entity/CalendrierPaiement.hpp"
 #include "EtudiantView.hpp"
-
+#include "CalendrierPaiementView.hpp"
 
 Etudiant EtudiantView::input()
 {
     Etudiant etu = Etudiant();
-    modifierNom(etu);
-    modifierPrenom(etu);
-    modifierTelephone(etu);
-    modifierEmail(etu);
-    modifierClasseId(etu);
-    modifierCadPaieId(etu);
-    modifierEstBoursier(etu);
-    modifierEstHandicape(etu);
-    modifierEstOrphelin(etu);
-    modifierFamilleNombreuse(etu);
+    modifierNom(etu, false);
+    modifierPrenom(etu, false);
+    modifierTelephone(etu, false);
+    modifierEmail(etu, false);
+    modifierEstBoursier(etu, false);
+    modifierEstHandicape(etu, false);
+    modifierEstOrphelin(etu, false);
+    modifierFamilleNombreuse(etu, false);
     return etu;
 }
 
-void EtudiantView::modifierNom(Etudiant &etu){
-    while (true)
+void EtudiantView::modifierNom(Etudiant &etu, bool one)
+{
+    do
     {
         std::string nom = promptString("Entrer le nom de l'étudiant: ");
         try
         {
             EtudiantService::validerMetierNom(etu, nom);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
 
-void EtudiantView::modifierPrenom(Etudiant &etu){
-    while (true)
+void EtudiantView::modifierPrenom(Etudiant &etu, bool one)
+{
+    do
     {
         std::string prenom = promptString("Entrer le prenom de l'étudiant: ");
         try
         {
             EtudiantService::validerMetierPrenom(etu, prenom);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
 
-void EtudiantView::modifierCadPaieId(Etudiant &etu)
+void EtudiantView::modifierClasseId(Etudiant &etu, bool one)
 {
-    while (true)
-    {
-        std::string cadPaieId = promptString("Entrer l'id du calendrier: ");
-        try
-        {
-            EtudiantService::validerMetierCadPaieId(etu, cadPaieId);
-        }
-        catch (const std::exception &e)
-        {
-            error(e.what());
-        }
-    }
-}
-void EtudiantView::modifierClasseId(Etudiant &etu)
-{
-    while (true)
+    do
     {
         std::string classeId = promptString("Entrer l'id de la classe de l'étudiant: ");
         try
         {
             EtudiantService::validerMetierClasseId(etu, classeId);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
 
-void EtudiantView::modifierEstBoursier(Etudiant &etu)
+void EtudiantView::modifierEstBoursier(Etudiant &etu, bool one)
 {
-    while (true)
+    do
     {
         bool estBoursier = promptYesNo("Est il boursier? ");
         try
         {
             EtudiantService::validerMetierEstBoursier(etu, estBoursier);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
 
-void EtudiantView::modifierEstHandicape(Etudiant &etu)
+void EtudiantView::modifierEstHandicape(Etudiant &etu, bool one)
 {
 
-    while (true)
-    {
+    do{
         bool estHandicape = promptYesNo("Est il Handicapé? ");
         try
         {
             EtudiantService::validerMetierEstHandicape(etu, estHandicape);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    }while (!one);
 }
-void EtudiantView::modifierFamilleNombreuse(Etudiant &etu)
+void EtudiantView::modifierFamilleNombreuse(Etudiant &etu, bool one)
 {
-    while (true)
-    {
-        bool familleNombreuse = promptYesNo("est il dans une famille nombreuse ? ");
+   do{
+        bool familleNombreuse = promptYesNo("Est il dans une famille nombreuse ? ");
         try
         {
             EtudiantService::validerMetierFamilleNombreuse(etu, familleNombreuse);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    }while (!one);
 }
-void EtudiantView::modifierEstOrphelin(Etudiant &etu)
+void EtudiantView::modifierEstOrphelin(Etudiant &etu, bool one)
 
 {
-    while (true)
-    {
+    do{
         bool estOrphelin = promptYesNo("Est il Orphelin? ");
         try
         {
             EtudiantService::validerMetierEstOrphelin(etu, estOrphelin);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    }while (!one);
 }
 
-void EtudiantView::modifierTelephone(Etudiant &etu)
+void EtudiantView::modifierTelephone(Etudiant &etu, bool one)
 {
-    while (true)
+    do
     {
         std::string telephone = promptString("Entrer le telephone de l'étudiant: ");
         try
         {
             EtudiantService::validerMetierTelephone(etu, telephone);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
-void EtudiantView::modifierEmail(Etudiant &etu)
+void EtudiantView::modifierEmail(Etudiant &etu, bool one)
 {
-    while (true)
+    do
     {
         std::string email = promptString("Entrer l'email de l'étudiant: ");
         try
         {
             EtudiantService::validerMetierEmail(etu, email);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
+    } while (!one);
+}
+
+void EtudiantView::definirCadPaieId(){
+    std::string etudiantCode = promptString("Entrer le code de l'étudiant: ");
+    if (!EtudiantService::exist(etudiantCode))
+    {
+        error("Erreur! l'étudiant est introuvable");
+        return;
+    }
+    Etudiant e = EtudiantService::rechercherEtudiant(etudiantCode);
+    bool oui = true;
+    if(e.getCadPaieId() != ""){
+        oui = promptYesNo("Il y a déjà un calendrier voulez-vous le remplacer? ");
+    }
+
+    if(oui){
+        Formation f = EtudiantService::avoirFormation(e);
+        CalendrierPaiement cp = CalendrierPaiementView::input(e, f);
     }
 }
 
 void EtudiantView::saisirEtEnregistrerEtudiant()
 {
-    Etudiant etu = Etudiant();
-    etu = input();
+    Etudiant etu = input();
     if (EtudiantService::ajouterEtudiant(etu))
     {
-        showMessage("etudiant ajouté avec succés!");
+        success("Etudiant bien enregistré avec le code " + etu.getCode());
     }
     else
     {
-        showMessage("erreur lors de l'ajout de l'étudiant");
+        error("Une erreur est survenue!");
+        warning("L'étudiant n'a pas été enregistrer");
     }
 }
 
@@ -198,11 +208,11 @@ void EtudiantView::supprimerEtudiant()
     std::string etudiantCode = promptString("entrer le le code de l'étudiant");
     if (EtudiantService::supprimerEtudiant(etudiantCode))
     {
-        showMessage("etudiant supprimé avec success");
+        success("Etudiant supprimé avec success");
     }
     else
     {
-        showMessage("Ereur lors de la suppression de l'etudiant");
+        error("Erreur lors de la suppression de l'étudiant");
     }
 }
 void EtudiantView::rechercherEtudiant()
@@ -216,7 +226,7 @@ void EtudiantView::rechercherEtudiant()
     }
     else
     {
-        showMessage("Etudiant non trouvé!");
+        error("Etudiant non trouvé!");
     }
 }
 
@@ -237,7 +247,6 @@ void EtudiantView::modifierEtudiant()
         {"telephone", "Modifier le telephone"},
         {"mail", "Modifier le mail"},
         {"classeId", "Modifier la classe"},
-        {"cadPaieId", "Modifier le calendrier de paiement"},
         {"estBoursier", "Modifier l'état être  boursier"},
         {"estHandicape", "Modifier l'état être  handicapé"},
         {"familleNombreuse", "Modifier l'état famille nombreuse"},
@@ -272,11 +281,6 @@ void EtudiantView::modifierEtudiant()
             modifierClasseId(e);
             success("l'id de la classe a été bien modifié");
         }
-        else if (key == "cadPaieId")
-        {
-            modifierCadPaieId(e);
-            success("l'id du calendier de paiement a été bien modifé");
-        }
         else if (key == "estBoursier")
         {
             modifierEstBoursier(e);
@@ -298,7 +302,7 @@ void EtudiantView::modifierEtudiant()
             success("l'état de l'étudiant a été bien modifié");
         }
 
-        if (key != "retour")
+        if (key != "quit")
         {
             EtudiantService::ajouterEtudiant(e);
         }
@@ -311,12 +315,21 @@ void EtudiantView::modifierEtudiant()
 
 void EtudiantView::displayAll(std::vector<Etudiant> etudiants)
 {
+    banner("LISTES DES ETUDIANTS");
+    if (etudiants.empty())
+    {
+        showMessage("Aucun étudiant disponible.");
+        return;
+    }
     for (auto e : etudiants)
     {
-        showMessage(e.toString());
+        showStringObject(e.toString());
     }
 }
 
-void EtudiantView::afficherTous(){
-    displayAll(EtudiantService::avoirTousEtudiants());
+void EtudiantView::afficherTous()
+{
+    auto ets = EtudiantService::avoirTousEtudiants();
+    displayAll(ets);
 }
+

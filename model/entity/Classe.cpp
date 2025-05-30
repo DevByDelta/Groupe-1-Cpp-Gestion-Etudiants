@@ -1,28 +1,30 @@
+#include <algorithm>
+
 #include "Classe.hpp"
 #include "../ReflectionMacros.hpp"
 #include "../utils/IDGenerator.hpp"
 
 Classe::Classe(
-    std::string formationId,
-    std::string firstEtudiantCode
-)
+    std::string formationId)
     : id(IDGenerator::generate("CL")),
       nom(""),
       formationId(formationId)
-{
-    if (!firstEtudiantCode.empty()) {
-        etudiantCodes.push_back(firstEtudiantCode);
-    }
-}
+{}
 
 // getters
 const std::string &Classe::getId() const { return this->id; }
 const std::string &Classe::getNom() const { return this->nom; }
 const std::string &Classe::getFormationId() const { return this->formationId; }
-const std::vector<std::string> &Classe::getEtudiantCodes() const { return this->etudiantCodes; }
 
 // setters
-void Classe::setNom(const std::string &nom) { this->nom = nom; }
+void Classe::setNom(const std::string &nom)
+{
+    if (nom.size() < 3)
+    {
+        throw std::invalid_argument("Le nom doit avoir au minimum 3 caractères !");
+    }
+    this->nom = nom;
+}
 void Classe::setFormationId(const std::string &formationId)
 {
     this->formationId = formationId;
@@ -40,11 +42,6 @@ std::string Classe::toString() const
     return oss.str();
 }
 
-// méthode d'ajout
-void Classe::addEtudiantCode(const std::string &codeEtudiant)
-{
-    this->etudiantCodes.push_back(codeEtudiant);
-}
 
 std::string Classe::toTxt() const
 {
@@ -52,14 +49,6 @@ std::string Classe::toTxt() const
     oss << "Id=" << id << "\n";
     oss << "Nom=" << nom << "\n";
     oss << "FormationId=" << formationId << "\n";
-    oss << "EtudiantCodes=";
-    for (size_t i = 0; i < etudiantCodes.size(); ++i)
-    {
-        oss << etudiantCodes[i];
-        if (i != etudiantCodes.size() - 1)
-            oss << ",";
-    }
-    oss << "\n";
     return oss.str();
 }
 
@@ -69,6 +58,5 @@ Classe Classe::To(const std::map<std::string, std::string> &data)
     SET_STRING(data, obj, Id);
     SET_STRING(data, obj, Nom);
     SET_STRING(data, obj, FormationId);
-    SET_LIST(data, obj, EtudiantCodes, addEtudiantCode);
     return obj;
 }

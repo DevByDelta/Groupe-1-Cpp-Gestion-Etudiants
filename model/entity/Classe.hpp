@@ -9,23 +9,20 @@ private:
     std::string id;
     std::string nom;
     std::string formationId;
-    std::vector<std::string> etudiantCodes;
 
     void setId(const std::string& id);
 
 public:
-    Classe(std::string formationId = "", std::string firstEtudiantCode = "");
+    Classe(std::string formationId = "");
 
     // Getters
     const std::string& getId() const;
     const std::string& getNom() const;
     const std::string& getFormationId() const;
-    const std::vector<std::string>& getEtudiantCodes() const;
 
     // Setters métier (publics)
     void setNom(const std::string& nom);
     void setFormationId(const std::string& formationId);
-    void addEtudiantCode(const std::string& codeEtudiant);
 
     // Affichage
     std::string toString() const;

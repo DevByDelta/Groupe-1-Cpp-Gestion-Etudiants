@@ -72,27 +72,14 @@ double ReglementService::avoirReliquatEtudiant(const std::string &etudiantCode)
     double totalReglement = calculerReglementTotalEtudiant(etudiantCode);
     return formation.getCoutAnnuel() - totalReglement;
 }
-double ReglementService::calculerTotalReglementClasse(const Classe &classe)
-{
-    double total = 0.0;
-    for (const std::string &codeEtudiant : classe.getEtudiantCodes())
-    {
-        total += calculerReglementTotalEtudiant(codeEtudiant);
-    }
-    return total;
-}
 
 double ReglementService::avoirChiffreAffaireEtablissement()
 {
     double chiffreAffaire = 0.0;
-
-    std::vector<Classe> classes = ClasseRepository::findAll();
-
-    for (const Classe &classe : classes)
+    for (const Reglement &r : ReglementRepository::findAll())
     {
-        chiffreAffaire += calculerTotalReglementClasse(classe);
+        chiffreAffaire += r.getMontant();
     }
-
     return chiffreAffaire;
 }
 
@@ -107,12 +94,17 @@ Reglement ReglementService::rechercherReglement(const std::string &reglementId)
 std::map<std :: string,double> ReglementService::rentabiliteParFiliere()
 {
     std::map<std::string, double> revenueParFiliere;
-    auto classes = ClasseRepository::findAll();
-    for (const auto &cl : classes)
+    for (const auto &r : ReglementRepository::findAll())
     {
-        const Formation &formation = FormationRepository::findById(cl.getFormationId());
-        double ca = calculerTotalReglementClasse(cl);
-        revenueParFiliere[formation.getFiliere()] += ca;
+        auto cl = ClasseRepository::findById(r.getClasseId());
+        auto f = FormationRepository::findById(cl.getFormationId());
+        auto filiere = f.getFiliere();
+        if(revenueParFiliere.count(filiere)){
+            revenueParFiliere[filiere] += r.getMontant();
+        }
+        else{
+            revenueParFiliere[filiere] = r.getMontant();
+        }
     }
     return revenueParFiliere;
 }

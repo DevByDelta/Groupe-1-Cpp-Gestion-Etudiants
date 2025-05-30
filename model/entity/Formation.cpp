@@ -10,16 +10,23 @@ Formation::Formation()
 {
     this->id = IDGenerator::generate("FR");
     this->anneeAcademique = Date::giveAnneeAcademique();
-    filiere="";
-    dureeAnnuelle=0;
-    coutAnnuel=0;
+    filiere = "";
+    dureeAnnuelle = 0;
+    coutAnnuel = 0;
 }
 
 const std::string &Formation::getId() const { return this->id; }
 void Formation::setId(const std::string &id) { this->id = id; }
 
 const std::string &Formation::getFiliere() const { return this->filiere; }
-void Formation::setFiliere(const std::string &filiere) { this->filiere = filiere; }
+void Formation::setFiliere(const std::string &filiere)
+{
+    if (filiere.size() < 3)
+    {
+        throw std::invalid_argument("La filière doit avoir au minimum 3 caractères !");
+    }
+    this->filiere = filiere;
+}
 
 Niveau::Type Formation::getNiveau() const { return this->niveau; }
 void Formation::setNiveau(Niveau::Type niveau) { this->niveau = niveau; }
@@ -33,7 +40,8 @@ void Formation::setCoutAnnuel(double coutAnnuel) { this->coutAnnuel = coutAnnuel
 const std::string &Formation::getAnneeAcademique() const { return this->anneeAcademique; }
 void Formation::setAnneeAcademique(const std::string &anneeAcademique) { this->anneeAcademique = anneeAcademique; }
 
-std::string Formation::toString() const{
+std::string Formation::toString() const
+{
     std::ostringstream oss;
     oss << "Formation[ID: " << id
         << ", Filiere: " << filiere
@@ -56,14 +64,14 @@ std::string Formation::toTxt() const
     oss << "CoutAnnuel=" << coutAnnuel << "\n";
     return oss.str();
 }
-Formation Formation::To(const std::map<std::string, std::string>& data) {
+Formation Formation::To(const std::map<std::string, std::string> &data)
+{
     Formation obj;
     SET_STRING(data, obj, Id);
     SET_STRING(data, obj, Filiere);
     SET_STRING(data, obj, AnneeAcademique);
-    SET_ENUM  (data, obj, Niveau, Niveau);
-    SET_INT   (data, obj, DureeAnnuelle);
+    SET_ENUM(data, obj, Niveau, Niveau);
+    SET_INT(data, obj, DureeAnnuelle);
     SET_DOUBLE(data, obj, CoutAnnuel);
     return obj;
 }
-

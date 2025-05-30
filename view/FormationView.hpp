@@ -13,10 +13,10 @@ public:
     static Formation input();
 
     // méthodes de modifications
-    static void modifierFiliere(Formation &fomation);
-    static void modifierNiveau(Formation &formation);
-    static void modifierDureeAnnuelle(Formation &formation);
-    static void modifierCoutAnnuel(Formation &Formation);
+    static void modifierFiliere(Formation &fomation, bool one=true);
+    static void modifierNiveau(Formation &formation, bool one=true);
+    static void modifierDureeAnnuelle(Formation &formation, bool one=true);
+    static void modifierCoutAnnuel(Formation &Formation, bool one=true);
     // methode pure service
     static void saisirEtEnregistrerFormation();
     static void supprimerFormation();

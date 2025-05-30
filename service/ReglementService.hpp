@@ -17,7 +17,6 @@ public:
     static double avoirReliquatEtudiant(const std::string &etudiantCode);
     static double calculerReglementTotalEtudiant(const std::string &etudiantCode);
     static double avoirChiffreAffaireEtablissement();
-    static double calculerTotalReglementClasse(const Classe &classe);
     static Reglement rechercherReglement(const std::string &reglementId);
     static std::vector<Reglement> avoirTousReglements();
     static std::map<std::string, double> rentabiliteParFiliere();

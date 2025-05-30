@@ -5,7 +5,11 @@
 
 class View {
 public:
+    static void banner(const std::string& msg, char deco='=', int width=40);
+    static void loader(int cycles = 50, int delay_ms = 25);
+    static void countdownBar(int width = 30, int total_ms = 3000);
     static void showMessage(const std::string& message);
+    static void showStringObject(const std::string& obs);
     static std::string promptString(const std::string& message);
     static int promptInt(const std::string& message);
     static double promptDouble(const std::string& message);

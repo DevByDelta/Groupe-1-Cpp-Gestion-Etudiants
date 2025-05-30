@@ -4,93 +4,115 @@
 
 Formation FormationView::input()
 {
-    Formation f =Formation();
-    modifierFiliere(f);
-    modifierNiveau(f);
-    modifierDureeAnnuelle(f);
-    modifierCoutAnnuel(f);
+    Formation f = Formation();
+    modifierFiliere(f, false);
+    modifierNiveau(f, false);
+    modifierDureeAnnuelle(f, false);
+    modifierCoutAnnuel(f, false);
     return f;
 }
 
-void FormationView::modifierFiliere(Formation &formation)
+void FormationView::modifierFiliere(Formation &formation, bool one)
 {
-    while (true)
+
+    do
     {
         std::string filiere = promptString("Donner la filiere: ");
         try
         {
-            FormationService:: validerMertierFiliere(formation, filiere);
+            FormationService::validerMertierFiliere(formation, filiere);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
-void FormationView::modifierNiveau(Formation &formation)
+void FormationView::modifierNiveau(Formation &formation, bool one)
 {
-    while (true)
+    do
     {
         Niveau::Type niveau = NiveauView::choisir();
         try
         {
-            FormationService:: validerMertierNiveau(formation, niveau);
+            FormationService::validerMertierNiveau(formation, niveau);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
-void FormationView::modifierDureeAnnuelle(Formation& formation)
+void FormationView::modifierDureeAnnuelle(Formation &formation, bool one)
 {
-    while (true)
+    do
     {
         int duree = promptInt("Donner la durée annuelle (en heures): ");
         try
         {
             FormationService::validerMetierDureeAnnuelle(formation, duree);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
+    } while (!one);
 }
-void FormationView::modifierCoutAnnuel(Formation& formation)
+void FormationView::modifierCoutAnnuel(Formation &formation, bool one)
 {
-    while (true)
+    do
     {
-        double coutAnnuel = promptDouble("Donner le coût annuel");
+        double coutAnnuel = promptDouble("Donner le coût annuel: ");
         try
         {
             FormationService::validerMetierCoutAnnuel(formation, coutAnnuel);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
+    } while (!one);
+}
+void FormationView::saisirEtEnregistrerFormation()
+{
+    Formation f = input();
+    if (FormationService::ajouterFormation(f))
+    {
+        success("Formation bien enregistré avec l'id " + f.getId());
+    }
+    else
+    {
+        error("Une erreur est survenue!");
+        warning("La formation n'a pas été enregistrer");
     }
 }
-void FormationView::saisirEtEnregistrerFormation() {
-    Formation f = input();
-    FormationService::ajouterFormation(f);
-}
-void FormationView::supprimerFormation() {
+void FormationView::supprimerFormation()
+{
     std::string formId = promptString("Entrer l'id de la formation : ");
-    if (FormationService::supprimerFormation(formId)) {
+    if (FormationService::supprimerFormation(formId))
+    {
         success("Formation bien supprimée");
-    } else {
+    }
+    else
+    {
         error("Erreur ! La formation est introuvable");
     }
 }
-void FormationView::rechercherFormation() {
+void FormationView::rechercherFormation()
+{
     std::string formationId = promptString("Entrer l'id de la formation: ");
-    if (FormationService::exist(formationId)) {
+    if (FormationService::exist(formationId))
+    {
         success("Formation trouvée :");
         Formation f = FormationService::rechercherFormation(formationId);
         showMessage(f.toString());
-    } else {
+    }
+    else
+    {
         error("Erreur ! La formation est introuvable");
     }
 }
@@ -106,12 +128,11 @@ void FormationView::modifierFormation()
     Formation f = FormationService::rechercherFormation(formId);
     showMessage(f.toString());
 
-    static const std::map<std::string,std::string> menuAt = {
+    static const std::map<std::string, std::string> menuAt = {
         {"filiere", "Modifier la filière"},
-        {"niveau",  "Modifier le niveau"},
-        {"duree",   "Modifier la durée annuelle"},
-        {"cout",    "Modifier le coût annuel"},
-        {"retour",  "Retour"}
+        {"niveau", "Modifier le niveau"},
+        {"duree", "Modifier la durée annuelle"},
+        {"cout", "Modifier le coût annuel"},
     };
 
     while (true)
@@ -138,7 +159,7 @@ void FormationView::modifierFormation()
             success("Le coût annuel a été modifié");
         }
 
-        if (key != "retour")
+        if (key != "quit")
         {
             FormationService::ajouterFormation(f);
         }
@@ -151,9 +172,15 @@ void FormationView::modifierFormation()
 
 void FormationView::displayAll(std::vector<Formation> formations)
 {
+    banner("LISTES DES FORMATIONS");
+    if (formations.empty())
+    {
+        showMessage("Aucune formations disponible.");
+        return;
+    }
     for (auto f : formations)
-{
-    showMessage(f.toString());
+    {
+        showStringObject(f.toString());
     }
 }
 
@@ -169,7 +196,8 @@ void FormationView::afficherFormationsPopulaires()
     showMessage("Formation la plus populaire : " + f.getFiliere() + " (ID : " + f.getId() + ")");
 }
 
-void FormationView::afficherTousFormations(){
-    std::vector<Formation> formations = FormationService::avoirTousFormations();
-    displayAll(formations);
+void FormationView::afficherTousFormations()
+{
+    auto fs = FormationService::avoirTousFormations();
+    displayAll(fs);
 }

@@ -13,17 +13,17 @@ public:
     static void ajouterReglementId(Etudiant etudiant);
 
     // méthodes de modifications
-    static void modifierNom(Etudiant &etu);
-    static void modifierPrenom(Etudiant &etu);
-    static void modifierTelephone(Etudiant &etu);
-    static void modifierEmail(Etudiant &etu);
-    static void modifierClasseId(Etudiant &etu);
-    static void modifierCadPaieId(Etudiant &etu);
-    static void modifierEstBoursier(Etudiant &etu);
-    static void modifierEstHandicape(Etudiant &etu);
-    static void modifierEstOrphelin(Etudiant &etu);
-    static void modifierFamilleNombreuse(Etudiant &etu);
-
+    static void modifierNom(Etudiant &etu, bool one=true);
+    static void modifierPrenom(Etudiant &etu, bool one=true);
+    static void modifierTelephone(Etudiant &etu, bool one=true);
+    static void modifierEmail(Etudiant &etu, bool one=true);
+    static void modifierClasseId(Etudiant &etu, bool one=true);
+    static void modifierEstBoursier(Etudiant &etu, bool one=true);
+    static void modifierEstHandicape(Etudiant &etu, bool one=true);
+    static void modifierEstOrphelin(Etudiant &etu, bool one=true);
+    static void modifierFamilleNombreuse(Etudiant &etu, bool one=true);
+    
+    static void definirCadPaieId();
     // méthodes pures services
     static void saisirEtEnregistrerEtudiant();
     static void supprimerEtudiant();

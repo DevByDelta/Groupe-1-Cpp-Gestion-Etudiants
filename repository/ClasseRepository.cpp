@@ -20,10 +20,8 @@ bool ClasseRepository::exists(const std::string& id) {
     return ifs.good();
 }
 
-#include <iostream>
 // Sauvegarde l'objet (insert/update)
 bool ClasseRepository::save(const Classe& obj) {
-    std::cout << getFilePath(obj.getId()) << std::endl;
     std::ofstream ofs(getFilePath(obj.getId()).c_str());
     if (!ofs) return false;
     ofs << obj.toTxt();

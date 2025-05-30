@@ -2,6 +2,7 @@
 #include "../repository/ClasseRepository.hpp"
 #include "../repository/EtudiantRepository.hpp"
 #include "../repository/CalendrierPaiementRepository.hpp"
+#include "../repository/FormationRepository.hpp"
 #include <exception>
 #include <stdexcept>
 
@@ -75,5 +76,10 @@ std::vector<Etudiant> EtudiantService::avoirTousEtudiants(){
 
 bool EtudiantService::exist(const std::string& code){
     return EtudiantRepository::exists(code);
+}
+
+Formation EtudiantService::avoirFormation(const Etudiant& e){
+    auto cls = ClasseRepository::findById(e.getClasseId());
+    return FormationRepository::findById(cls.getFormationId());
 }
 

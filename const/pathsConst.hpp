@@ -1,7 +1,7 @@
 #pragma once
 
 // Dossiers de stockage principaux
-#define DATABASE_PATH        "/database/"
+#define DATABASE_PATH        "database/"
 #define CLASSES_PATH         DATABASE_PATH "classes/"
 #define ETUDIANTS_PATH       DATABASE_PATH "etudiants/"
 #define REGLEMENTS_PATH      DATABASE_PATH "reglements/"

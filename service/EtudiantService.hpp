@@ -1,5 +1,6 @@
 #pragma once
 #include "../model/entity/Etudiant.hpp"
+#include "../model/entity/Formation.hpp"
 class EtudiantService {
 private:
 
@@ -19,4 +20,5 @@ public:
     static Etudiant rechercherEtudiant(const std::string& code);
     static bool exist(const std::string& code);
     static std::vector<Etudiant> avoirTousEtudiants();
+    static Formation avoirFormation(const Etudiant& e);
 };

@@ -1,6 +1,7 @@
 #include "FormationService.hpp"
 #include "../repository/FormationRepository.hpp"
 #include "../repository/ClasseRepository.hpp"
+#include "../repository/EtudiantRepository.hpp"
 #include <exception>
 #include <stdexcept>
 
@@ -45,11 +46,17 @@ std::vector<Classe> FormationService::avoirTousClasses(const std::string& format
     });
 }
 int FormationService::nombreEtudiantPourUneFormation(const std::string& formationId){
-    int nbEtudiant = 0;
-    for(const Classe& cl : avoirTousClasses(formationId)){
-        nbEtudiant += cl.getEtudiantCodes().size();
+    auto cls = ClasseRepository::findBy([&](const Classe &c){
+        return c.getFormationId() == formationId; 
+    });
+    int cpt = 0;
+    for(auto c : cls){
+        auto ets = EtudiantRepository::findBy([&](const Etudiant &e){
+            return e.getClasseId() == c.getId(); 
+        });
+        cpt += ets.size();
     }
-    return nbEtudiant;
+    return cpt;
 }
 std::pair<std::string, double> FormationService::avoirFilierePlusRentable(){
 
@@ -99,5 +106,5 @@ Formation FormationService::formationLaPlusPopulaire(){
 }
 
 bool FormationService::exist(const std::string& id){
-    return FormationService::exist(id);
+    return FormationRepository::exists(id);
 }

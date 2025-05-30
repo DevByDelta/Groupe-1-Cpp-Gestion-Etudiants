@@ -9,14 +9,13 @@
 Classe ClasseView::input()
 {
     Classe cl = Classe();
-    modifierNom(cl);
+    modifierNom(cl, false);
     return cl;
 }
-void ClasseView::modifierNom(Classe &cl)
+void ClasseView::modifierNom(Classe &cl, bool one)
 {
-    while (true)
-    {
-        std::string nom = promptString("Donner le nom de l'étudiant: ");
+    do{
+        std::string nom = promptString("Donner le nom de la classe: ");
         try
         {
             ClasseService::validerMetierNom(cl, nom);
@@ -26,47 +25,29 @@ void ClasseView::modifierNom(Classe &cl)
         {
             error(e.what());
         }
-    }
+    }while (!one);
 }
-void ClasseView::modifierFormationId(Classe &cl)
+void ClasseView::modifierFormationId(Classe &cl, bool one)
 {
-    while (true)
-    {
+    do{
         std::string formationId = promptString("Donner l'id de la formation: ");
         try
         {
             ClasseService::validerMetierFormationId(cl, formationId);
+            return;
         }
         catch (const std::exception &e)
         {
             error(e.what());
         }
-    }
-}
-
-void ClasseView::ajouterEtudiantCode(Classe &cl)
-{
-    while (promptYesNo("Voulez vous ajouter un étudiant?"))
-    {
-        std::string etudiantCode = promptString("Saisir le code de l'étudiant: ");
-        try
-        {
-            ClasseService::validerMetierAddEtudiantCode(cl, etudiantCode);
-        }
-        catch (const std::exception &e)
-        {
-            error(e.what());
-        }
-    }
+    }while (!one);
 }
 
 void ClasseView::saisirEtEnregistrerClasse()
 {
     Classe cl = input();
-    showMessage("--- Affichage de la classe ---");
-    showMessage(cl.toString());
     if(ClasseService::enregistrerClasse(cl)){
-        success("Classe bien enregistré");
+        success("Classe bien enregistré avec l'id " + cl.getId());
     }
     else{
         error("Une erreur est survenue!");
@@ -117,7 +98,6 @@ void ClasseView::modifierClasse()
         {"nom", "Modifier le nom"},
         {"formationId", "Modifier la formation"},
         {"addEtudiantCode", "Ajouter un etudiant"},
-        {"retour", "retour"}
     };
     while (true)
     {
@@ -132,13 +112,8 @@ void ClasseView::modifierClasse()
             modifierFormationId(cl);
             success("La formation a été bien modifiée");
         }
-        else if (key == "addEtudiantCode")
-        {
-            ajouterEtudiantCode(cl);
-            success("L'etudiant a bien été bien modifiée");
-        }
 
-        if (key != "retour"){
+        if (key != "quit"){
             ClasseService::enregistrerClasse(cl);
         }
         else
@@ -156,8 +131,7 @@ void ClasseView::afficherEffectifClasse()
         error("Erreur! la classe est introuvable");
         return;
     }
-    Classe cl = ClasseService::rechercherClasse(classeId);
-    int nombreE = cl.getEtudiantCodes().size();
+    int nombreE = ClasseService::avoirEffectif(classeId);
     showMessage("Il y a " + std::to_string(nombreE) + " étudiants dans cette classe");
 }
 
@@ -175,15 +149,16 @@ void ClasseView::afficherCoutFormationClasse()
 
 void ClasseView::afficherTous(){
     auto cls = ClasseService::avoirTousClasses();
-    if (cls.empty()) {
-        showMessage("Aucune classe disponible.");
-        return;
-    }
     displayAll(cls);
 }
 
 void ClasseView::displayAll(std::vector<Classe> classes){
+    banner("LISTES DES CLASSES");
+    if (classes.empty()) {
+        showMessage("Aucune classe disponible.");
+        return;
+    }
     for (auto r : classes){
-        showMessage(r.toString());
+        showStringObject(r.toString());
     }
 }
