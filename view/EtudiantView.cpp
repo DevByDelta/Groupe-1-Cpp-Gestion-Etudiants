@@ -316,3 +316,7 @@ void EtudiantView::displayAll(std::vector<Etudiant> etudiants)
         showMessage(e.toString());
     }
 }
+
+void EtudiantView::afficherTous(){
+    displayAll(EtudiantService::avoirTousEtudiants());
+}

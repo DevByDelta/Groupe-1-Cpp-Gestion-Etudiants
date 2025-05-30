@@ -148,14 +148,6 @@ void FormationView::modifierFormation()
         }
     }
 }
-void afficherRentabiliteParFiliere(){
-    auto p= FormationService::avoirFilierePlusRentable();
-
-}
-
-
-
-
 
 void FormationView::displayAll(std::vector<Formation> formations)
 {
@@ -163,4 +155,21 @@ void FormationView::displayAll(std::vector<Formation> formations)
 {
     showMessage(f.toString());
     }
+}
+
+void FormationView::afficherFilierePlusRentable()
+{
+    auto p = FormationService::avoirFilierePlusRentable();
+    showMessage("Filière la plus rentable : " + p.first + " - CA : " + std::to_string(p.second));
+}
+
+void FormationView::afficherFormationsPopulaires()
+{
+    auto f = FormationService::formationLaPlusPopulaire();
+    showMessage("Formation la plus populaire : " + f.getFiliere() + " (ID : " + f.getId() + ")");
+}
+
+void FormationView::afficherTousFormations(){
+    std::vector<Formation> formations = FormationService::avoirTousFormations();
+    displayAll(formations);
 }

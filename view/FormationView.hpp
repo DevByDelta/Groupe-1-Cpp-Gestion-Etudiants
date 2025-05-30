@@ -23,7 +23,8 @@ public:
     static void rechercherFormation();
     static void modifierFormation();
     static void displayAll(std::vector<Formation> formations);
+    static void afficherTousFormations();
     // methode service utils
-    static void afficherRentabiliteParFiliere();
+    static void afficherFilierePlusRentable();
     static void afficherFormationsPopulaires();
 };

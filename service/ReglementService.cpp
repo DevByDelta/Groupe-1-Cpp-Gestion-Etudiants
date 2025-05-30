@@ -82,7 +82,7 @@ double ReglementService::calculerTotalReglementClasse(const Classe &classe)
     return total;
 }
 
-double ReglementService::avoirChiffreAffaireEtabilissement()
+double ReglementService::avoirChiffreAffaireEtablissement()
 {
     double chiffreAffaire = 0.0;
 
@@ -119,5 +119,5 @@ std::map<std :: string,double> ReglementService::rentabiliteParFiliere()
 
 
 bool ReglementService::exist(const std::string& id){
-    return ReglementService::exist(id);
+    return ReglementRepository::exists(id);
 }

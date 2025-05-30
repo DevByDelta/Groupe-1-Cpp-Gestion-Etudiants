@@ -6,9 +6,6 @@ Gestion des Étudiants
     Rechercher un étudiant //Etudiant
     Afficher la liste des étudiants  //void
 
-    Définir le calendrier de paiement personnalisé d'un étudiant
-
-
 Gestion des Classes
     Ajouter une classe
     Modifier une classe

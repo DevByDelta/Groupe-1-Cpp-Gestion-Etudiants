@@ -30,6 +30,7 @@ public:
     static void rechercherEtudiant();
     static void modifierEtudiant();
     static void displayAll(std::vector<Etudiant> etudiants);
+    static void afficherTous();
 
     // méthodes services utiles
 };

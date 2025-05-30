@@ -22,9 +22,10 @@ public:
     static void supprimerClasse();
     static void rechercherClasse();
     static void modifierClasse();
+    static void afficherTous();
 
     // méthodes services utiles
     static void afficherEffectifClasse();
     static void afficherCoutFormationClasse();
-    static void displayAll(const std::vector<Classe> &classes);
+    static void displayAll(std::vector<Classe> classes);
 };

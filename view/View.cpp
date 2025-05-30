@@ -4,6 +4,9 @@
 #include <map>
 #include <iomanip>
 #include <vector>
+#include <stdio.h>
+#include <locale.h>
+
 
 #include "View.hpp"
 
@@ -65,7 +68,7 @@ double View::promptDouble(const std::string &message)
         }
         catch (const std::exception &)
         {
-            showMessage("Entrée invalide. Veuillez saisir un nombre réel valide.");
+            error("Entrée invalide. Veuillez saisir un nombre réel valide.");
         }
     }
     return value;
@@ -82,7 +85,7 @@ bool View::promptYesNo(const std::string &message)
             return true;
         if (input == "n" || input == "N" || input == "non" || input == "Non")
             return false;
-        showMessage("Réponse invalide. Veuillez répondre par 'o' (oui) ou 'n' (non).");
+        error("Réponse invalide. Veuillez répondre par 'o' (oui) ou 'n' (non).");
     }
 }
 

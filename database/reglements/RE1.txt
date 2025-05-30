@@ -1,5 +1,0 @@
-Id=RE1
-EtudiantCode=ETU1
-ClasseId=CL1
-Date=10-10-2024
-Montant=10000

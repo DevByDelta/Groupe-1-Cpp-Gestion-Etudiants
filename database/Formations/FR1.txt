@@ -1,6 +1,0 @@
-Id=FR1
-Filiere=Informatique
-AnneeAcademique=2024-2025
-Niveau=L3
-DureeAnnuelle=600
-CoutAnnuel=350000.0

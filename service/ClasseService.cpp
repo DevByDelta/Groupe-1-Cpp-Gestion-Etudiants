@@ -32,7 +32,7 @@ bool ClasseService::supprimerClasse(const std::string& id){
 Classe ClasseService::rechercherClasse(const std::string& id){
     return ClasseRepository::findById(id);
 }
-std::vector<Classe> ClasseService::avoirTousEtudiants(){
+std::vector<Classe> ClasseService::avoirTousClasses() {
     return ClasseRepository::findAll();
 }
 double ClasseService::avoirCoutFormation(const std::string& id){

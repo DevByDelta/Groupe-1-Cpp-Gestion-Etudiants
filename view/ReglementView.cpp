@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include "ReglementView.hpp"
 #include "../service/ReglementService.hpp"
+#include "../service/EtudiantService.hpp"
 
 Reglement ReglementView::input(){
     Reglement r = Reglement();
@@ -144,4 +145,36 @@ void ReglementView::displayAll(std::vector<Reglement> reglements){
     }
 }
 
+
+void ReglementView::afficherReglementsEtudiantParAnnee() {
+    std::string code = promptString("Entrer le code de l'étudiant : ");
+    if (!EtudiantService::exist(code)) {
+        error("Erreur ! Cet étudiant est introuvable");
+        return;
+    }
+    auto regs = ReglementService::avoirTousReglementPourUnEtudiant(code);
+    displayAll(regs);
+}
+
+void ReglementView::afficherReliquatEtudiant() {
+    std::string etudiantCode = promptString("Entrer le code de l'étudiant : ");
+    if (EtudiantService::exist(etudiantCode)){
+    double reliquat = ReglementService::avoirReliquatEtudiant(etudiantCode);
+    showMessage("Reliquat à payer : " + std::to_string(reliquat));
+    }else{
+        showMessage("Aucun étudiant correspondant à ce code n' a été trouvé");
+    }
+}
+
+void ReglementView::afficherChiffreAffaireEtablissement(){
+    double chiffreAffaire = ReglementService::avoirChiffreAffaireEtablissement();
+    showMessage("Le chiffre d'affaire de l'établissement est : "+ std::to_string(chiffreAffaire));
+}
+
+void ReglementView::afficherRentabiliteParFiliere() {
+    auto m = ReglementService::rentabiliteParFiliere();
+    for (const auto &p : m) {
+        showMessage(p.first + " : " + std::to_string(p.second));
+    }
+}
 

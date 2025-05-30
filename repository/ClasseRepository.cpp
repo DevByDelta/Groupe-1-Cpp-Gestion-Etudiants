@@ -11,7 +11,7 @@
 
 // Utilisation de la macro pour obtenir le chemin du fichier
 std::string ClasseRepository::getFilePath(const std::string& id) {
-    return CLASSES_PATH + std::string(id) + EXTENSION_DB;
+    return  CLASSES_PATH + std::string(id) + EXTENSION_DB;
 }
 
 // Vérifier la présence de l'objet
@@ -20,8 +20,10 @@ bool ClasseRepository::exists(const std::string& id) {
     return ifs.good();
 }
 
+#include <iostream>
 // Sauvegarde l'objet (insert/update)
 bool ClasseRepository::save(const Classe& obj) {
+    std::cout << getFilePath(obj.getId()) << std::endl;
     std::ofstream ofs(getFilePath(obj.getId()).c_str());
     if (!ofs) return false;
     ofs << obj.toTxt();

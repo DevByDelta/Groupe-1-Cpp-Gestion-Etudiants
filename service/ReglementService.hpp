@@ -16,7 +16,7 @@ public:
     static std::vector<Reglement> avoirTousReglementPourUnEtudiant(const std::string &etudiantode);
     static double avoirReliquatEtudiant(const std::string &etudiantCode);
     static double calculerReglementTotalEtudiant(const std::string &etudiantCode);
-    static double avoirChiffreAffaireEtabilissement();
+    static double avoirChiffreAffaireEtablissement();
     static double calculerTotalReglementClasse(const Classe &classe);
     static Reglement rechercherReglement(const std::string &reglementId);
     static std::vector<Reglement> avoirTousReglements();

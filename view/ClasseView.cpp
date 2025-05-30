@@ -9,10 +9,7 @@
 Classe ClasseView::input()
 {
     Classe cl = Classe();
-
     modifierNom(cl);
-    modifierFormationId(cl);
-    ajouterEtudiantCode(cl);
     return cl;
 }
 void ClasseView::modifierNom(Classe &cl)
@@ -23,6 +20,7 @@ void ClasseView::modifierNom(Classe &cl)
         try
         {
             ClasseService::validerMetierNom(cl, nom);
+            return;
         }
         catch (const std::exception &e)
         {
@@ -65,7 +63,15 @@ void ClasseView::ajouterEtudiantCode(Classe &cl)
 void ClasseView::saisirEtEnregistrerClasse()
 {
     Classe cl = input();
-    ClasseService::enregistrerClasse(cl);
+    showMessage("--- Affichage de la classe ---");
+    showMessage(cl.toString());
+    if(ClasseService::enregistrerClasse(cl)){
+        success("Classe bien enregistré");
+    }
+    else{
+        error("Une erreur est survenue!");
+        warning("La classe n'a pas été enregistrer");
+    }
 }
 
 void ClasseView::supprimerClasse()
@@ -164,4 +170,20 @@ void ClasseView::afficherCoutFormationClasse()
         return;
     }
     double coutAnnuel = ClasseService::avoirCoutFormation(classeId);
+    showMessage(classeId + " : " + std::to_string(coutAnnuel));
+}
+
+void ClasseView::afficherTous(){
+    auto cls = ClasseService::avoirTousClasses();
+    if (cls.empty()) {
+        showMessage("Aucune classe disponible.");
+        return;
+    }
+    displayAll(cls);
+}
+
+void ClasseView::displayAll(std::vector<Classe> classes){
+    for (auto r : classes){
+        showMessage(r.toString());
+    }
 }
