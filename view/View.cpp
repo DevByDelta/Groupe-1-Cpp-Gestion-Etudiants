@@ -7,7 +7,6 @@
 
 #include "View.hpp"
 
-View::~View(){}
 
 void View::showMessage(const std::string &message)
 {
@@ -102,10 +101,10 @@ void View::error(const std::string &msg)
 
 std::string View::afficherMenu(
     const std::map<std::string, std::string>& menu,
-    const std::string& titre = "FONCTIONNALITÉS DISPONIBLES",
-    const std::string& separateur = "=",
-    int largeur = 40,
-    const std::string& prefix = "→ "
+    const std::string& titre,
+    const std::string& separateur,
+    int largeur,
+    const std::string& prefix
 ) {
     std::string sepLine(largeur, separateur.empty() ? '=' : separateur[0]);
     int titrePos = (largeur - titre.size()) / 2;

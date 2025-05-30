@@ -2,10 +2,9 @@
 #include <map>
 
 #include "ClasseView.hpp"
-#include "Classe.hpp"
-#include "ClasseService.hpp"
+#include "../model/entity/Classe.hpp"
+#include "../service/ClasseService.hpp"
 
-ClasseView::ClasseView() {}
 
 Classe ClasseView::input()
 {
@@ -23,7 +22,7 @@ void ClasseView::modifierNom(Classe &cl)
         std::string nom = promptString("Donner le nom de l'étudiant: ");
         try
         {
-            ClasseService::instance().validerMetierNom(cl, nom);
+            ClasseService::validerMetierNom(cl, nom);
         }
         catch (const std::exception &e)
         {
@@ -38,7 +37,7 @@ void ClasseView::modifierFormationId(Classe &cl)
         std::string formationId = promptString("Donner l'id de la formation: ");
         try
         {
-            ClasseService::instance().validerMetierFormationId(cl, formationId);
+            ClasseService::validerMetierFormationId(cl, formationId);
         }
         catch (const std::exception &e)
         {
@@ -54,7 +53,7 @@ void ClasseView::ajouterEtudiantCode(Classe &cl)
         std::string etudiantCode = promptString("Saisir le code de l'étudiant: ");
         try
         {
-            ClasseService::instance().validerMetierAddEtudiantCode(cl, etudiantCode);
+            ClasseService::validerMetierAddEtudiantCode(cl, etudiantCode);
         }
         catch (const std::exception &e)
         {
@@ -63,23 +62,18 @@ void ClasseView::ajouterEtudiantCode(Classe &cl)
     }
 }
 
-ClasseView &ClasseView::instance()
-{
-    static ClasseView inst;
-    return inst;
-}
-
 void ClasseView::saisirEtEnregistrerClasse()
 {
     Classe cl = input();
-    ClasseService::instance().enregistrerClasse(cl);
+    ClasseService::enregistrerClasse(cl);
 }
 
 void ClasseView::supprimerClasse()
 {
     std::string classeId = promptString("Entrer l'id de la classe: ");
-    if (ClasseService::instance().supprimerClasse(classeId))
+    if (ClasseService::supprimerClasse(classeId))
     {
+
         success("Classe bien supprimer");
     }
     else
@@ -91,10 +85,10 @@ void ClasseView::supprimerClasse()
 void ClasseView::rechercherClasse()
 {
     std::string classeId = promptString("Entrer l'id de la classe: ");
-    if (ClasseService::instance().exist(classeId))
+    if (ClasseService::exist(classeId))
     {
         success("Classe trouvé:");
-        Classe cl = ClasseService::instance().rechercherClasse(classeId);
+        Classe cl = ClasseService::rechercherClasse(classeId);
         showMessage(cl.toString());
     }
     else
@@ -106,12 +100,12 @@ void ClasseView::rechercherClasse()
 void ClasseView::modifierClasse()
 {
     std::string classeId = promptString("Entrer l'id de la classe: ");
-    if (!ClasseService::instance().exist(classeId))
+    if (!ClasseService::exist(classeId))
     {
         error("Erreur! la classe est introuvable");
         return;
     }
-    Classe cl = ClasseService::instance().rechercherClasse(classeId);
+    Classe cl = ClasseService::rechercherClasse(classeId);
     showMessage(cl.toString());
     static std::map<std::string, std::string> menuAt = {
         {"nom", "Modifier le nom"},
@@ -137,9 +131,9 @@ void ClasseView::modifierClasse()
             ajouterEtudiantCode(cl);
             success("L'etudiant a bien été bien modifiée");
         }
-        
+
         if (key != "retour"){
-            ClasseService::instance().enregistrerClasse(cl);
+            ClasseService::enregistrerClasse(cl);
         }
         else
         {
@@ -151,12 +145,12 @@ void ClasseView::modifierClasse()
 void ClasseView::afficherEffectifClasse()
 {
     std::string classeId = promptString("Entrer l'id de la classe: ");
-    if (!ClasseService::instance().exist(classeId))
+    if (!ClasseService::exist(classeId))
     {
         error("Erreur! la classe est introuvable");
         return;
     }
-    Classe cl = ClasseService::instance().rechercherClasse(classeId);
+    Classe cl = ClasseService::rechercherClasse(classeId);
     int nombreE = cl.getEtudiantCodes().size();
     showMessage("Il y a " + std::to_string(nombreE) + " étudiants dans cette classe");
 }
@@ -164,10 +158,10 @@ void ClasseView::afficherEffectifClasse()
 void ClasseView::afficherCoutFormationClasse()
 {
     std::string classeId = promptString("Entrer l'id de la classe: ");
-    if (!ClasseService::instance().exist(classeId))
+    if (!ClasseService::exist(classeId))
     {
         error("Erreur! la classe est introuvable");
         return;
     }
-    double coutAnnuel = ClasseService::instance().avoirCoutFormation(classeId);
+    double coutAnnuel = ClasseService::avoirCoutFormation(classeId);
 }

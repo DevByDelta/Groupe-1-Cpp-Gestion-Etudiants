@@ -33,20 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
-		<Unit filename="model/CalendrierPaiement.cpp" />
-		<Unit filename="model/CalendrierPaiement.hpp" />
-		<Unit filename="model/Classe.cpp" />
-		<Unit filename="model/Classe.hpp" />
-		<Unit filename="model/Etudiant.cpp" />
-		<Unit filename="model/Etudiant.hpp" />
-		<Unit filename="model/Formation.cpp" />
-		<Unit filename="model/Formation.hpp" />
-		<Unit filename="model/IDGenerator.cpp" />
-		<Unit filename="model/IDGenerator.hpp" />
-		<Unit filename="model/Promotion.cpp" />
-		<Unit filename="model/Promotion.hpp" />
-		<Unit filename="model/Reglement.cpp" />
-		<Unit filename="model/Reglement.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

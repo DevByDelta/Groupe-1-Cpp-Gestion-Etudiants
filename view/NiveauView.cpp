@@ -26,8 +26,3 @@ Niveau::Type NiveauView::choisir()
     }
 }
 
-NiveauView &NiveauView::instance()
-{
-    static NiveauView inst;
-    return inst;
-}

@@ -10,7 +10,6 @@
 #include <stdexcept>
 
 
-ReglementService::ReglementService() {}
 void ReglementService::validerMetierEtudiantCode(Reglement &r, const std::string &code)
 {
     if (!EtudiantRepository::exists(code))
@@ -116,12 +115,6 @@ std::map<std :: string,double> ReglementService::rentabiliteParFiliere()
         revenueParFiliere[formation.getFiliere()] += ca;
     }
     return revenueParFiliere;
-}
-
-ReglementService &ReglementService::instance()
-{
-    static ReglementService inst;
-    return inst;
 }
 
 

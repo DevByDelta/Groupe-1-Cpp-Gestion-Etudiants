@@ -6,7 +6,6 @@
 #include <exception>
 #include <stdexcept>
 
-CalendrierPaiementService::CalendrierPaiementService() {}
 
 
 void CalendrierPaiementService::validerMetierEtudiantCode(CalendrierPaiement& cp, const std::string& etudiantCode){
@@ -27,11 +26,6 @@ void CalendrierPaiementService::validerMetierEchancier(CalendrierPaiement& cp, c
     cp.setEcheancier(echeancier);
 }
 
-CalendrierPaiementService &CalendrierPaiementService::instance()
-{
-    static CalendrierPaiementService inst;
-    return inst;
-}
 
 bool CalendrierPaiementService::exist(const std::string& id){
     return CalendrierPaiementService::exist(id);

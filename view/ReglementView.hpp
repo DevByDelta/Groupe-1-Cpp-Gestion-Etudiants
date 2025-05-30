@@ -7,29 +7,23 @@
 
 class ReglementView : public View
 {
-private:
-    ReglementView() {}
-    ReglementView(const ReglementView &) = delete;
-    ReglementView &operator=(const ReglementView &) = delete;
-
 public:
-    Reglement input();
-    static ReglementView &instance();
-    void displayAll(std::vector<Reglement> reglements);
+    static Reglement input();
+    static void displayAll(std::vector<Reglement> reglements);
 
     // méthodes de modifications
-    void modifierMontant(Reglement &reglement);
-    void modifierEtudiantCode(Reglement &reglement);
-    void modifierClasseId(Reglement &Reglement);
+    static void modifierMontant(Reglement &reglement);
+    static void modifierEtudiantCode(Reglement &reglement);
+    static void modifierClasseId(Reglement &Reglement);
     // methode pure service
-    void ajouterReglement();
-    void modifierReglement();
-    void supprimerReglement();
-    void rechercherReglement();
-    void listerReglements();
+    static void ajouterReglement();
+    static void modifierReglement();
+    static void supprimerReglement();
+    static void rechercherReglement();
+    static void listerReglements();
     // methode util
-    void afficherReglementsEtudiantParAnnee();
-    void afficherReliquatEtudiant();
-    void afficherChiffreAffaireEtablissement();
-    void afficherRentabiliteParFiliere();
+    static void afficherReglementsEtudiantParAnnee();
+    static void afficherReliquatEtudiant();
+    static void afficherChiffreAffaireEtablissement();
+    static void afficherRentabiliteParFiliere();
 };

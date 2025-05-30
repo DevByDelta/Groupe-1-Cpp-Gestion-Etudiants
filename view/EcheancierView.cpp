@@ -25,9 +25,3 @@ Echeancier::Type EcheancierView::choisir()
         showMessage("Choix invalide. Veuillez recommencer.");
     }
 }
-
-EcheancierView &EcheancierView::instance()
-{
-    static EcheancierView inst;
-    return inst;
-}

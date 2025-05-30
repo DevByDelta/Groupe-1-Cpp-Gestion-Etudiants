@@ -3,15 +3,15 @@
 #include "../utils/IDGenerator.hpp"
 
 Classe::Classe(
-    const std::string &formationId = "",
-    const std::string &firstEtudiantCode = ""
-){
-    this->id = IDGenerator::generate("CL");
-    this->nom = "";
-    this->formationId = formationId;
-    if (firstEtudiantCode != "")
-    {
-        this->etudiantCodes.push_back(firstEtudiantCode);
+    std::string formationId,
+    std::string firstEtudiantCode
+)
+    : id(IDGenerator::generate("CL")),
+      nom(""),
+      formationId(formationId)
+{
+    if (!firstEtudiantCode.empty()) {
+        etudiantCodes.push_back(firstEtudiantCode);
     }
 }
 

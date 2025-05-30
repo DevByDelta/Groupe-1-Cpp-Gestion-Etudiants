@@ -12,19 +12,13 @@
 
 class CalendrierPaiementView : public View
 {
-private:
-    CalendrierPaiementView() {}
-    CalendrierPaiementView(const CalendrierPaiementView &) = delete;
-    CalendrierPaiementView &operator=(const CalendrierPaiementView &) = delete;
-
 public:
-    CalendrierPaiement input(const Etudiant &e, const Formation &f);
-    static CalendrierPaiementView &instance();
-    void displayAll(const std::vector<CalendrierPaiement> &cps);
+    static CalendrierPaiement input(const Etudiant &e, const Formation &f);
+    static void displayAll(const std::vector<CalendrierPaiement> &cps);
 
     // méthodes de modification
-    void modifierEtudiantCode(CalendrierPaiement &cp);
-    void modifierClasseId(CalendrierPaiement &cp);
-    void modifierEcheancier(CalendrierPaiement &cp);
+    static void modifierEtudiantCode(CalendrierPaiement &cp);
+    static void modifierClasseId(CalendrierPaiement &cp);
+    static void modifierEcheancier(CalendrierPaiement &cp);
 
 };

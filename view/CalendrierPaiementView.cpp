@@ -1,9 +1,8 @@
 #include "CalendrierPaiementView.hpp"
 #include "View.hpp"
 #include "EcheancierView.hpp"
-#include "CalendrierPaiementService.hpp"
+#include "../service/CalendrierPaiementService.hpp"
 
-CalendrierPaiementView::CalendrierPaiementView() {}
 
 CalendrierPaiement CalendrierPaiementView::input(const Etudiant& e, const Formation& f)
 {
@@ -24,7 +23,7 @@ void CalendrierPaiementView::modifierEtudiantCode(CalendrierPaiement &cp)
         std::string etudiantCode = promptString("Entrer le code de l'étudiant: ");
         try
         {
-            CalendrierPaiementService::instance().validerMetierEtudiantCode(cp, etudiantCode);
+            CalendrierPaiementService::validerMetierEtudiantCode(cp, etudiantCode);
         }
         catch (const std::exception &e)
         {
@@ -40,7 +39,7 @@ void CalendrierPaiementView::modifierClasseId(CalendrierPaiement &cp)
         std::string classeId = promptString("Donner l'id de la classe: ");
         try
         {
-            CalendrierPaiementService::instance().validerMetierClasseId(cp, classeId);
+            CalendrierPaiementService::validerMetierClasseId(cp, classeId);
         }
         catch (const std::exception &e)
         {
@@ -53,21 +52,15 @@ void CalendrierPaiementView::modifierEcheancier(CalendrierPaiement &cp)
 {
     while (true)
     {
-        Echeancier::Type echeancier = EcheancierView::instance().choisir();
+        Echeancier::Type echeancier = EcheancierView::choisir();
         try
         {
-            CalendrierPaiementService::instance().validerMetierEchancier(cp, echeancier);
+            CalendrierPaiementService::validerMetierEchancier(cp, echeancier);
         }
         catch(const std::exception& e)
         {
             error(e.what());
         }
-        
-    }
-}
 
-CalendrierPaiementView &CalendrierPaiementView::instance()
-{
-    static CalendrierPaiementView inst;
-    return inst;
+    }
 }

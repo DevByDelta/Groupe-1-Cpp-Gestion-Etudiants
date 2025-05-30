@@ -10,8 +10,8 @@
 #include "../ReflectionMacros.hpp"
 
 Etudiant::Etudiant(
-    const std::string &classeId = "",
-    const std::string &cadPaieId = ""
+    const std::string &classeId,
+    const std::string &cadPaieId
 )
 {
     this->code = IDGenerator::generate("ETU");

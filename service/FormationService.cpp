@@ -39,7 +39,7 @@ std::vector<Formation> FormationService::avoirTousFormations()
 {
     return FormationRepository::findAll();
 }
-const std::vector<Classe>& FormationService::avoirTousClasses(const std::string& formationId){
+std::vector<Classe> FormationService::avoirTousClasses(const std::string& formationId){
     return ClasseRepository::findBy([&](const Classe& classe){
         return classe.getFormationId() == formationId;
     });
@@ -78,27 +78,24 @@ std::pair<std::string, double> FormationService::avoirFilierePlusRentable(){
 }
 Formation FormationService::formationLaPlusPopulaire(){
     std::vector<Formation> formations = avoirTousFormations();
-    std::map<Formation, int> epp;
+    std::map<std::string, int> epp;
     for(const Formation& f : avoirTousFormations()){
-        if(epp.count(f)){
-            epp[f] += nombreEtudiantPourUneFormation(f.getId());
+        std::string id = f.getId();
+        if(epp.count(id)){
+            epp[id] += nombreEtudiantPourUneFormation(id);
         }
         else{
-            epp[f] = nombreEtudiantPourUneFormation(f.getId());
+            epp[id] = nombreEtudiantPourUneFormation(id);
         }
     }
-    std::pair<Formation, double> max_pair = {Formation(), 0.0};
+    std::pair<std::string, double> max_pair = {"", 0.0};
     for (const auto& pair : epp) {
         if (pair.second > max_pair.second) {
             max_pair = pair;
         }
     }
-    return max_pair.first;
-}
-FormationService &FormationService::instance()
-{
-    static FormationService inst;
-    return inst;
+    std::string id = max_pair.first;
+    return rechercherFormation(id);
 }
 
 bool FormationService::exist(const std::string& id){

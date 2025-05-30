@@ -7,7 +7,6 @@
 #include <stdexcept>
 
 
-ClasseService::ClasseService() {}
 
 void ClasseService::validerMetierNom(Classe& classe,const  std::string& nom){
     classe.setNom(nom);
@@ -41,11 +40,6 @@ double ClasseService::avoirCoutFormation(const std::string& id){
     std::string formationId = cl.getFormationId();
     Formation f = FormationRepository::findById(formationId);
     return f.getCoutAnnuel();
-}
-ClasseService &ClasseService::instance()
-{
-    static ClasseService inst;
-    return inst;
 }
 
 bool ClasseService::exist(const std::string& id){

@@ -5,7 +5,6 @@
 #include <exception>
 #include <stdexcept>
 
-EtudiantService::EtudiantService() {}
 
 void EtudiantService::validerMetierNom(Etudiant &etudiant, const std::string &nom)
 {
@@ -31,7 +30,7 @@ void EtudiantService::validerMetierClasseId(Etudiant &etudiant, const std::strin
     }
     etudiant.setClasseId(classeId);
 }
-void validerMetierCadPaieId(Etudiant& etudiant,const std::string& cadPaieId){
+void EtudiantService::validerMetierCadPaieId(Etudiant& etudiant,const std::string& cadPaieId){
     if (!CalendrierPaiementRepository::exists(cadPaieId))
     {
         throw std::runtime_error("Calendrier Paiement ID invalide " + cadPaieId);
@@ -78,9 +77,3 @@ bool EtudiantService::exist(const std::string& code){
     return EtudiantRepository::exists(code);
 }
 
-
-EtudiantService &EtudiantService::instance()
-{
-    static EtudiantService inst;
-    return inst;
-}

@@ -9,23 +9,22 @@
 class ClasseView : public View
 {
 public:
-    Classe input();
-    static ClasseView &instance();
+    static Classe input();
 
     // méthodes de modifications
-    void modifierNom(Classe &cl);
-    void modifierFormationId(Classe &cl);
-    void ajouterEtudiantCode(Classe &cl);
+    static void modifierNom(Classe &cl);
+    static void modifierFormationId(Classe &cl);
+    static void ajouterEtudiantCode(Classe &cl);
 
     // méthodes pures services
-    Classe trouverClasse();
-    void saisirEtEnregistrerClasse();
-    void supprimerClasse();
-    void rechercherClasse();
-    void modifierClasse();
+    static Classe trouverClasse();
+    static void saisirEtEnregistrerClasse();
+    static void supprimerClasse();
+    static void rechercherClasse();
+    static void modifierClasse();
 
     // méthodes services utiles
-    void afficherEffectifClasse();
-    void afficherCoutFormationClasse();
-    void displayAll(const std::vector<Classe> &classes);
+    static void afficherEffectifClasse();
+    static void afficherCoutFormationClasse();
+    static void displayAll(const std::vector<Classe> &classes);
 };

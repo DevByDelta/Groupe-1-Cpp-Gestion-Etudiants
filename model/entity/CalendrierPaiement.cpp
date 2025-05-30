@@ -9,8 +9,8 @@
 
 // Constructeur
 CalendrierPaiement::CalendrierPaiement(
-    const std::string &etudiantCode = "",
-    const std::string &classeId = ""
+    const std::string &etudiantCode,
+    const std::string &classeId
 ){
     this->id = IDGenerator::generate("CP");
     this->dateInscription = Date();

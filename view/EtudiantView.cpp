@@ -1,12 +1,11 @@
 #include <algorithm>
 #include <cctype>
-#include "EtudiantService.hpp"
 #include "ReglementView.hpp"
+#include "../service/EtudiantService.hpp"
 #include "View.hpp"
-#include "CalendrierPaiement.hpp"
+#include "../model/entity/CalendrierPaiement.hpp"
 #include "EtudiantView.hpp"
 
-EtudiantView::EtudiantView() {}
 
 Etudiant EtudiantView::input()
 {
@@ -24,6 +23,36 @@ Etudiant EtudiantView::input()
     return etu;
 }
 
+void EtudiantView::modifierNom(Etudiant &etu){
+    while (true)
+    {
+        std::string nom = promptString("Entrer le nom de l'étudiant: ");
+        try
+        {
+            EtudiantService::validerMetierNom(etu, nom);
+        }
+        catch (const std::exception &e)
+        {
+            error(e.what());
+        }
+    }
+}
+
+void EtudiantView::modifierPrenom(Etudiant &etu){
+    while (true)
+    {
+        std::string prenom = promptString("Entrer le prenom de l'étudiant: ");
+        try
+        {
+            EtudiantService::validerMetierPrenom(etu, prenom);
+        }
+        catch (const std::exception &e)
+        {
+            error(e.what());
+        }
+    }
+}
+
 void EtudiantView::modifierCadPaieId(Etudiant &etu)
 {
     while (true)
@@ -31,7 +60,7 @@ void EtudiantView::modifierCadPaieId(Etudiant &etu)
         std::string cadPaieId = promptString("Entrer l'id du calendrier: ");
         try
         {
-            EtudiantService::instance().validerMetierCadPaieId(etu, cadPaieId);
+            EtudiantService::validerMetierCadPaieId(etu, cadPaieId);
         }
         catch (const std::exception &e)
         {
@@ -46,7 +75,7 @@ void EtudiantView::modifierClasseId(Etudiant &etu)
         std::string classeId = promptString("Entrer l'id de la classe de l'étudiant: ");
         try
         {
-            EtudiantService::instance().validerMetierClasseId(etu, classeId);
+            EtudiantService::validerMetierClasseId(etu, classeId);
         }
         catch (const std::exception &e)
         {
@@ -62,7 +91,7 @@ void EtudiantView::modifierEstBoursier(Etudiant &etu)
         bool estBoursier = promptYesNo("Est il boursier? ");
         try
         {
-            EtudiantService::instance().validerMetierEstBoursier(etu, estBoursier);
+            EtudiantService::validerMetierEstBoursier(etu, estBoursier);
         }
         catch (const std::exception &e)
         {
@@ -79,7 +108,7 @@ void EtudiantView::modifierEstHandicape(Etudiant &etu)
         bool estHandicape = promptYesNo("Est il Handicapé? ");
         try
         {
-            EtudiantService::instance().validerMetierEstHandicape(etu, estHandicape);
+            EtudiantService::validerMetierEstHandicape(etu, estHandicape);
         }
         catch (const std::exception &e)
         {
@@ -94,7 +123,7 @@ void EtudiantView::modifierFamilleNombreuse(Etudiant &etu)
         bool familleNombreuse = promptYesNo("est il dans une famille nombreuse ? ");
         try
         {
-            EtudiantService::instance().validerMetierFamilleNombreuse(etu, familleNombreuse);
+            EtudiantService::validerMetierFamilleNombreuse(etu, familleNombreuse);
         }
         catch (const std::exception &e)
         {
@@ -110,7 +139,7 @@ void EtudiantView::modifierEstOrphelin(Etudiant &etu)
         bool estOrphelin = promptYesNo("Est il Orphelin? ");
         try
         {
-            EtudiantService::instance().validerMetierEstOrphelin(etu, estOrphelin);
+            EtudiantService::validerMetierEstOrphelin(etu, estOrphelin);
         }
         catch (const std::exception &e)
         {
@@ -126,7 +155,7 @@ void EtudiantView::modifierTelephone(Etudiant &etu)
         std::string telephone = promptString("Entrer le telephone de l'étudiant: ");
         try
         {
-            EtudiantService::instance().validerMetierTelephone(etu, telephone);
+            EtudiantService::validerMetierTelephone(etu, telephone);
         }
         catch (const std::exception &e)
         {
@@ -141,7 +170,7 @@ void EtudiantView::modifierEmail(Etudiant &etu)
         std::string email = promptString("Entrer l'email de l'étudiant: ");
         try
         {
-            EtudiantService::instance().validerMetierEmail(etu, email);
+            EtudiantService::validerMetierEmail(etu, email);
         }
         catch (const std::exception &e)
         {
@@ -150,24 +179,11 @@ void EtudiantView::modifierEmail(Etudiant &etu)
     }
 }
 
-void EtudiantView::displayAll(std::vector<Etudiant> etudiants)
-{
-    for (auto e : etudiants)
-    {
-        showMessage(e.toString());
-    }
-}
-
-EtudiantView &EtudiantView::instance()
-{
-    static EtudiantView inst;
-    return inst;
-}
 void EtudiantView::saisirEtEnregistrerEtudiant()
 {
     Etudiant etu = Etudiant();
     etu = input();
-    if (EtudiantService::instance().ajouterEtudiant(etu))
+    if (EtudiantService::ajouterEtudiant(etu))
     {
         showMessage("etudiant ajouté avec succés!");
     }
@@ -180,7 +196,7 @@ void EtudiantView::saisirEtEnregistrerEtudiant()
 void EtudiantView::supprimerEtudiant()
 {
     std::string etudiantCode = promptString("entrer le le code de l'étudiant");
-    if (EtudiantService::instance().supprimerEtudiant(etudiantCode))
+    if (EtudiantService::supprimerEtudiant(etudiantCode))
     {
         showMessage("etudiant supprimé avec success");
     }
@@ -192,10 +208,10 @@ void EtudiantView::supprimerEtudiant()
 void EtudiantView::rechercherEtudiant()
 {
     std::string etudiantCode = promptString("entrer le le code de l'étudiant");
-    if (EtudiantService::instance().exist(etudiantCode))
+    if (EtudiantService::exist(etudiantCode))
     {
         Etudiant etu = Etudiant();
-        etu = EtudiantService::instance().rechercherEtudiant(etudiantCode);
+        etu = EtudiantService::rechercherEtudiant(etudiantCode);
         showMessage(etu.toString());
     }
     else
@@ -207,13 +223,13 @@ void EtudiantView::rechercherEtudiant()
 void EtudiantView::modifierEtudiant()
 {
     std::string etudiantCode = promptString("Entrer le code de l'étudiant: ");
-    if (!EtudiantService::instance().exist(etudiantCode))
+    if (!EtudiantService::exist(etudiantCode))
     {
         error("Erreur! l'étudiant est introuvable");
         return;
     }
 
-    Etudiant e = EtudiantService::instance().rechercherEtudiant(etudiantCode);
+    Etudiant e = EtudiantService::rechercherEtudiant(etudiantCode);
     showMessage(e.toString());
     static std::map<std::string, std::string> menuAt = {
         {"nom", "Modifier le nom"},
@@ -284,7 +300,7 @@ void EtudiantView::modifierEtudiant()
 
         if (key != "retour")
         {
-            EtudiantService::instance().ajouterEtudiant(e);
+            EtudiantService::ajouterEtudiant(e);
         }
         else
         {

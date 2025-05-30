@@ -8,27 +8,22 @@
 class FormationView : public View
 
 {
-private:
-    FormationView() {};
-    FormationView(const FormationView &) = delete;
-    FormationView &operator=(const FormationView &) = delete;
 
 public:
-    Formation input();
-    static FormationView &instance();
+    static Formation input();
 
     // méthodes de modifications
-    void modifierFiliere(Formation &fomation);
-    void modifierNiveau(Formation &formation);
-    void modifierDureeAnnuelle(Formation &formation);
-    void modifierCoutAnnuel(Formation &Formation);
+    static void modifierFiliere(Formation &fomation);
+    static void modifierNiveau(Formation &formation);
+    static void modifierDureeAnnuelle(Formation &formation);
+    static void modifierCoutAnnuel(Formation &Formation);
     // methode pure service
-    void saisirEtEnregistrerFormation();
-    void supprimerFormation();
-    void rechercherFormation();
-    void modifierFormation();
-    void displayAll(std::vector<Formation> formations);
+    static void saisirEtEnregistrerFormation();
+    static void supprimerFormation();
+    static void rechercherFormation();
+    static void modifierFormation();
+    static void displayAll(std::vector<Formation> formations);
     // methode service utils
-    void afficherRentabiliteParFiliere();
-    void afficherFormationsPopulaires();
+    static void afficherRentabiliteParFiliere();
+    static void afficherFormationsPopulaires();
 };

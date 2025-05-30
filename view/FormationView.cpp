@@ -1,5 +1,5 @@
 #include "FormationView.hpp"
-#include "FormationService.hpp"
+#include "../service/FormationService.hpp"
 #include "NiveauView.hpp"
 
 Formation FormationView::input()
@@ -19,7 +19,7 @@ void FormationView::modifierFiliere(Formation &formation)
         std::string filiere = promptString("Donner la filiere: ");
         try
         {
-            FormationService::instance(). validerMertierFiliere(formation, filiere);
+            FormationService:: validerMertierFiliere(formation, filiere);
         }
         catch (const std::exception &e)
         {
@@ -31,10 +31,10 @@ void FormationView::modifierNiveau(Formation &formation)
 {
     while (true)
     {
-        Niveau::Type niveau = NiveauView::instance().choisir(); 
+        Niveau::Type niveau = NiveauView::choisir();
         try
         {
-            FormationService::instance(). validerMertierNiveau(formation, niveau);
+            FormationService:: validerMertierNiveau(formation, niveau);
         }
         catch (const std::exception &e)
         {
@@ -49,7 +49,7 @@ void FormationView::modifierDureeAnnuelle(Formation& formation)
         int duree = promptInt("Donner la durée annuelle (en heures): ");
         try
         {
-            FormationService::instance(). validerMetierDureeAnnuelle(formation, duree);
+            FormationService::validerMetierDureeAnnuelle(formation, duree);
         }
         catch (const std::exception &e)
         {
@@ -64,7 +64,7 @@ void FormationView::modifierCoutAnnuel(Formation& formation)
         double coutAnnuel = promptDouble("Donner le coût annuel");
         try
         {
-            FormationService::instance(). validerMetierCoutAnnuel(formation, coutAnnuel);
+            FormationService::validerMetierCoutAnnuel(formation, coutAnnuel);
         }
         catch (const std::exception &e)
         {
@@ -73,12 +73,12 @@ void FormationView::modifierCoutAnnuel(Formation& formation)
     }
 }
 void FormationView::saisirEtEnregistrerFormation() {
-    Formation f = FormationView::input();
-    FormationService::instance().ajouterFormation(f);
+    Formation f = input();
+    FormationService::ajouterFormation(f);
 }
 void FormationView::supprimerFormation() {
     std::string formId = promptString("Entrer l'id de la formation : ");
-    if (FormationService::instance().supprimerFormation(formId)) {
+    if (FormationService::supprimerFormation(formId)) {
         success("Formation bien supprimée");
     } else {
         error("Erreur ! La formation est introuvable");
@@ -86,9 +86,9 @@ void FormationView::supprimerFormation() {
 }
 void FormationView::rechercherFormation() {
     std::string formationId = promptString("Entrer l'id de la formation: ");
-    if (FormationService::instance().exist(formationId)) {
+    if (FormationService::exist(formationId)) {
         success("Formation trouvée :");
-        Formation f = FormationService::instance().rechercherFormation(formationId);
+        Formation f = FormationService::rechercherFormation(formationId);
         showMessage(f.toString());
     } else {
         error("Erreur ! La formation est introuvable");
@@ -97,13 +97,13 @@ void FormationView::rechercherFormation() {
 void FormationView::modifierFormation()
 {
     std::string formId = promptString("Entrer l'id de la formation: ");
-    if (!FormationService::instance().exist(formId))
+    if (!FormationService::exist(formId))
     {
         error("Erreur ! La formation est introuvable");
         return;
     }
 
-    Formation f = FormationService::instance().rechercherFormation(formId);
+    Formation f = FormationService::rechercherFormation(formId);
     showMessage(f.toString());
 
     static const std::map<std::string,std::string> menuAt = {
@@ -140,7 +140,7 @@ void FormationView::modifierFormation()
 
         if (key != "retour")
         {
-            FormationService::instance().ajouterFormation(f);
+            FormationService::ajouterFormation(f);
         }
         else
         {
@@ -149,8 +149,8 @@ void FormationView::modifierFormation()
     }
 }
 void afficherRentabiliteParFiliere(){
-    auto p= FormationService::instance().avoirFilierePlusRentable();
-    
+    auto p= FormationService::avoirFilierePlusRentable();
+
 }
 
 
